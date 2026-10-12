@@ -1,11 +1,19 @@
 [
   {
+    "file": "box-registered.png",
+    "width": 780,
+    "height": 1688,
+    "logicalWidth": 390,
+    "logicalHeight": 844,
+    "sha256": "a7ef57326f3be9466d130b03848bd295a0b4ac66e03cee052cdb13237954840e"
+  },
+  {
     "file": "box-start.png",
     "width": 780,
     "height": 1688,
     "logicalWidth": 390,
     "logicalHeight": 844,
-    "sha256": "0253d2609c0a0b7a50e90fec54ed0eb089c30bfa8a56d1f14810aa5d2693eb38"
+    "sha256": "a7ef57326f3be9466d130b03848bd295a0b4ac66e03cee052cdb13237954840e"
   },
   {
     "file": "box-taken.png",
@@ -13,7 +21,7 @@
     "height": 1688,
     "logicalWidth": 390,
     "logicalHeight": 844,
-    "sha256": "f2200b4aea2c490938ef518fa6ae126622d3b4ebe5fa23c41046c07716356108"
+    "sha256": "1d8bae08d22f10704dc7cff7af57038354e04a773884dd4d7fd33f8b427f7e6d"
   },
   {
     "file": "box.png",
@@ -53,7 +61,7 @@
     "height": 1688,
     "logicalWidth": 390,
     "logicalHeight": 844,
-    "sha256": "36122ee494884f3bebbd44bd8c607e0b742488c756ed29bce744c040e27da08c"
+    "sha256": "4c971cf449fa0aae3e34ecabfdcb3be0a2c23af20eafc149995a19f9a983f0a5"
   },
   {
     "file": "guardian-linked.png",
@@ -61,7 +69,7 @@
     "height": 1688,
     "logicalWidth": 390,
     "logicalHeight": 844,
-    "sha256": "e9624f37e381017384af7bea7e4af6b1cccff18e231309f7e8afd5bb81327c86"
+    "sha256": "015b74b9a0868f4cc65a19a6d1b5b3e70dd07c26844f3f357929ef6d840c0c70"
   },
   {
     "file": "guardian-pending.png",
@@ -69,7 +77,7 @@
     "height": 1688,
     "logicalWidth": 390,
     "logicalHeight": 844,
-    "sha256": "04112fcf296f66c1a8a6c5515a63d984224d69aafaaf9d6ee0267362ab4ca739"
+    "sha256": "23ad053b29b156342d580d223238979f4dea98b08f38c43c6e1f139f2cdd7b6f"
   },
   {
     "file": "guardian-received.png",
@@ -96,12 +104,20 @@
     "sha256": "64a72d5916aff33c9ca8391905138c9cb2ecb4b749585a43cab576cf201541b2"
   },
   {
+    "file": "home-complete.png",
+    "width": 780,
+    "height": 1688,
+    "logicalWidth": 390,
+    "logicalHeight": 844,
+    "sha256": "51f8beb269574adc77d2d997bf5ec4f101055eea2ff93c2a2045fa626c23e56f"
+  },
+  {
     "file": "home-start.png",
     "width": 780,
     "height": 1688,
     "logicalWidth": 390,
     "logicalHeight": 844,
-    "sha256": "1ca6c2ec6fd4f3cc18928e0f3e830f215b17b4f27cc288674c7e9ba8cf97edd1"
+    "sha256": "16fbde0db8db8b806dbf765f271ddac34e03f6b321249920623f3db7e5a8ca0d"
   },
   {
     "file": "home-taken.png",
@@ -109,7 +125,7 @@
     "height": 1688,
     "logicalWidth": 390,
     "logicalHeight": 844,
-    "sha256": "ef9c7b52252e5caad6732c46384ae01b84dd7fa0b87ec852d2c0f65089e218b5"
+    "sha256": "7066dc67139a2176b7e43add4ba12292e1829bc0bd5b14ca4dc5ed4482d592f7"
   },
   {
     "file": "home.png",
@@ -117,7 +133,7 @@
     "height": 1688,
     "logicalWidth": 390,
     "logicalHeight": 844,
-    "sha256": "4c9a36d746881531e6f3e9835d174b2be7bc350e161646e113858e00907e4425"
+    "sha256": "ad280e08d2cbecbcc9e2b5b3dee3767cb7108c8a52b169e4a16a0f81e44ee417"
   },
   {
     "file": "pharmacy-detail.png",
@@ -165,7 +181,7 @@
     "height": 1688,
     "logicalWidth": 390,
     "logicalHeight": 844,
-    "sha256": "ecbc1184e8f695a4cd58553c95de234d24289a3cdb55a23d46a2d66ba5a31f63"
+    "sha256": "39ce2ed9ec03c1ce03e882f92e25a7b7ac28e3c60d8de9dbf916857255310efd"
   },
   {
     "file": "reminders.png",
@@ -176,12 +192,20 @@
     "sha256": "771814ad743ef2abbe39386f6b04988ee8b1b2ec3aeef2d26f560dee7fd77cbe"
   },
   {
+    "file": "schedule-ready.png",
+    "width": 780,
+    "height": 1688,
+    "logicalWidth": 390,
+    "logicalHeight": 844,
+    "sha256": "528a3e109f45edb18cce95e3147bba548ff8d2bcc16f4a9e5b485da161d34ff3"
+  },
+  {
     "file": "schedule.png",
     "width": 780,
     "height": 1688,
     "logicalWidth": 390,
     "logicalHeight": 844,
-    "sha256": "3434f7b123e69cf803addcccba754bec392160193457f4473c559ed34635e86f"
+    "sha256": "8a5065f45f7590a85096d344b6bb92caddf7cb43e2f4f2603ae8fae18f06a7a4"
   },
   {
     "file": "search-empty.png",
@@ -205,7 +229,7 @@
     "height": 1688,
     "logicalWidth": 390,
     "logicalHeight": 844,
-    "sha256": "d59680a934ff77138cee2eea4629c17a429c40470082f8dc4c6ec28c937856e4"
+    "sha256": "c3eae78774a36e942d1f26b724d4043c8d952e0a1bc4ee91f4a32583b8a55734"
   },
   {
     "file": "search.png",
@@ -221,7 +245,7 @@
     "height": 1688,
     "logicalWidth": 390,
     "logicalHeight": 844,
-    "sha256": "de125d45b8bd1dc51da3c07374f8790cb0554562b05f3c6fa612e039c7c3edb6"
+    "sha256": "5cc583adbf7e5d294650f7c547129ecd345d5dadf187107a52184affeff4cbf1"
   },
   {
     "file": "stock.png",
@@ -237,6 +261,6 @@
     "height": 1688,
     "logicalWidth": 390,
     "logicalHeight": 844,
-    "sha256": "c777b240a4a9002fe543dec9e75de82f94bf96313cf64bfd6899468c0ac08e09"
+    "sha256": "866735682cda055fea1809c2fde10c57ae6ee29deab1f749a6fb166ac0abeb02"
   }
 ]

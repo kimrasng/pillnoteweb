@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { ArrowDown, ArrowRight, ChevronDown, Menu } from "lucide-react";
 import PhoneFilm from "./PhoneFilm";
 import { scenes, type Scene } from "./story";
@@ -250,7 +250,7 @@ function StoryViewport({
               <div
                 className="copy-layer"
                 style={{
-                  opacity: 1 - transition,
+                  opacity: 1 - smoothstep(0, 0.5, transition),
                   transform: `translateY(${-transition * 18}px)`,
                   pointerEvents: transition > 0.5 ? "none" : "auto",
                 }}
@@ -263,7 +263,7 @@ function StoryViewport({
                 <div
                   className="copy-layer"
                   style={{
-                    opacity: transition,
+                    opacity: smoothstep(0.5, 1, transition),
                     transform: `translateY(${(1 - transition) * 18}px)`,
                     visibility: transition === 0 ? "hidden" : "visible",
                     pointerEvents: transition <= 0.5 ? "none" : "auto",
@@ -320,7 +320,7 @@ export default function App() {
   );
   useWeightedScroll(reducedMotion);
   const { navigateTo, contentOpacity } = useChapterNavigation(reducedMotion);
-  useEffect(() => {
+  useLayoutEffect(() => {
     let frame = 0;
     const update = () => {
       frame = 0;

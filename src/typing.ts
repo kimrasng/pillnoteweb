@@ -1,14 +1,16 @@
 // Korean IME keystrokes, sampled from scroll position rather than a timer.
 const keystrokes = [
   { at: 0, committed: "", composing: "" },
-  { at: 0.08, committed: "", composing: "ㅂ" },
-  { at: 0.18, committed: "", composing: "비" },
-  { at: 0.3, committed: "", composing: "빝" },
-  { at: 0.35, committed: "비", composing: "타" },
-  { at: 0.47, committed: "비", composing: "탐" },
-  { at: 0.52, committed: "비타", composing: "미" },
-  { at: 0.65, committed: "비타", composing: "민" },
-  { at: 0.76, committed: "비타민", composing: "" },
+  { at: 0.06, committed: "", composing: "ㅌ" },
+  { at: 0.13, committed: "", composing: "타" },
+  { at: 0.21, committed: "타", composing: "ㅇ" },
+  { at: 0.28, committed: "타", composing: "이" },
+  { at: 0.36, committed: "타이", composing: "ㄹ" },
+  { at: 0.44, committed: "타이", composing: "레" },
+  { at: 0.53, committed: "타이레", composing: "ㄴ" },
+  { at: 0.61, committed: "타이레", composing: "노" },
+  { at: 0.7, committed: "타이레", composing: "놀" },
+  { at: 0.8, committed: "타이레놀", composing: "" },
 ];
 export function getTypingState(progress: number) {
   const position = Number.isNaN(progress)

@@ -15,6 +15,7 @@ export type ScreenMotion =
   | "pop"
   | "tab"
   | "update"
+  | "dose"
   | "typing"
   | "search"
   | "scroll"
@@ -111,11 +112,12 @@ export const scenes: Scene[] = [
       add.frame("search-typed", 2.85, "search"),
       add.frame("schedule", 3.7, "push"),
       add.frame("time-picker", 4.37, "dialog", { region: [174, 16, 154, 16] }),
-      add.frame("schedule", 5.1, "dismiss-dialog", {
+      add.frame("schedule-ready", 5.1, "dismiss-dialog", {
         region: [174, 16, 154, 16],
       }),
       add.frame("registered", 5.77, "update"),
-      add.frame("home", 6.62, "pop"),
+      add.frame("box-registered", 6.62, "pop"),
+      add.frame("home", 7.32, "tab"),
     ],
     gestures: [
       add.tap(195, 696, 0.05),
@@ -131,11 +133,8 @@ export const scenes: Scene[] = [
     id: "record",
     ...translations.ko.scenes.record,
     tone: "record",
-    frames: [
-      record.frame("home", 0),
-      record.frame("home-taken", 1.55, "update"),
-    ],
-    gestures: [record.tap(342, 604, 0.96)],
+    frames: [record.frame("home", 0), record.frame("home-taken", 1.7, "dose")],
+    gestures: [record.tap(342, 643.22, 0.4)],
   },
   {
     id: "box",
@@ -155,7 +154,7 @@ export const scenes: Scene[] = [
       alarm.frame("dose-notification", 0.82, "notification"),
       alarm.frame("home-taken", 2.45, "unlock"),
     ],
-    gestures: [alarm.tap(208, 396, 1.6)],
+    gestures: [alarm.tap(195, 600, 1.6)],
   },
   {
     id: "guardian",
@@ -177,6 +176,7 @@ export const scenes: Scene[] = [
       guardian.frame("guardian-linked", 7, "push"),
       guardian.frame("guardian-lock", 7.8, "lock"),
       guardian.frame("guardian-notification", 8.52, "notification"),
+      guardian.frame("guardian-linked", 9.6, "unlock"),
     ],
     gestures: [
       guardian.tap(204, 470, 0.28),
@@ -188,7 +188,7 @@ export const scenes: Scene[] = [
     id: "pharmacy",
     ...translations.ko.scenes.pharmacy,
     tone: "pharmacy",
-    entry: "unlock",
+    entry: "push",
     frames: [
       pharmacy.frame("pharmacy-station", 0),
       pharmacy.frame("pharmacy-list", 1.1, "scroll", { travel: 315 }),

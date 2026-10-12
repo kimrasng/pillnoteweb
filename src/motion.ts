@@ -89,20 +89,29 @@ export function getScreenMotion(frame: CaptureFrame, amount: number) {
       break;
     case "notification":
       // Keep the clock/wallpaper in place; only the arriving card moves.
-      to.contentClip = [325, 0, 300, 0];
-      to.y = -24 * (1 - t);
-      to.scale = 0.98 + 0.02 * t;
+      to.contentClip = [535, 0, 165, 0];
+      to.y = 32 * (1 - t);
+      to.scale = 0.96 + 0.04 * t;
       break;
     case "unlock":
-      // Expand the complete app surface from the notification's center.
-      // Cropping the capture would expose the map before its page title.
-      to.opacity = Math.min(1, t * 12);
-      to.y = -25 * (1 - t);
-      to.radius = 32 * (1 - t);
-      to.scale = 0.26 + 0.74 * t;
+      // A notification opens a rounded app window from the card's position.
+      // Its crop grows to the display edges while the lock chrome recedes.
+      from.scale = 1 - 0.035 * t;
+      from.y = -12 * t;
+      to.opacity = Math.min(1, t * 4);
+      to.y = 178 * (1 - t);
+      to.contentClip = [
+        366 * (1 - t),
+        14 * (1 - t),
+        366 * (1 - t),
+        14 * (1 - t),
+      ];
+      to.radius = 24 * (1 - t);
+      to.scale = 0.94 + 0.06 * t;
       break;
     case "lock":
-      // A full-screen view must keep covering the display, including its edges.
+      // The display briefly sleeps before the lock screen wakes.
+      to.opacity = Number(t >= 0.4);
       break;
   }
   return { from, to, shade, pinnedHeader };

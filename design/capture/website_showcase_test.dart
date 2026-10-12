@@ -92,7 +92,7 @@ void main() {
     await tester.tap(find.text('보호자 초대'));
     await tester.pumpAndSettle();
     await tester.enterText(find.byType(TextFormField).at(0), 'guardian@example.com');
-    await tester.enterText(find.byType(TextFormField).at(1), '우리 가족');
+    await tester.enterText(find.byType(TextFormField).at(1), '홍길동');
     FocusManager.instance.primaryFocus?.unfocus();
     await tester.pumpAndSettle();
     await capture.capture(tester, 'guardian-invite');

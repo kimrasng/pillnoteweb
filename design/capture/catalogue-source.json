@@ -1,0 +1,34 @@
+{
+  "retrievedOn": "2026-10-13",
+  "searchUrl": "https://pillnote.kimrasng.kr/v1/drugs/search?name=%ED%83%80%EC%9D%B4%EB%A0%88%EB%86%80&limit=5",
+  "verifiedProductUrl": "https://nedrug.mfds.go.kr/pbp/CCBBB01/getItemDetail?itemSeq=202106092",
+  "responseFile": "tylenol-search.json",
+  "responseSha256": "e9beb07fc49e10fe8747da6951320fe285e00360b1f1fd1af7a45bc8dc26983b",
+  "selectedItemSeq": "202106092",
+  "imageFiles": [
+    {
+      "itemSeq": "202200407",
+      "sourceUrl": "https://nedrug.mfds.go.kr/pbp/cmn/itemImageDownload/1OKRXo9l4DN",
+      "file": "202200407.png",
+      "sha256": "12933579db40660ec187df2e15b35305dd9654c8389eeead5c00bca5114e3332"
+    },
+    {
+      "itemSeq": "202106092",
+      "sourceUrl": "https://nedrug.mfds.go.kr/pbp/cmn/itemImageDownload/1OKRXo9l4D5",
+      "file": "202106092.png",
+      "sha256": "60fc9042ab6c44eef63d8d82fd544e4fdb7987249d8a39ba64a97aa12659eb2f"
+    },
+    {
+      "itemSeq": "202106954",
+      "sourceUrl": "https://nedrug.mfds.go.kr/pbp/cmn/itemImageDownload/1OKRXo9l4Df",
+      "file": "202106954.png",
+      "sha256": "7d60cfdd805d54939d8dc5ecd77e1f9c8b0b093358cca48c8f055e6b0a985f20"
+    },
+    {
+      "itemSeq": "202200658",
+      "sourceUrl": "https://nedrug.mfds.go.kr/pbp/cmn/itemImageDownload/1OKRXo9l4Dx",
+      "file": "202200658.png",
+      "sha256": "9df5c1202f0176bffb6df8b41c3a06997131396870f890ae449ef70e914b2937"
+    }
+  ]
+}

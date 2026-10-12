@@ -15,7 +15,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timezone/data/latest.dart' as tz_data;
 import 'package:timezone/timezone.dart' as tz;
 import 'helpers/fake_dose_reminder_gateway.dart';
-import 'website_capture_test.dart' as capture;
+import 'native_capture_support.dart' as capture;
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -40,18 +40,15 @@ void main() {
     await tester.pumpWidget(const MyApp());
     await tester.pumpAndSettle();
     final theme = Theme.of(tester.element(find.byType(NavigationBar))).copyWith(
-      platform: TargetPlatform.android, visualDensity: VisualDensity.standard,
+      platform: TargetPlatform.iOS, visualDensity: VisualDensity.standard,
     );
     final existing = jsonDecode((await tester.runAsync(() => File('/Users/kimrasng/dev/pillnoteweb/src/capture-dates.json').readAsString()))!) as Map;
     for (final entry in existing.entries) {
       capture.dateOverlays[entry.key as String] = (entry.value as List).map((label) => Map<String, dynamic>.from(label)).toList();
     }
-    final api = ApiClient(baseUrl: 'https://capture.invalid', client: MockClient((_) async => http.Response(jsonEncode({
-      'data': [
-        {'itemSeq': 'capture-vitamin-d', 'name': '비타민 D', 'manufacturer': '소개용 예시'},
-        {'itemSeq': 'capture-vitamin-c', 'name': '비타민 C', 'manufacturer': '소개용 예시'},
-      ], 'meta': {'stale': false},
-    }), 200, headers: {'content-type': 'application/json; charset=utf-8'})));
+    final response = await capture.loadTylenolCatalogue(tester);
+    final api = ApiClient(baseUrl: 'https://capture.invalid', client: MockClient((_) async => http.Response(jsonEncode(response), 200, headers: {'content-type': 'application/json; charset=utf-8'})));
+    await api.searchDrugs('타이레놀');
     await capture.pumpPage(tester, theme, Pillsearch(apiClient: api));
     final field = find.byType(TextField).first;
     final guide = find.text('포장에 적힌 이름으로 찾아보세요');
@@ -67,12 +64,12 @@ void main() {
     capture.reportPoint(tester, 'search.editable', find.byType(EditableText));
     final editable = tester.widget<EditableText>(find.byType(EditableText));
     print('SEARCH STYLE ${editable.style}');
-    await tester.enterText(field, '비타민');
+    await tester.enterText(field, '타이레놀');
     await tester.pump(const Duration(milliseconds: 500));
     await tester.pumpAndSettle();
     expect(tester.getRect(field), beforeField);
     await capture.capture(tester, 'search-typed');
-    capture.reportPoint(tester, 'search.result', find.text('비타민 D'));
+    capture.reportPoint(tester, 'search.result', find.text('타이레놀정500밀리그람(아세트아미노펜)'));
     await tester.pumpWidget(const SizedBox.shrink());
     await tester.pumpAndSettle();
     debugDefaultTargetPlatformOverride = null;

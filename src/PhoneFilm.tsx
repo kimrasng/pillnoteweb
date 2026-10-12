@@ -5,8 +5,10 @@ import { dateKey } from "./dates";
 import NotificationScreen, { notificationScreens } from "./NotificationScreen";
 import { getTypingState } from "./typing";
 import { useLocale } from "./LocaleProvider";
-import NativeRaster from "./NativeRaster";
+import { useEffect } from "react";
+import NativeRaster, { warmRasterFrames } from "./NativeRaster";
 import TouchIndicator from "./TouchIndicator";
+import DoseCheckFeedback from "./DoseCheckFeedback";
 
 const clip = ([top, right, bottom, left]: number[], radius = 0) =>
   `inset(${(top / 844) * 100}% ${(right / 390) * 100}% ${(bottom / 844) * 100}% ${(left / 390) * 100}%${radius ? ` round ${(radius / 390) * 100}cqw` : ""})`;
@@ -15,15 +17,24 @@ function Screen({
   now,
   label = "",
   visible = false,
+  opening = 0,
+  pressed = false,
 }: {
   image: string;
   now: Date;
   label?: string;
   visible?: boolean;
+  opening?: number;
+  pressed?: boolean;
 }) {
   const { copy } = useLocale();
   return notificationScreens.has(image) ? (
-    <NotificationScreen image={image} now={now} />
+    <NotificationScreen
+      image={image}
+      now={now}
+      opening={opening}
+      pressed={pressed}
+    />
   ) : (
     <>
       <img
@@ -53,6 +64,16 @@ export default function PhoneFilm({
 }) {
   const { copy } = useLocale();
   const now = useCurrentDate();
+  useEffect(() => {
+    warmRasterFrames(
+      [...scene.frames, ...(nextScene?.frames ?? [])]
+        .filter(({ image }) => !notificationScreens.has(image))
+        .map(({ image }) => ({
+          image: `/images/app/${image}.png`,
+          date: image,
+        })),
+    );
+  }, [scene.id, nextScene?.id]);
   const film = getFilmState(
     scene,
     progress,
@@ -68,6 +89,19 @@ export default function PhoneFilm({
       sum + (notificationScreens.has(frame.image) ? frame.weight : 0),
     0,
   );
+  const unlocking = film.motion === "unlock";
+  const lockedStatus = unlocking
+    ? film.unlockProgress < 0.88
+    : lockWeight > 0.5;
+  const statusTimeOpacity = unlocking
+    ? Math.max(0, (film.unlockProgress - 0.88) / 0.12)
+    : 1 - lockWeight;
+  const statusTime =
+    displayScene.id === "alarm"
+      ? "8:00"
+      : displayScene.id === "guardian"
+        ? "8:30"
+        : "9:41";
   return (
     <figure
       className="phone-film"
@@ -120,11 +154,18 @@ export default function PhoneFilm({
                     now={now}
                     label={label}
                     visible={index === film.dominantFrame}
+                    opening={film.unlockProgress}
+                    pressed={film.touches.some(
+                      (touch) => touch.opacity > 0 && touch.phase === "down",
+                    )}
                   />
                 </div>
               </div>
             ))}
-            {film.native && <NativeRaster sample={film.native} now={now} />}
+            <NativeRaster sample={film.native} now={now} />
+            {film.doseProgress !== null && (
+              <DoseCheckFeedback progress={film.doseProgress} />
+            )}
             {film.shade > 0 && (
               <div
                 className="film-shade"
@@ -167,8 +208,11 @@ export default function PhoneFilm({
                 <Screen image={film.pinnedImage} now={now} />
               </div>
             )}
-            <div className="phone-status" aria-hidden="true">
-              <span style={{ opacity: 1 - lockWeight }}>9:41</span>
+            <div
+              className={`phone-status ${lockedStatus ? "is-locked" : ""}`}
+              aria-hidden="true"
+            >
+              <span style={{ opacity: statusTimeOpacity }}>{statusTime}</span>
               <div className="phone-signals">
                 <span className="phone-bars">
                   <i />
@@ -180,8 +224,18 @@ export default function PhoneFilm({
                 <span className="phone-battery" />
               </div>
             </div>
-            <div className="phone-home-line" aria-hidden="true" />
+            <div
+              className={`phone-home-line ${lockedStatus ? "is-locked" : ""}`}
+              aria-hidden="true"
+            />
             {!reducedMotion && <TouchIndicator touches={film.touches} />}
+            {film.power > 0 && (
+              <div
+                className="phone-power"
+                style={{ opacity: film.power }}
+                aria-hidden="true"
+              />
+            )}
           </div>
         </div>
         <img

@@ -44,9 +44,8 @@ void main() {
       await (FontLoader(font.$1)..addFont(rootBundle.load(font.$2))).load();
     }
     SharedPreferences.setMockInitialValues({'onboarding_completed': true, 'startup_permissions_requested': true, 'user_pills': jsonEncode([
-      {'id': 'morning', 'ITEM_NAME': '아침 처방약', 'times': ['08:00'], 'dosage': 1, 'unit': '정', 'stock': 14, 'trackStock': true},
+      {'id': 'morning', 'ITEM_SEQ': '202106092', 'ITEM_NAME': '타이레놀정500밀리그람(아세트아미노펜)', 'ENTP_NAME': '켄뷰코리아판매유한회사', 'ITEM_IMAGE': 'https://nedrug.mfds.go.kr/pbp/cmn/itemImageDownload/1OKRXo9l4D5', 'times': ['08:00'], 'dosage': 1, 'unit': '정', 'stock': 14, 'trackStock': true},
       {'id': 'evening', 'ITEM_NAME': '저녁 처방약', 'times': ['20:00'], 'dosage': 1, 'unit': '정', 'stock': 14, 'trackStock': true},
-      {'id': 'vitamin', 'ITEM_NAME': '비타민 D', 'times': ['13:00'], 'dosage': 1, 'unit': '정', 'stock': 30, 'trackStock': true},
     ])});
     FlutterSecureStorage.setMockInitialValues({
       'session_user_id': 'owner', 'session_email': 'family@example.com',
@@ -56,6 +55,7 @@ void main() {
     await SessionStore.instance.initialize();
     await AppServices.initialize(reminderGateway: FakeDoseReminderGateway(tz.getLocation('Asia/Seoul')));
     addTearDown(AppServices.instance.dispose);
+    await capture.loadTylenolCatalogue(tester);
     await tester.pumpWidget(const MyApp());
     await tester.pumpAndSettle();
     final theme = Theme.of(tester.element(find.byType(NavigationBar))).copyWith(platform: TargetPlatform.iOS, visualDensity: VisualDensity.standard);
@@ -108,12 +108,12 @@ void main() {
       tester.state<NavigatorState>(find.byType(Navigator).first).push(MaterialPageRoute<void>(builder: (_) => Pushalarm(apiClient: ownerApi, sessionStore: owner, notifications: ownerPush)));
     }, pressTarget: find.text('보호자 연결'), overridePress: true);
     capture.reportPoint(tester, 'guardian.open', find.text('보호자 초대'));
-    await motion.record(tester, 'guardian-base', 'guardian-invite-empty', () async {}, pressTarget: find.text('보호자 초대'), milliseconds: 320);
+    await motion.record(tester, 'guardian-base', 'guardian-invite-empty', () async {}, pressTarget: find.text('보호자 초대'), milliseconds: 480);
     final inputFrames = <String>['guardian-invite-empty'];
     final inputTouches = <Map<String, dynamic>>[];
     final focusStages = <Map<String, dynamic>>[];
     var inputIndex = 0;
-    for (final entry in ['guardian@example.com', '우리 가족'].asMap().entries) {
+    for (final entry in ['guardian@example.com', '홍길동'].asMap().entries) {
       final field = find.byType(TextFormField).at(entry.key);
       final point = tester.getCenter(field);
       final startIndex = inputFrames.length - 1;
@@ -142,7 +142,6 @@ void main() {
         }
       }
     }
-    FocusManager.instance.primaryFocus?.unfocus();
     await tester.pumpAndSettle();
     await motion.snapshot(tester, 'guardian-invite');
     inputFrames.add('guardian-invite');
@@ -178,15 +177,14 @@ void main() {
     }));
     await tester.runAsync(() => HttpOverrides.runZoned(() async {
       final cache = BuiltInMapCachingProvider.getOrCreateInstance(cacheDirectory: '/private/tmp/pillnote-website-capture-map', maxCacheSize: 20000000);
-      await capture.pumpPage(tester, theme, Distanc(apiClient: pharmacyApi));
-      await Future<void>.delayed(const Duration(seconds: 6));
-      for (var frame = 0; frame < 12; frame++) {
-        await tester.pump(const Duration(milliseconds: 100));
-        await Future<void>.delayed(const Duration(milliseconds: 100));
-      }
-      await tester.tap(find.text('이 지역 약국 찾기'));
-      await tester.pumpAndSettle();
-      await capture.saveBoundary(tester, 'pharmacy-station');
+      await motion.record(tester, 'guardian-linked', 'pharmacy-station', () async {
+        tester.state<NavigatorState>(find.byType(Navigator).first).push(MaterialPageRoute<void>(builder: (_) => Distanc(apiClient: pharmacyApi)));
+        await tester.pump();
+        await Future<void>.delayed(const Duration(seconds: 6));
+        tester.widget<ButtonStyleButton>(find.ancestor(of: find.text('이 지역 약국 찾기', skipOffstage: false), matching: find.byWidgetPredicate((widget) => widget is ButtonStyleButton, skipOffstage: false))).onPressed!();
+        await tester.pump();
+        await Future<void>.delayed(const Duration(milliseconds: 300));
+      }, realIO: true);
       await motion.record(tester, 'pharmacy-station', 'pharmacy-list', () async {
         tester.widget<CustomScrollView>(find.byType(CustomScrollView).first).controller!.animateTo(315, duration: const Duration(milliseconds: 700), curve: Curves.easeOutCubic);
       }, milliseconds: 720, realIO: true);

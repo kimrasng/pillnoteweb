@@ -17,6 +17,8 @@ export type NativeSample = {
   frame: NativeFrame;
   neighbors: NativeFrame[];
   touches: TouchPose[];
+  captureProgress: number;
+  postTouchProgress: number;
 };
 
 export function hasNativeClip(from: string, to: string) {
@@ -109,6 +111,7 @@ export function sampleNativeClip(
     ? 0
     : Math.max(0, Math.min(1, progress));
   const sequence = sequenceTouch(clip, position, touchExtension);
+  const lastRelease = clip.touches?.at(-1)?.release ?? 0;
   let index = Math.min(
     clip.frames.length - 1,
     Math.floor(sequence.progress * (clip.frames.length - 1) + 1e-10),
@@ -123,7 +126,16 @@ export function sampleNativeClip(
     index,
     count: clip.frames.length,
     frame: clip.frames[index],
-    neighbors: clip.frames.slice(Math.max(0, index - 3), index + 4),
+    neighbors: [
+      clip.frames[0],
+      ...clip.frames.slice(Math.max(0, index - 4), index + 7),
+      clip.frames.at(-1)!,
+    ],
     touches: sequence.touches.map((touch) => getTouchPose(touch, position)),
+    captureProgress: sequence.progress,
+    postTouchProgress: Math.max(
+      0,
+      Math.min(1, (sequence.progress - lastRelease) / (1 - lastRelease)),
+    ),
   };
 }

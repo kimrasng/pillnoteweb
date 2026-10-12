@@ -51,8 +51,9 @@ test("registration traverses the actual app states, including opening and closin
     "search-typed",
     "schedule",
     "time-picker",
-    "schedule",
+    "schedule-ready",
     "registered",
+    "box-registered",
     "home",
   ];
   assert.deepEqual(
@@ -254,69 +255,48 @@ test("button, field and notification touches remain visible for at least 0.3 vie
   }
 });
 
-test("notification screens open only after the complete click has disappeared in both paths", () => {
-  const alarm = scenes.find((scene) => scene.id === "alarm");
-  const target = alarm.frames.at(-1);
-  const sampleAlarm = (progress) =>
-    getFilmState(
-      alarm,
-      target.at - target.duration + target.duration * progress,
-    );
-  const guardian = scenes.find((scene) => scene.id === "guardian");
-  const pharmacy = scenes.find((scene) => scene.id === "pharmacy");
-  const sampleBoundary = (progress) =>
-    getFilmState(guardian, 1, false, pharmacy, progress);
-  for (const sample of [sampleAlarm, sampleBoundary]) {
-    const pressed = sample(0.1);
-    const source = pressed.frames.find((frame) =>
-      frame.image.endsWith("notification"),
-    );
-    assert.equal(source.opacity, 1);
-    assert.equal(Math.abs(source.y), 0);
-    assert.equal(pressed.touches[0].phase, "down");
-    assert.ok(pressed.touches[0].opacity > 0);
-    const fadingClick = sample(
+test("notifications wait for the tap, then open the corresponding app screen from their card", () => {
+  for (const [sceneId, targetImage] of [
+    ["alarm", "home-taken"],
+    ["guardian", "guardian-linked"],
+  ]) {
+    const scene = scenes.find((scene) => scene.id === sceneId);
+    const target = scene.frames.at(-1);
+    assert.equal(target.image, targetImage);
+    assert.equal(target.motion, "unlock");
+    const sample = (progress) =>
+      getFilmState(
+        scene,
+        target.at - target.duration + target.duration * progress,
+      );
+    for (const portion of [
+      0.1,
       (notificationTouch.release + notificationTouch.end) / 2,
+    ]) {
+      const pressed = sample(portion);
+      assert.ok(pressed.touches[0].opacity > 0);
+      assert.equal(pressed.unlockProgress, 0);
+      assert.equal(
+        pressed.frames.find((frame) => frame.image === targetImage).opacity,
+        0,
+      );
+    }
+    const opening = sample(
+      notificationTouch.end + (1 - notificationTouch.end) * 0.5,
     );
-    assert.ok(fadingClick.touches[0].opacity > 0);
-    assert.ok(fadingClick.touches[0].ringOpacity > 0);
-    assert.ok(
-      fadingClick.frames
-        .filter((frame) => !frame.image.endsWith("notification"))
-        .every((frame) => frame.opacity === 0),
+    const incoming = opening.frames.find(
+      (frame) => frame.image === targetImage,
     );
-    const completedClick = sample(notificationTouch.end);
-    assert.equal(completedClick.touches[0].opacity, 0);
-    assert.equal(completedClick.touches[0].ringOpacity, 0);
-    assert.ok(
-      completedClick.frames
-        .filter((frame) => !frame.image.endsWith("notification"))
-        .every((frame) => frame.opacity === 0),
+    assert.equal(opening.touches[0].opacity, 0);
+    assert.ok(incoming.contentClip[0] > 0);
+    assert.ok(incoming.scale > 0.94 && incoming.scale < 1);
+    assert.ok(incoming.y > 0);
+    const settled = getFilmState(scene, target.at);
+    assert.equal(settled.dominantImage, targetImage);
+    assert.deepEqual(
+      settled.frames[settled.dominantFrame].contentClip,
+      [0, 0, 0, 0],
     );
-    const opened = sample(
-      notificationTouch.end + (1 - notificationTouch.end) * 0.3,
-    );
-    assert.equal(
-      Math.abs(
-        opened.frames.find((frame) => frame.image.endsWith("notification")).y,
-      ),
-      0,
-    );
-    assert.equal(opened.touches[0].phase, "release");
-    assert.equal(opened.touches[0].opacity, 0);
-    assert.equal(opened.touches[0].ringOpacity, 0);
-    const incoming = opened.frames.find(
-      (frame) => frame.weight > 0 && !frame.image.endsWith("notification"),
-    );
-    assert.deepEqual(incoming.contentClip, [0, 0, 0, 0]);
-    assert.ok(incoming.scale > 0.26 && incoming.scale < 1);
-    assert.equal(incoming.opacity, 1);
-    assert.equal(
-      opened.frames.find((frame) => frame.image.endsWith("notification"))
-        .opacity,
-      1,
-    );
-    assert.deepEqual(sample(0.1), pressed);
   }
 });
 

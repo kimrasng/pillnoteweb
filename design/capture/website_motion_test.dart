@@ -104,7 +104,6 @@ void main() {
     SharedPreferences.setMockInitialValues({
       'onboarding_completed': true, 'startup_permissions_requested': true,
       'user_pills': jsonEncode([
-        {'id': 'morning', 'ITEM_NAME': '아침 처방약', 'times': ['08:00'], 'dosage': 1, 'unit': '정', 'stock': 14, 'trackStock': true},
         {'id': 'evening', 'ITEM_NAME': '저녁 처방약', 'times': ['20:00'], 'dosage': 1, 'unit': '정', 'stock': 14, 'trackStock': true},
       ]),
     });
@@ -120,12 +119,14 @@ void main() {
     final homeTab = find.descendant(of: find.byType(NavigationBar), matching: find.text('홈'));
     await record(tester, 'home-start', 'box-start', () async {}, pressTarget: boxTab);
 
-    final catalogue = ApiClient(baseUrl: 'https://capture.invalid', client: MockClient((_) async => http.Response(jsonEncode({
-      'data': [
-        {'itemSeq': 'capture-vitamin-d', 'name': '비타민 D', 'manufacturer': '소개용 예시'},
-        {'itemSeq': 'capture-vitamin-c', 'name': '비타민 C', 'manufacturer': '소개용 예시'},
-      ], 'meta': {'stale': false},
-    }), 200, headers: {'content-type': 'application/json; charset=utf-8'})));
+    final catalogueResponse = await capture.loadTylenolCatalogue(tester);
+    final catalogue = ApiClient(baseUrl: 'https://capture.invalid', client: MockClient((request) async {
+      expect(request.url.path, '/v1/drugs/search');
+      expect(request.url.queryParameters['name'], '타이레놀');
+      return http.Response(jsonEncode(catalogueResponse), 200,
+        headers: {'content-type': 'application/json; charset=utf-8'});
+    }));
+    expect((await catalogue.searchDrugs('타이레놀')).any((pill) => pill['ITEM_SEQ'] == '202106092'), true);
     final navigator = tester.state<NavigatorState>(find.byType(Navigator).first);
     await record(tester, 'box-start', 'search-empty', () async {
       navigator.push(MaterialPageRoute<void>(builder: (_) => Pillsearch(apiClient: catalogue)));
@@ -133,11 +134,11 @@ void main() {
     await record(tester, 'search-empty', 'search-focused', () async {}, pressTarget: find.byType(TextField).first, milliseconds: 240);
 
     // TextInput sends real Korean composing ranges to Flutter's EditableText.
-    final typing = <String>['', 'ㅂ', '비', '빝', '비타', '비탐', '비타미', '비타민', '비타민'];
+    final typing = <String>['', 'ㅌ', '타', '타ㅇ', '타이', '타이ㄹ', '타이레', '타이레ㄴ', '타이레노', '타이레놀', '타이레놀'];
     final typingFrames = <String>['search-focused'];
     for (var i = 1; i < typing.length; i++) {
       final text = typing[i];
-      tester.testTextInput.updateEditingValue(TextEditingValue(text: text, selection: TextSelection.collapsed(offset: text.length), composing: i < 8 ? TextRange(start: i < 4 ? 0 : i < 6 ? 1 : 2, end: text.length) : TextRange.empty));
+      tester.testTextInput.updateEditingValue(TextEditingValue(text: text, selection: TextSelection.collapsed(offset: text.length), composing: i < 10 ? TextRange(start: i < 3 ? 0 : i < 5 ? 1 : i < 7 ? 2 : 3, end: text.length) : TextRange.empty));
       await tester.pump(const Duration(milliseconds: 24));
       final name = 'native/search-focused--search-typed/${i.toString().padLeft(3, '0')}';
       await snapshot(tester, name);
@@ -147,28 +148,33 @@ void main() {
     await tester.pumpAndSettle();
     await snapshot(tester, 'search-typed');
     typingFrames.add('search-typed');
-    clips['search-focused--search-typed'] = {'from': 'search-focused', 'to': 'search-typed', 'fps': 60, 'frames': typingFrames, 'stops': [0, .08, .18, .30, .35, .47, .52, .65, .76, 1]};
-    // Keep the search field focused until the result opens its route. Removing
-    // focus here would change the endpoint without any captured user action.
-    // Same MaterialPageRoute and MedicationForm as the app, with demo schedule data.
-    await record(tester, 'search-typed', 'schedule', () async {
-      navigator.push(MaterialPageRoute<MedicationFormResult>(builder: (_) => MedicationForm(pill: {
-        'ITEM_SEQ': 'capture-vitamin-d', 'ITEM_NAME': '비타민 D', 'ENTP_NAME': '소개용 예시',
-        'times': ['13:00'], 'dosage': 1, 'unit': '정', 'stock': 30, 'trackStock': true,
-      })));
-    }, pressTarget: find.text('비타민 D'), overridePress: true);
-    await record(tester, 'schedule', 'time-picker', () async {}, pressTarget: find.text('13:00'), milliseconds: 320);
-    await record(tester, 'time-picker', 'schedule', () async {}, pressTarget: find.text('확인'), milliseconds: 320);
-    await record(tester, 'schedule', 'registered', () async {}, pressTarget: find.text('등록하기'));
-    // Capture the real pop rather than sliding an already completed screenshot.
-    await record(tester, 'registered', 'home', () async {
-      tester.widget<NavigationBar>(find.byType(NavigationBar, skipOffstage: false)).onDestinationSelected!(0);
-      navigator.popUntil((route) => route.isFirst);
-    }, pressTarget: find.text('완료'), overridePress: true);
-    await record(tester, 'home', 'home-taken', () async {}, pressTarget: find.byKey(const ValueKey('dose-morning|08:00')));
+    clips['search-focused--search-typed'] = {'from': 'search-focused', 'to': 'search-typed', 'fps': 60, 'frames': typingFrames, 'stops': [0, .06, .13, .21, .28, .36, .44, .53, .61, .70, .8, 1]};
+    // Tap the real result. Pillsearch itself opens MedicationForm, and its
+    // completion callback returns to the box. No substitute result or route.
+    const productName = '타이레놀정500밀리그람(아세트아미노펜)';
+    await record(tester, 'search-typed', 'schedule', () async {},
+      pressTarget: find.text(productName));
+    expect(tester.widget<MedicationForm>(find.byType(MedicationForm)).pill!['ITEM_SEQ'], '202106092');
+    await record(tester, 'schedule', 'time-picker', () async {},
+      pressTarget: find.text('시간 추가'), milliseconds: 320);
+    await record(tester, 'time-picker', 'schedule-ready', () async {},
+      pressTarget: find.text('확인'), milliseconds: 320);
+    expect(find.text('08:00'), findsOneWidget);
+    await record(tester, 'schedule-ready', 'registered', () async {}, pressTarget: find.text('등록하기'));
+    final saved = AppServices.instance.medications.getPills().singleWhere((pill) => pill['ITEM_SEQ'] == '202106092');
+    expect(saved['ITEM_NAME'], productName);
+    expect(saved['times'], ['08:00']);
+    // Stock is an isolated presentation input, like the existing evening dose.
+    // Medicine identity comes exclusively from the preserved public response.
+    await AppServices.instance.medications.updatePill(saved['id'].toString(), {...saved, 'stock': 14, 'trackStock': true});
+    await record(tester, 'registered', 'box-registered', () async {}, pressTarget: find.text('완료'));
+    await record(tester, 'box-registered', 'home', () async {}, pressTarget: homeTab);
+    final dose = find.byKey(ValueKey("dose-${saved['id']}|08:00"));
+    capture.reportPoint(tester, 'home.check', dose);
+    await record(tester, 'home', 'home-taken', () async {}, pressTarget: dose, milliseconds: 800);
     await record(tester, 'home-taken', 'box-taken', () async {}, pressTarget: boxTab);
-    expect(AppServices.instance.medications.getPills().first['stock'], 13);
-    await record(tester, 'box-taken', 'stock-taken', () async {}, pressTarget: find.text('아침 처방약'));
+    expect(AppServices.instance.medications.getPills().singleWhere((pill) => pill['ITEM_SEQ'] == '202106092')['stock'], 13);
+    await record(tester, 'box-taken', 'stock-taken', () async {}, pressTarget: find.text(productName));
     await tester.pumpWidget(const SizedBox.shrink());
     await tester.pumpAndSettle();
     await tester.runAsync(() => File('/Users/kimrasng/dev/pillnoteweb/design/capture/native-clips-main.json').writeAsString(const JsonEncoder.withIndent('  ').convert(clips)));

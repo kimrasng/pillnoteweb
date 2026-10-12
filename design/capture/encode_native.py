@@ -25,12 +25,14 @@ for key, clip in clips.items():
         digest = hashlib.sha256(image.tobytes()).hexdigest()[:20]
         path = f'/images/app/native/{digest}.webp'
         if digest not in encoded:
-            image.save(assets / f'native/{digest}.webp', format='WEBP', lossless=True, method=6)
+            output = assets / f'native/{digest}.webp'
+            if not output.exists():
+                image.save(output, format='WEBP', lossless=True, method=4)
             encoded[digest] = path
         value = labels[name]
-        if key == 'schedule--registered':
+        if key == 'schedule-ready--registered':
             for label in value:
-                if label['kind'] == 'next': label['times'] = [13]
+                if label['kind'] == 'next': label['times'] = [8]
         signature = json.dumps(value, sort_keys=True)
         date = date_keys.get(signature)
         if date is None:
@@ -43,8 +45,10 @@ for key, clip in clips.items():
     last = len(frames) - 1
     if 'pressReleaseIndex' in clip:
         release = clip['pressReleaseIndex']
+        # Keep the preceding tap at the same pace during longer dose feedback.
+        press_stop = .165 / .95 if key == 'home--home-taken' else .3
         manifest[key]['stops'] = [
-            .3 * i / release if i <= release else .3 + .7 * (i - release) / (last - release)
+            press_stop * i / release if i <= release else press_stop + (1 - press_stop) * (i - release) / (last - release)
             for i in range(len(frames))
         ]
     def frame_stop(index):

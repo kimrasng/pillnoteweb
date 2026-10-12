@@ -4,9 +4,9 @@ export const TOUCH_PRESS_SHARE = 0.52;
 export const BASE_CHAPTER_EXIT_SCREENS = 0.55;
 export const CHAPTER_EXIT_SCREENS =
   BASE_CHAPTER_EXIT_SCREENS + TOUCH_EXTRA_SCREENS;
-const chapterTouchCounts = [1, 7, 1, 1, 1, 7, 1];
+const chapterTouchCounts = [1, 8, 1, 1, 1, 8, 1];
 // Reserve the added contact distance inside each chapter and its outgoing route.
-export const chapterLengths = [2.1, 7.4, 3.2, 4.2, 3.4, 9.6, 3.4].map(
+export const chapterLengths = [2.1, 8.2, 2.6, 4.2, 3.4, 10.7, 3.4].map(
   (length, index) =>
     length + (chapterTouchCounts[index] + 1) * TOUCH_EXTRA_SCREENS,
 );
@@ -15,6 +15,7 @@ export const motionDistances = {
   pop: 0.55,
   tab: 0.55,
   update: 0.32,
+  dose: 0.95,
   typing: 1.4,
   search: 1.4,
   scroll: 0.7,

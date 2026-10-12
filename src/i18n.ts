@@ -31,6 +31,7 @@ type SiteCopy = {
     doseTitle: string;
     guardianBody: string;
     doseBody: string;
+    swipe: string;
   };
 };
 
@@ -71,8 +72,8 @@ export const translations: Record<Locale, SiteCopy> = {
         label: "약 등록",
         title: "약을 찾고,\n시간을 정하면 끝.",
         description:
-          "이름으로 검색하거나 직접 입력하고,\n복용 시간과 수량을 정해 등록해요.",
-        detail: "약 이름 검색부터 시간·수량 등록까지 한 번에.",
+          "타이레놀처럼 포장에 적힌 이름으로 찾고,\n검색 결과에서 골라 복용 시간을 정해요.",
+        detail: "실제 의약품 검색 결과에서 내 약을 선택해요.",
       },
       record: {
         label: "복용 기록",
@@ -129,7 +130,7 @@ export const translations: Record<Locale, SiteCopy> = {
       {
         question: "페이지에 보이는 화면은 실제 앱인가요?",
         answer:
-          "앱 화면은 실제 PillNote 화면을 소개용 데이터로 캡처했어요. 휴대폰 알림은 앱과 서버의 알림 문구를 사용한 도착 예시예요. 보호자 연결은 소개용 계정으로 초대와 수락 과정을 재현했어요. 지도와 약국 목록은 서울역 주변 실제 검색 결과예요. 스크롤을 올리면 이전 과정으로 돌아갈 수 있어요.",
+          "앱 화면은 실제 PillNote 화면을 캡처했어요. 타이레놀 검색은 실제 의약품 목록과 식별 사진을 사용하고, 복용 일정과 수량은 소개용 예시예요. 휴대폰 알림은 앱과 서버의 알림 문구를 사용한 도착 예시예요. 보호자 연결은 소개용 계정으로 초대와 수락 과정을 재현했어요. 지도와 약국 목록은 서울역 주변 실제 검색 결과예요. 스크롤을 올리면 이전 과정으로 돌아갈 수 있어요.",
       },
     ],
     developer: "Developed by Dohyun Kim",
@@ -144,6 +145,7 @@ export const translations: Record<Locale, SiteCopy> = {
       doseTitle: "PillNote 복용 시간 알림",
       guardianBody: "보호 중인 사용자의 복약 상태를 확인해주세요.",
       doseBody: "08:00 복용할 약이 1개 있어요. 오늘 일정을 확인해주세요.",
+      swipe: "위로 쓸어올려서 열기",
     },
   },
   en: {
@@ -177,8 +179,8 @@ export const translations: Record<Locale, SiteCopy> = {
         label: "Add medication",
         title: "Find your medication.\nSet your schedule.",
         description:
-          "Search by name or enter it yourself.\nChoose your dose times and quantity.",
-        detail: "Medication, dose times and quantity in one place.",
+          "Search the name on the packaging, like Tylenol.\nSelect your medication and set a dose time.",
+        detail: "Choose your medication from real catalogue results.",
       },
       record: {
         label: "Dose tracking",
@@ -236,7 +238,7 @@ export const translations: Record<Locale, SiteCopy> = {
       {
         question: "Are these real app screens?",
         answer:
-          "The screens are captured from the actual PillNote app with sample data. Phone notifications demonstrate the app and server's notification messages. Caregiver invitations and acceptance use demo accounts. The map and pharmacy list show real search results around Seoul Station. Scroll up to retrace the experience. The app screenshots currently show the Korean interface.",
+          "The screens are captured from the actual PillNote app. Tylenol search uses real catalogue results and identification photos; schedules and stock are presentation examples. Phone notifications demonstrate the app and server's notification messages. Caregiver invitations and acceptance use demo accounts. The map and pharmacy list show real search results around Seoul Station. Scroll up to retrace the experience. The app screenshots currently show the Korean interface.",
       },
     ],
     developer: "Developed by Dohyun Kim",
@@ -252,6 +254,7 @@ export const translations: Record<Locale, SiteCopy> = {
       guardianBody:
         "Please check the medication status of the person you care for.",
       doseBody: "1 medication is scheduled for 08:00. Check today's schedule.",
+      swipe: "Swipe up to open",
     },
   },
 };

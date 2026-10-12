@@ -8,6 +8,7 @@ import {
   type NativeSample,
 } from "./native.ts";
 import { BASE_CHAPTER_EXIT_SCREENS, TOUCH_EXTRA_SCREENS } from "./pacing.ts";
+import { lockPower } from "./feedback.ts";
 
 export const FRAME_FADE_DISTANCE = 0.08;
 type FilmFrame = FramePose & { image: string; weight: number };
@@ -27,6 +28,9 @@ export type FilmState = {
   backgroundImage: string;
   native: NativeSample | null;
   touches: TouchPose[];
+  doseProgress: number | null;
+  unlockProgress: number;
+  power: number;
 };
 export function clampProgress(progress: number): number {
   return Number.isNaN(progress) ? 0 : Math.max(0, Math.min(1, progress));
@@ -176,6 +180,10 @@ export function getFilmState(
     dominantImage: frames[dominantFrame]?.image ?? "",
     frames,
     native,
+    doseProgress:
+      native?.id === "home--home-taken" ? native.postTouchProgress : null,
+    unlockProgress: to?.motion === "unlock" ? blend : 0,
+    power: to?.motion === "lock" ? lockPower(blend) : 0,
     touches: reducedMotion
       ? []
       : (native?.touches ??

@@ -7,14 +7,16 @@ import { scenes } from "../src/story.ts";
 test("search composes Korean keystrokes with a caret and commits the full name before results", () => {
   assert.equal(getTypingState(0).text, "");
   for (const [progress, text] of [
-    [0.1, "ㅂ"],
-    [0.2, "비"],
-    [0.32, "빝"],
-    [0.4, "비타"],
-    [0.49, "비탐"],
-    [0.6, "비타미"],
-    [0.7, "비타민"],
-    [0.8, "비타민"],
+    [0.1, "ㅌ"],
+    [0.15, "타"],
+    [0.23, "타ㅇ"],
+    [0.3, "타이"],
+    [0.4, "타이ㄹ"],
+    [0.5, "타이레"],
+    [0.55, "타이레ㄴ"],
+    [0.65, "타이레노"],
+    [0.75, "타이레놀"],
+    [0.8, "타이레놀"],
   ])
     assert.equal(getTypingState(progress).text, text);
   assert.equal(getTypingState(0.8).composing, "");
@@ -31,7 +33,7 @@ test("search composes Korean keystrokes with a caret and commits the full name b
   }
   const committed = getFilmState(add, atTyping(0.9));
   assert.equal(committed.native.id, "search-focused--search-typed");
-  assert.equal(committed.native.index, 8);
+  assert.equal(committed.native.index, 10);
   const results = getFilmState(add, typed.at);
   assert.equal(results.dominantImage, "search-typed");
 });
@@ -51,5 +53,5 @@ test("pausing freezes input and reversing restores each composed syllable exactl
     );
   }
   assert.equal(getTypingState(NaN).text, "");
-  assert.equal(getTypingState(2).text, "비타민");
+  assert.equal(getTypingState(2).text, "타이레놀");
 });

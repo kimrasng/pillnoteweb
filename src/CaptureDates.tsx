@@ -75,14 +75,13 @@ export default function CaptureDates({
         {formatCaptureDate(label, now)}
       </span>
     );
-    return label.clipRight === undefined ? (
-      text
-    ) : (
+    return (
       <div
         key={index}
         className="capture-date-clip"
         style={{
-          clipPath: `inset(0 ${(1 - label.clipRight / 390) * 100}% 0 0)`,
+          // Scrolled calendar text must pass behind Flutter's pinned heading.
+          clipPath: `inset(${(110 / 844) * 100}% ${(1 - (label.clipRight ?? 390) / 390) * 100}% ${(34 / 844) * 100}% 0)`,
         }}
       >
         {text}

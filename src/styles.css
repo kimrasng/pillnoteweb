@@ -12,7 +12,8 @@
   box-sizing: border-box;
 }
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
+  overflow-anchor: none;
   scroll-padding-top: 80px;
   scrollbar-width: none;
 }
@@ -986,80 +987,145 @@ main {
 .notification-screen {
   position: absolute;
   inset: 0;
-  color: #28473e;
-  background:
-    radial-gradient(ellipse at 95% 90%, #6eaaa077 0%, transparent 64%),
-    linear-gradient(155deg, #d7e7e0 0%, #e9efeb 44%, #a6c8ba 100%);
-  font-family: "PillNote Capture", sans-serif;
+  color: #f6fffc;
+  background: #164a43;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "PillNote Capture", sans-serif;
+  overflow: hidden;
+}
+.lock-wallpaper {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(155deg, #164d4b 0%, #69978c 46%, #bbc8a7 100%);
+}
+.lock-wallpaper i {
+  position: absolute;
+  display: block;
+  width: 145%;
+  height: 78%;
+  left: -54%;
+  top: -10%;
+  border-radius: 48%;
+  transform: rotate(-28deg);
+  background: linear-gradient(135deg, #ddedd34d, #83c5b987 50%, #27756d);
+  box-shadow:
+    inset -4cqw -6cqw 12cqw #163b3940,
+    3cqw 6cqw 10cqw #163b3950;
+}
+.lock-wallpaper i:nth-child(2) {
+  left: 24%;
+  top: 28%;
+  width: 120%;
+  height: 85%;
+  transform: rotate(-31deg);
+  background: linear-gradient(130deg, #d6e5bc, #8cbcad 37%, #37796b 72%);
+}
+.lock-wallpaper i:nth-child(3) {
+  left: -67%;
+  top: 62%;
+  width: 147%;
+  height: 65%;
+  transform: rotate(-34deg);
+  background: linear-gradient(145deg, #a3d5c2, #477e70 70%);
+}
+.lock-auth {
+  position: absolute;
+  top: 9.2%;
+  left: 0;
+  right: 0;
+  display: grid;
+  place-items: center;
+  opacity: max(0.25, var(--lock-chrome));
+}
+.lock-auth svg {
+  width: 5.5cqw;
+  height: 5.5cqw;
+  stroke-width: 2.5;
 }
 .lock-heading {
   position: absolute;
-  top: 13%;
+  top: 15.4%;
   left: 0;
   right: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-.lock-heading > svg {
-  width: 6.2cqw;
-  height: 6.2cqw;
-  margin-bottom: 4.2cqw;
+  opacity: var(--lock-chrome);
+  filter: blur(var(--lock-blur));
 }
 .lock-heading p {
-  font-size: 5.2cqw;
+  font-size: 5.1cqw;
   font-weight: 600;
+  letter-spacing: -0.1cqw;
+  text-shadow: 0 0.3cqw 2cqw #16433d20;
 }
 .lock-heading > strong {
-  font-size: 24cqw;
-  line-height: 1.12;
-  font-weight: 600;
-  letter-spacing: -1.2cqw;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 26.5cqw;
+  line-height: 1.16;
+  font-weight: 650;
+  letter-spacing: -1.3cqw;
+  text-shadow: 0 0.4cqw 3cqw #16433d18;
 }
 .lock-notification {
   position: absolute;
-  top: 40%;
-  left: 3.5%;
-  right: 3.5%;
-  display: flex;
-  gap: 3cqw;
-  padding: 4.1cqw;
+  top: 65%;
+  left: 3.6%;
+  right: 3.6%;
+  padding: 3cqw 4cqw 3.4cqw;
   border-radius: 6cqw;
-  background: #ffffffcc;
-  box-shadow: 0 2cqw 8cqw #42695116;
-}
-.lock-notification > img {
-  width: 10.8cqw;
-  height: 10.8cqw;
-  border-radius: 2.7cqw;
-  align-self: center;
+  background: #f3fff1ba;
+  border: 0.25cqw solid #f9fff861;
+  box-shadow:
+    0 0.8cqw 4cqw #143e3424,
+    inset 0 0.3cqw 0.5cqw #fff7;
+  backdrop-filter: blur(24px) saturate(1.55);
+  -webkit-backdrop-filter: blur(24px) saturate(1.55);
+  transform: scale(var(--card-scale));
+  opacity: var(--lock-chrome);
 }
 .lock-notification-copy {
-  flex: 1;
   min-width: 0;
-  color: #23342e;
+  color: #172b23;
 }
 .notification-sender {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  font-size: 3.5cqw;
+  color: #3c5148;
+  font-size: 3.1cqw;
   font-weight: 500;
-  margin-bottom: 1.3cqw;
+  margin-bottom: 1.8cqw;
+  letter-spacing: 0.1cqw;
+}
+.notification-sender > span {
+  display: flex;
+  align-items: center;
+  gap: 1.6cqw;
+}
+.notification-sender img {
+  width: 5.1cqw;
+  height: 5.1cqw;
+  border-radius: 1.3cqw;
 }
 .notification-sender small {
-  font-size: 3.2cqw;
-  color: #64726b;
+  font-size: 3cqw;
+  letter-spacing: 0;
+  color: #53655a;
 }
 .lock-notification-copy > strong {
-  font-size: 3.75cqw;
+  font-size: 3.85cqw;
+  line-height: 1.35;
   font-weight: 650;
   display: block;
-  margin-bottom: 0.9cqw;
+  margin-bottom: 0.6cqw;
+  letter-spacing: -0.05cqw;
 }
 .lock-notification-copy > p {
-  font-size: 3.6cqw;
-  line-height: 1.45;
+  font-size: 3.7cqw;
+  line-height: 1.4;
   word-break: keep-all;
+  letter-spacing: -0.04cqw;
 }
 .lock-controls {
   position: absolute;
@@ -1068,19 +1134,125 @@ main {
   right: 11%;
   display: flex;
   justify-content: space-between;
+  opacity: var(--lock-chrome);
 }
 .lock-controls span {
   display: grid;
   place-items: center;
-  width: 12.5cqw;
-  height: 12.5cqw;
+  width: 12.8cqw;
+  height: 12.8cqw;
   border-radius: 50%;
-  background: #315a4640;
+  background: #17372b52;
+  border: 0.25cqw solid #eaffeb27;
+  box-shadow: inset 0 0.4cqw 0.6cqw #fff2;
+  backdrop-filter: blur(16px);
   color: #fff;
 }
 .lock-controls svg {
-  width: 6cqw;
-  height: 6cqw;
+  width: 5.9cqw;
+  height: 5.9cqw;
+  fill: currentColor;
+  stroke-width: 1.8;
+}
+.lock-swipe {
+  position: absolute;
+  bottom: 3.6%;
+  width: 100%;
+  text-align: center;
+  font-size: 3.4cqw;
+  font-weight: 500;
+  opacity: var(--lock-chrome);
+}
+.phone-status.is-locked {
+  color: #fff;
+}
+.phone-status.is-locked .phone-bars i,
+.phone-status.is-locked .phone-wifi:after,
+.phone-status.is-locked .phone-battery:before,
+.phone-status.is-locked .phone-battery:after {
+  background: #fff;
+}
+.phone-status.is-locked .phone-wifi,
+.phone-status.is-locked .phone-battery {
+  border-color: #fff;
+}
+.phone-home-line.is-locked {
+  background: #fff;
+}
+.phone-power {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  z-index: 16;
+  pointer-events: none;
+}
+.dose-feedback {
+  position: absolute;
+  inset: 0;
+  z-index: 7;
+  pointer-events: none;
+}
+.dose-region,
+.dose-region-backdrop {
+  position: absolute;
+  inset: 0;
+}
+.dose-region-backdrop {
+  background: #fff;
+}
+.dose-crop {
+  position: absolute;
+  overflow: hidden;
+}
+.dose-crop img {
+  position: absolute;
+  max-width: none;
+  user-select: none;
+}
+.dose-summary-panel {
+  position: absolute;
+  top: 39.57346%;
+  left: 6.153846%;
+  width: 87.692308%;
+  border-radius: 5.128205cqw;
+  background: #eff5ff;
+}
+.dose-list {
+  position: absolute;
+  inset: 0;
+}
+.dose-progress-track {
+  position: absolute;
+  left: 11.28%;
+  width: 77.44%;
+  height: 0.71%;
+  border-radius: 10cqw;
+  background: #dce8ff;
+  overflow: hidden;
+}
+.dose-progress-track span {
+  display: block;
+  height: 100%;
+  background: #2563eb;
+  transform-origin: left;
+}
+.dose-check-response {
+  position: absolute;
+  width: 10.26%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+}
+.dose-check-response svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.dose-check-response i {
+  position: absolute;
+  inset: -15%;
+  border-radius: 50%;
+  background: #2563eb;
 }
 
 /* The app stays in one device. Its actions carry the story. */

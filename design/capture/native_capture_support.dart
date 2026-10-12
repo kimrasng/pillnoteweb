@@ -30,6 +30,27 @@ const outputDirectory = '/Users/kimrasng/dev/pillnoteweb/public/images/app';
 const captureKey = ValueKey('website-screen-capture');
 final dateOverlays = <String, List<Map<String, dynamic>>>{};
 
+// Preserve the real public API response and its MFDS product photos offline.
+// These are catalogue facts; the capture's schedule and stock are demo inputs.
+Future<Map<String, dynamic>> loadTylenolCatalogue(WidgetTester tester) async {
+  final response = jsonDecode((await tester.runAsync(() => File(
+    '/Users/kimrasng/dev/pillnoteweb/design/capture/tylenol-search.json',
+  ).readAsString()))!) as Map<String, dynamic>;
+  for (final item in response['data'] as List) {
+    final bytes = (await tester.runAsync(() => File(
+      '/Users/kimrasng/dev/pillnoteweb/design/capture/catalogue-images/${item['itemSeq']}.png',
+    ).readAsBytes()))!;
+    final codec = await tester.runAsync(() => ui.instantiateImageCodec(bytes));
+    final frame = (await tester.runAsync(() => codec!.getNextFrame()))!;
+    final key = NetworkImage(item['imageUrl'] as String);
+    PaintingBinding.instance.imageCache.putIfAbsent(key, () =>
+      OneFrameImageStreamCompleter(Future.value(ImageInfo(image: frame.image))));
+    codec!.dispose();
+  }
+  await tester.pump();
+  return response;
+}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   tz_data.initializeTimeZones();
@@ -291,7 +312,7 @@ Future<void> saveBoundary(WidgetTester tester, String name) async {
     final color = style.color ?? Colors.black;
     labels.add({
       'kind': kind, 'offset': offset,
-      if (kind == 'next') 'times': name == 'registered' ? [13] : [8, 13, 20],
+      if (kind == 'next') 'times': name == 'registered' ? [8] : [8, 20],
       'x': rect.left, 'y': rect.top, 'width': rect.width, 'height': rect.height,
       'opacity': paragraphOpacity(render),
       'clipRight': ModalRoute.of(element) == foregroundRoute ? 390.0 : foregroundLeft,

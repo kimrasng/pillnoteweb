@@ -18,7 +18,7 @@ const notificationTouchEnd =
   (motionDistances.unlock + TOUCH_EXTRA_SCREENS);
 export const notificationTouch: TouchCue = {
   x: 195,
-  y: 397,
+  y: 600,
   start: 0,
   release: notificationTouchEnd * TOUCH_PRESS_SHARE,
   end: notificationTouchEnd,

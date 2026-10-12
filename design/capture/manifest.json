@@ -1,0 +1,242 @@
+[
+  {
+    "file": "box-start.png",
+    "width": 780,
+    "height": 1688,
+    "logicalWidth": 390,
+    "logicalHeight": 844,
+    "sha256": "0253d2609c0a0b7a50e90fec54ed0eb089c30bfa8a56d1f14810aa5d2693eb38"
+  },
+  {
+    "file": "box-taken.png",
+    "width": 780,
+    "height": 1688,
+    "logicalWidth": 390,
+    "logicalHeight": 844,
+    "sha256": "f2200b4aea2c490938ef518fa6ae126622d3b4ebe5fa23c41046c07716356108"
+  },
+  {
+    "file": "box.png",
+    "width": 780,
+    "height": 1688,
+    "logicalWidth": 390,
+    "logicalHeight": 844,
+    "sha256": "b78c1224e4d44b9aa8892a251ae3986c9a3a8118fa5798160bf20f9e44f345ea"
+  },
+  {
+    "file": "guardian-accepted.png",
+    "width": 780,
+    "height": 1688,
+    "logicalWidth": 390,
+    "logicalHeight": 844,
+    "sha256": "b7c0d705351be70babb12da92775b70c54f7c6d15784899f72ed03bccb15ba11"
+  },
+  {
+    "file": "guardian-base.png",
+    "width": 780,
+    "height": 1688,
+    "logicalWidth": 390,
+    "logicalHeight": 844,
+    "sha256": "b7c0d705351be70babb12da92775b70c54f7c6d15784899f72ed03bccb15ba11"
+  },
+  {
+    "file": "guardian-invite-empty.png",
+    "width": 780,
+    "height": 1688,
+    "logicalWidth": 390,
+    "logicalHeight": 844,
+    "sha256": "e58dc7517b2c87d5bf2ba0f3395de17226c2b6382a22dbc815903bdaa4f9d868"
+  },
+  {
+    "file": "guardian-invite.png",
+    "width": 780,
+    "height": 1688,
+    "logicalWidth": 390,
+    "logicalHeight": 844,
+    "sha256": "36122ee494884f3bebbd44bd8c607e0b742488c756ed29bce744c040e27da08c"
+  },
+  {
+    "file": "guardian-linked.png",
+    "width": 780,
+    "height": 1688,
+    "logicalWidth": 390,
+    "logicalHeight": 844,
+    "sha256": "e9624f37e381017384af7bea7e4af6b1cccff18e231309f7e8afd5bb81327c86"
+  },
+  {
+    "file": "guardian-pending.png",
+    "width": 780,
+    "height": 1688,
+    "logicalWidth": 390,
+    "logicalHeight": 844,
+    "sha256": "04112fcf296f66c1a8a6c5515a63d984224d69aafaaf9d6ee0267362ab4ca739"
+  },
+  {
+    "file": "guardian-received.png",
+    "width": 780,
+    "height": 1688,
+    "logicalWidth": 390,
+    "logicalHeight": 844,
+    "sha256": "5fa5c9c7cc856e99b4dbcef188d2e199785fabf08529dd4cc4a2eea8442fa6f0"
+  },
+  {
+    "file": "guardian-settings.png",
+    "width": 780,
+    "height": 1688,
+    "logicalWidth": 390,
+    "logicalHeight": 844,
+    "sha256": "ce8bb85e321aa0e5e7c75fa39dad891d7ad608933e8126be67b8c614bd29372b"
+  },
+  {
+    "file": "guardian.png",
+    "width": 780,
+    "height": 1688,
+    "logicalWidth": 390,
+    "logicalHeight": 844,
+    "sha256": "64a72d5916aff33c9ca8391905138c9cb2ecb4b749585a43cab576cf201541b2"
+  },
+  {
+    "file": "home-start.png",
+    "width": 780,
+    "height": 1688,
+    "logicalWidth": 390,
+    "logicalHeight": 844,
+    "sha256": "1ca6c2ec6fd4f3cc18928e0f3e830f215b17b4f27cc288674c7e9ba8cf97edd1"
+  },
+  {
+    "file": "home-taken.png",
+    "width": 780,
+    "height": 1688,
+    "logicalWidth": 390,
+    "logicalHeight": 844,
+    "sha256": "ef9c7b52252e5caad6732c46384ae01b84dd7fa0b87ec852d2c0f65089e218b5"
+  },
+  {
+    "file": "home.png",
+    "width": 780,
+    "height": 1688,
+    "logicalWidth": 390,
+    "logicalHeight": 844,
+    "sha256": "4c9a36d746881531e6f3e9835d174b2be7bc350e161646e113858e00907e4425"
+  },
+  {
+    "file": "pharmacy-detail.png",
+    "width": 780,
+    "height": 1688,
+    "logicalWidth": 390,
+    "logicalHeight": 844,
+    "sha256": "cfc5fb86aa88bf343faf819bcc562b59622c09948c26e45c5e7e95e22b9407e8"
+  },
+  {
+    "file": "pharmacy-list.png",
+    "width": 780,
+    "height": 1688,
+    "logicalWidth": 390,
+    "logicalHeight": 844,
+    "sha256": "42e0d16aa52a7141f18722cfd6adb455975a60be73e454c1fbedc4bb638e850f"
+  },
+  {
+    "file": "pharmacy-map.png",
+    "width": 780,
+    "height": 1688,
+    "logicalWidth": 390,
+    "logicalHeight": 844,
+    "sha256": "a5e83ee8d9f6e66cd58a4a214a1d53524560ad827ba7620e565235f23d50a750"
+  },
+  {
+    "file": "pharmacy-station.png",
+    "width": 780,
+    "height": 1688,
+    "logicalWidth": 390,
+    "logicalHeight": 844,
+    "sha256": "6e5238a6a91047ad227c8ed50d93c9bb14fa14ffa5e86267361b3fc1b2fc298a"
+  },
+  {
+    "file": "pharmacy.png",
+    "width": 780,
+    "height": 1688,
+    "logicalWidth": 390,
+    "logicalHeight": 844,
+    "sha256": "3f2a640f18ceda0179528343f7634c4d21cf41ffbf714b6cfc8ce8a68aa70711"
+  },
+  {
+    "file": "registered.png",
+    "width": 780,
+    "height": 1688,
+    "logicalWidth": 390,
+    "logicalHeight": 844,
+    "sha256": "ecbc1184e8f695a4cd58553c95de234d24289a3cdb55a23d46a2d66ba5a31f63"
+  },
+  {
+    "file": "reminders.png",
+    "width": 780,
+    "height": 1688,
+    "logicalWidth": 390,
+    "logicalHeight": 844,
+    "sha256": "771814ad743ef2abbe39386f6b04988ee8b1b2ec3aeef2d26f560dee7fd77cbe"
+  },
+  {
+    "file": "schedule.png",
+    "width": 780,
+    "height": 1688,
+    "logicalWidth": 390,
+    "logicalHeight": 844,
+    "sha256": "3434f7b123e69cf803addcccba754bec392160193457f4473c559ed34635e86f"
+  },
+  {
+    "file": "search-empty.png",
+    "width": 780,
+    "height": 1688,
+    "logicalWidth": 390,
+    "logicalHeight": 844,
+    "sha256": "64418c4693bc295ec274452ccf6bc278d43c368e4598ed3aa0d8b597aac757bf"
+  },
+  {
+    "file": "search-focused.png",
+    "width": 780,
+    "height": 1688,
+    "logicalWidth": 390,
+    "logicalHeight": 844,
+    "sha256": "38e39ccaed8e1a3862b500de8202c26d8e1ba2899a4aedbd80ddd2247ae7d7ff"
+  },
+  {
+    "file": "search-typed.png",
+    "width": 780,
+    "height": 1688,
+    "logicalWidth": 390,
+    "logicalHeight": 844,
+    "sha256": "d59680a934ff77138cee2eea4629c17a429c40470082f8dc4c6ec28c937856e4"
+  },
+  {
+    "file": "search.png",
+    "width": 780,
+    "height": 1688,
+    "logicalWidth": 390,
+    "logicalHeight": 844,
+    "sha256": "79364704345829e17f2d28c83f531d5296a15b90177d5a790674d3d1db3dcba6"
+  },
+  {
+    "file": "stock-taken.png",
+    "width": 780,
+    "height": 1688,
+    "logicalWidth": 390,
+    "logicalHeight": 844,
+    "sha256": "de125d45b8bd1dc51da3c07374f8790cb0554562b05f3c6fa612e039c7c3edb6"
+  },
+  {
+    "file": "stock.png",
+    "width": 780,
+    "height": 1688,
+    "logicalWidth": 390,
+    "logicalHeight": 844,
+    "sha256": "8b7f74303305c6ea462c8915c6463676d992da741c5cf18b8aa511c1921a1bf2"
+  },
+  {
+    "file": "time-picker.png",
+    "width": 780,
+    "height": 1688,
+    "logicalWidth": 390,
+    "logicalHeight": 844,
+    "sha256": "c777b240a4a9002fe543dec9e75de82f94bf96313cf64bfd6899468c0ac08e09"
+  }
+]

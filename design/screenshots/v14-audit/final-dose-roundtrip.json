@@ -1,0 +1,314 @@
+[
+  {
+    "frame": "dose-lock",
+    "motion": "hold",
+    "progress": "0.079357",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 22576.5
+  },
+  {
+    "frame": "dose-lock",
+    "motion": "hold",
+    "progress": "0.108433",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 22698
+  },
+  {
+    "frame": "dose-lock",
+    "motion": "notification",
+    "progress": "0.137869",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 22821
+  },
+  {
+    "frame": "dose-lock",
+    "motion": "notification",
+    "progress": "0.167424",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 22944.5
+  },
+  {
+    "frame": "dose-notification",
+    "motion": "notification",
+    "progress": "0.196741",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 23067
+  },
+  {
+    "frame": "dose-notification",
+    "motion": "notification",
+    "progress": "0.226296",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 23190.5
+  },
+  {
+    "frame": "dose-notification",
+    "motion": "hold",
+    "progress": "0.255492",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 23312.5
+  },
+  {
+    "frame": "dose-notification",
+    "motion": "hold",
+    "progress": "0.284928",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 23435.5
+  },
+  {
+    "frame": "dose-notification",
+    "motion": "hold",
+    "progress": "0.314244",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 23558
+  },
+  {
+    "frame": "dose-notification",
+    "motion": "hold",
+    "progress": "0.343440",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 23680
+  },
+  {
+    "frame": "dose-notification",
+    "motion": "hold",
+    "progress": "0.372756",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 23802.5
+  },
+  {
+    "frame": "dose-notification",
+    "motion": "hold",
+    "progress": "0.402312",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 23926
+  },
+  {
+    "frame": "dose-notification",
+    "motion": "hold",
+    "progress": "0.431269",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 24047
+  },
+  {
+    "frame": "dose-notification",
+    "motion": "hold",
+    "progress": "0.460944",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 24171
+  },
+  {
+    "frame": "dose-notification",
+    "motion": "hold",
+    "progress": "0.490260",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 24293.5
+  },
+  {
+    "frame": "dose-notification",
+    "motion": "hold",
+    "progress": "0.519696",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 24416.5
+  },
+  {
+    "frame": "dose-notification",
+    "motion": "hold",
+    "progress": "0.549131",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 24539.5
+  },
+  {
+    "frame": "dose-notification",
+    "motion": "unlock",
+    "progress": "0.578447",
+    "today": "2026-10-12",
+    "touch": {
+      "touchPhase": "down",
+      "touchX": "195",
+      "touchY": "397"
+    },
+    "transition": "0.000000",
+    "y": 24662
+  },
+  {
+    "frame": "dose-notification",
+    "motion": "unlock",
+    "progress": "0.607644",
+    "today": "2026-10-12",
+    "touch": {
+      "touchPhase": "release",
+      "touchX": "195",
+      "touchY": "397"
+    },
+    "transition": "0.000000",
+    "y": 24784
+  },
+  {
+    "frame": "dose-notification",
+    "motion": "unlock",
+    "progress": "0.637079",
+    "today": "2026-10-12",
+    "touch": {
+      "touchPhase": "release",
+      "touchX": "195",
+      "touchY": "397"
+    },
+    "transition": "0.000000",
+    "y": 24907
+  },
+  {
+    "frame": "home-taken",
+    "motion": "unlock",
+    "progress": "0.666395",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 25029.5
+  },
+  {
+    "frame": "home-taken",
+    "motion": "unlock",
+    "progress": "0.695831",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 25152.5
+  },
+  {
+    "frame": "home-taken",
+    "motion": "hold",
+    "progress": "0.724908",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 25274
+  },
+  {
+    "frame": "home-taken",
+    "motion": "hold",
+    "progress": "0.754344",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 25397
+  },
+  {
+    "frame": "home-taken",
+    "motion": "hold",
+    "progress": "0.736874",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 25324
+  },
+  {
+    "frame": "home-taken",
+    "motion": "unlock",
+    "progress": "0.719404",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 25251
+  },
+  {
+    "frame": "home-taken",
+    "motion": "unlock",
+    "progress": "0.701694",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 25177
+  },
+  {
+    "frame": "home-taken",
+    "motion": "unlock",
+    "progress": "0.684464",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 25105
+  },
+  {
+    "frame": "home-taken",
+    "motion": "unlock",
+    "progress": "0.666515",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 25030
+  },
+  {
+    "frame": "dose-notification",
+    "motion": "unlock",
+    "progress": "0.649045",
+    "today": "2026-10-12",
+    "touch": {
+      "touchPhase": "release",
+      "touchX": "195",
+      "touchY": "397"
+    },
+    "transition": "0.000000",
+    "y": 24957
+  },
+  {
+    "frame": "dose-notification",
+    "motion": "unlock",
+    "progress": "0.631216",
+    "today": "2026-10-12",
+    "touch": {
+      "touchPhase": "release",
+      "touchX": "195",
+      "touchY": "397"
+    },
+    "transition": "0.000000",
+    "y": 24882.5
+  },
+  {
+    "frame": "dose-notification",
+    "motion": "unlock",
+    "progress": "0.613627",
+    "today": "2026-10-12",
+    "touch": {
+      "touchPhase": "release",
+      "touchX": "195",
+      "touchY": "397"
+    },
+    "transition": "0.000000",
+    "y": 24809
+  },
+  {
+    "frame": "dose-notification",
+    "motion": "unlock",
+    "progress": "0.596396",
+    "today": "2026-10-12",
+    "touch": {
+      "touchPhase": "release",
+      "touchX": "195",
+      "touchY": "397"
+    },
+    "transition": "0.000000",
+    "y": 24737
+  },
+  {
+    "frame": "dose-notification",
+    "motion": "unlock",
+    "progress": "0.578447",
+    "today": "2026-10-12",
+    "touch": {
+      "touchPhase": "down",
+      "touchX": "195",
+      "touchY": "397"
+    },
+    "transition": "0.000000",
+    "y": 24662
+  }
+]

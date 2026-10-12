@@ -1,0 +1,182 @@
+[
+  {
+    "direction": "down",
+    "frame": "search-typed",
+    "motion": "push",
+    "native": {
+      "nativeClip": "search-typed--schedule",
+      "nativeCount": "43",
+      "nativeDisplayed": "/images/app/native/c9d8443ba4113cea3410.webp",
+      "nativeIndex": "2"
+    },
+    "progress": "0.439030",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 8048.5
+  },
+  {
+    "direction": "down",
+    "frame": "search-typed",
+    "motion": "push",
+    "native": {
+      "nativeClip": "search-typed--schedule",
+      "nativeCount": "43",
+      "nativeDisplayed": "/images/app/native/a39c5fd02549b4ab4bd5.webp",
+      "nativeIndex": "6"
+    },
+    "progress": "0.449805",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 8146.5
+  },
+  {
+    "direction": "down",
+    "frame": "search-typed",
+    "motion": "push",
+    "native": {
+      "nativeClip": "search-typed--schedule",
+      "nativeCount": "43",
+      "nativeDisplayed": "/images/app/native/94b8919423a4fe18d238.webp",
+      "nativeIndex": "13"
+    },
+    "progress": "0.460416",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 8243
+  },
+  {
+    "direction": "down",
+    "frame": "schedule",
+    "motion": "push",
+    "native": {
+      "nativeClip": "search-typed--schedule",
+      "nativeCount": "43",
+      "nativeDisplayed": "/images/app/native/899d6d3774fda4db7243.webp",
+      "nativeIndex": "21"
+    },
+    "progress": "0.471357",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 8342.5
+  },
+  {
+    "direction": "down",
+    "frame": "schedule",
+    "motion": "push",
+    "native": {
+      "nativeClip": "search-typed--schedule",
+      "nativeCount": "43",
+      "nativeDisplayed": "/images/app/native/2c7d56ab5a7b64668cb1.webp",
+      "nativeIndex": "29"
+    },
+    "progress": "0.482187",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 8441
+  },
+  {
+    "direction": "down",
+    "frame": "schedule",
+    "motion": "push",
+    "native": {
+      "nativeClip": "search-typed--schedule",
+      "nativeCount": "43",
+      "nativeDisplayed": "/images/app/native/96c309a976aeda73da55.webp",
+      "nativeIndex": "36"
+    },
+    "progress": "0.492963",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 8539
+  },
+  {
+    "direction": "up",
+    "frame": "schedule",
+    "motion": "push",
+    "native": {
+      "nativeClip": "search-typed--schedule",
+      "nativeCount": "43",
+      "nativeDisplayed": "/images/app/native/2c7d56ab5a7b64668cb1.webp",
+      "nativeIndex": "29"
+    },
+    "progress": "0.482242",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 8441.5
+  },
+  {
+    "direction": "up",
+    "frame": "schedule",
+    "motion": "push",
+    "native": {
+      "nativeClip": "search-typed--schedule",
+      "nativeCount": "43",
+      "nativeDisplayed": "/images/app/native/899d6d3774fda4db7243.webp",
+      "nativeIndex": "21"
+    },
+    "progress": "0.471412",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 8343
+  },
+  {
+    "direction": "up",
+    "frame": "search-typed",
+    "motion": "push",
+    "native": {
+      "nativeClip": "search-typed--schedule",
+      "nativeCount": "43",
+      "nativeDisplayed": "/images/app/native/fd1cb8ab117a15d66316.webp",
+      "nativeIndex": "14"
+    },
+    "progress": "0.460636",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 8245
+  },
+  {
+    "direction": "up",
+    "frame": "search-typed",
+    "motion": "push",
+    "native": {
+      "nativeClip": "search-typed--schedule",
+      "nativeCount": "43",
+      "nativeDisplayed": "/images/app/native/a39c5fd02549b4ab4bd5.webp",
+      "nativeIndex": "6"
+    },
+    "progress": "0.449915",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 8147.5
+  },
+  {
+    "direction": "up",
+    "frame": "search-typed",
+    "motion": "push",
+    "native": {
+      "nativeClip": "search-typed--schedule",
+      "nativeCount": "43",
+      "nativeDisplayed": "/images/app/native/591a1fa6fb1a752614f6.webp",
+      "nativeIndex": "3"
+    },
+    "progress": "0.439140",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 8049.5
+  },
+  {
+    "direction": "up",
+    "frame": "search-typed",
+    "motion": "push",
+    "native": {
+      "nativeClip": "search-typed--schedule",
+      "nativeCount": "43",
+      "nativeDisplayed": "/images/app/search-typed.png",
+      "nativeIndex": "0"
+    },
+    "progress": "0.428254",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 7950.5
+  }
+]

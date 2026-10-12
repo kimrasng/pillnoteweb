@@ -1,0 +1,359 @@
+[
+  {
+    "direction": "up",
+    "frame": "pharmacy-station",
+    "motion": "hold",
+    "progress": "0.070382",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 38516
+  },
+  {
+    "direction": "up",
+    "frame": "pharmacy-station",
+    "motion": "hold",
+    "progress": "0.052912",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 38443
+  },
+  {
+    "direction": "up",
+    "frame": "pharmacy-station",
+    "motion": "hold",
+    "progress": "0.035203",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 38369
+  },
+  {
+    "direction": "up",
+    "frame": "pharmacy-station",
+    "motion": "hold",
+    "progress": "0.017733",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 38296
+  },
+  {
+    "direction": "up",
+    "frame": "pharmacy-station",
+    "motion": "hold",
+    "progress": "0.000144",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 38222.5
+  },
+  {
+    "direction": "up",
+    "frame": "pharmacy-station",
+    "motion": "unlock",
+    "progress": "0.993991",
+    "today": "2026-10-12",
+    "transition": "0.895111",
+    "y": 38151
+  },
+  {
+    "direction": "up",
+    "frame": "pharmacy-station",
+    "motion": "unlock",
+    "progress": "0.987592",
+    "today": "2026-10-12",
+    "transition": "0.783416",
+    "y": 38075.5
+  },
+  {
+    "direction": "up",
+    "frame": "pharmacy-station",
+    "motion": "unlock",
+    "progress": "0.981320",
+    "today": "2026-10-12",
+    "transition": "0.673940",
+    "y": 38001.5
+  },
+  {
+    "direction": "up",
+    "frame": "guardian-notification",
+    "motion": "unlock",
+    "progress": "0.975132",
+    "today": "2026-10-12",
+    "touch": {
+      "touchPhase": "release",
+      "touchX": "195",
+      "touchY": "397"
+    },
+    "transition": "0.565944",
+    "y": 37928.5
+  },
+  {
+    "direction": "up",
+    "frame": "guardian-notification",
+    "motion": "unlock",
+    "progress": "0.968945",
+    "today": "2026-10-12",
+    "touch": {
+      "touchPhase": "release",
+      "touchX": "195",
+      "touchY": "397"
+    },
+    "transition": "0.457948",
+    "y": 37855.5
+  },
+  {
+    "direction": "up",
+    "frame": "guardian-notification",
+    "motion": "unlock",
+    "progress": "0.962673",
+    "today": "2026-10-12",
+    "touch": {
+      "touchPhase": "release",
+      "touchX": "195",
+      "touchY": "397"
+    },
+    "transition": "0.348473",
+    "y": 37781.5
+  },
+  {
+    "direction": "up",
+    "frame": "guardian-notification",
+    "motion": "unlock",
+    "progress": "0.956401",
+    "today": "2026-10-12",
+    "touch": {
+      "touchPhase": "release",
+      "touchX": "195",
+      "touchY": "397"
+    },
+    "transition": "0.238997",
+    "y": 37707.5
+  },
+  {
+    "direction": "up",
+    "frame": "guardian-notification",
+    "motion": "unlock",
+    "progress": "0.950214",
+    "today": "2026-10-12",
+    "touch": {
+      "touchPhase": "down",
+      "touchX": "195",
+      "touchY": "397"
+    },
+    "transition": "0.131001",
+    "y": 37634.5
+  },
+  {
+    "direction": "up",
+    "frame": "guardian-notification",
+    "motion": "unlock",
+    "progress": "0.944069",
+    "today": "2026-10-12",
+    "touch": {
+      "touchPhase": "down",
+      "touchX": "195",
+      "touchY": "397"
+    },
+    "transition": "0.023744",
+    "y": 37562
+  },
+  {
+    "direction": "up",
+    "frame": "guardian-notification",
+    "motion": "hold",
+    "progress": "0.937712",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 37487
+  },
+  {
+    "direction": "up",
+    "frame": "guardian-notification",
+    "motion": "hold",
+    "progress": "0.931567",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 37414.5
+  },
+  {
+    "direction": "up",
+    "frame": "guardian-notification",
+    "motion": "hold",
+    "progress": "0.925253",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 37340
+  },
+  {
+    "direction": "down",
+    "frame": "guardian-notification",
+    "motion": "hold",
+    "progress": "0.931440",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 37413
+  },
+  {
+    "direction": "down",
+    "frame": "guardian-notification",
+    "motion": "hold",
+    "progress": "0.937754",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 37487.5
+  },
+  {
+    "direction": "down",
+    "frame": "guardian-notification",
+    "motion": "unlock",
+    "progress": "0.943984",
+    "today": "2026-10-12",
+    "touch": {
+      "touchPhase": "down",
+      "touchX": "195",
+      "touchY": "397"
+    },
+    "transition": "0.022265",
+    "y": 37561
+  },
+  {
+    "direction": "down",
+    "frame": "guardian-notification",
+    "motion": "unlock",
+    "progress": "0.950171",
+    "today": "2026-10-12",
+    "touch": {
+      "touchPhase": "down",
+      "touchX": "195",
+      "touchY": "397"
+    },
+    "transition": "0.130261",
+    "y": 37634
+  },
+  {
+    "direction": "down",
+    "frame": "guardian-notification",
+    "motion": "unlock",
+    "progress": "0.956443",
+    "today": "2026-10-12",
+    "touch": {
+      "touchPhase": "release",
+      "touchX": "195",
+      "touchY": "397"
+    },
+    "transition": "0.239737",
+    "y": 37708
+  },
+  {
+    "direction": "down",
+    "frame": "guardian-notification",
+    "motion": "unlock",
+    "progress": "0.962546",
+    "today": "2026-10-12",
+    "touch": {
+      "touchPhase": "release",
+      "touchX": "195",
+      "touchY": "397"
+    },
+    "transition": "0.346253",
+    "y": 37780
+  },
+  {
+    "direction": "down",
+    "frame": "guardian-notification",
+    "motion": "unlock",
+    "progress": "0.968903",
+    "today": "2026-10-12",
+    "touch": {
+      "touchPhase": "release",
+      "touchX": "195",
+      "touchY": "397"
+    },
+    "transition": "0.457208",
+    "y": 37855
+  },
+  {
+    "direction": "down",
+    "frame": "guardian-notification",
+    "motion": "unlock",
+    "progress": "0.975132",
+    "today": "2026-10-12",
+    "touch": {
+      "touchPhase": "release",
+      "touchX": "195",
+      "touchY": "397"
+    },
+    "transition": "0.565944",
+    "y": 37928.5
+  },
+  {
+    "direction": "down",
+    "frame": "pharmacy-station",
+    "motion": "unlock",
+    "progress": "0.981362",
+    "today": "2026-10-12",
+    "transition": "0.674680",
+    "y": 38002
+  },
+  {
+    "direction": "down",
+    "frame": "pharmacy-station",
+    "motion": "unlock",
+    "progress": "0.987592",
+    "today": "2026-10-12",
+    "transition": "0.783416",
+    "y": 38075.5
+  },
+  {
+    "direction": "down",
+    "frame": "pharmacy-station",
+    "motion": "unlock",
+    "progress": "0.993821",
+    "today": "2026-10-12",
+    "transition": "0.892152",
+    "y": 38149
+  },
+  {
+    "direction": "down",
+    "frame": "pharmacy-station",
+    "motion": "hold",
+    "progress": "0.000144",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 38222.5
+  },
+  {
+    "direction": "down",
+    "frame": "pharmacy-station",
+    "motion": "hold",
+    "progress": "0.017614",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 38295.5
+  },
+  {
+    "direction": "down",
+    "frame": "pharmacy-station",
+    "motion": "hold",
+    "progress": "0.035323",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 38369.5
+  },
+  {
+    "direction": "down",
+    "frame": "pharmacy-station",
+    "motion": "hold",
+    "progress": "0.052793",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 38442.5
+  },
+  {
+    "direction": "down",
+    "frame": "pharmacy-station",
+    "motion": "hold",
+    "progress": "0.070502",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 38516.5
+  }
+]

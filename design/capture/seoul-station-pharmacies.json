@@ -1,0 +1,129 @@
+{
+  "data": [
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMTkxIzUxIyQxIyQ1IyQ3OSQyNjE0ODEjNzEjJDEjJDgjJDgz",
+      "name": "회현약국",
+      "address": "서울특별시 중구 퇴계로 36, 삼선빌딩 302호 (남창동)",
+      "phone": "02-3789-6399",
+      "latitude": 37.5573006,
+      "longitude": 126.9770319
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzQxIyQxIyQ3IyQ3OSQzNjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "하연약국",
+      "address": "서울특별시 중구 통일로 10, 연세대학교 세브란스빌딩 1층 107호 (남대문로5가)",
+      "phone": "02-2259-0488",
+      "latitude": 37.5570913,
+      "longitude": 126.9736575
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkMCMkMDMkNDgxMTkxIzExIyQxIyQzIyQ2MiQyNjEyMjIjNDEjJDEjJDgjJDgz",
+      "name": "서울중앙약국",
+      "address": "서울특별시 용산구 청파로 378, 한국철도공사 3층 (동자동)",
+      "phone": null,
+      "latitude": 37.552715,
+      "longitude": 126.969458
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzQxIyQxIyQ3IyQ4OSQzNjE4MzIjNjEjJDEjJDAjJDgz",
+      "name": "유일약국",
+      "address": "서울특별시 중구 세종대로 23, 1층 (남대문로5가)",
+      "phone": "02-318-5997",
+      "latitude": 37.5590959,
+      "longitude": 126.9738597
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzIxIyQxIyQxIyQxMyQyNjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "목화약국",
+      "address": "서울특별시 중구 만리재로 175, 402동 1층 402-1-다호 (만리동2가)",
+      "phone": "02-393-9117",
+      "latitude": 37.5548629,
+      "longitude": 126.9644863
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzMxIyQxIyQ3IyQxMyQ0NjE0ODEjNTEjJDEjJDYjJDgz",
+      "name": "옵티마서울약국",
+      "address": "서울특별시 중구 한강대로 416, 서울스퀘어 1층 9-1호 (남대문로5가)",
+      "phone": "02-6456-8971",
+      "latitude": 37.5555057,
+      "longitude": 126.9737678
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMzUxIzIxIyQxIyQxIyQ4MiQyNjEwMDIjNTEjJDEjJDYjJDgz",
+      "name": "센츄럴팜약국",
+      "address": "서울특별시 중구 한강대로 405, 2층 (봉래동2가)",
+      "phone": "02-393-5505",
+      "latitude": 37.554989,
+      "longitude": 126.9695548
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMzUxIzUxIyQxIyQxIyQ4MiQyNjE4MzIjODEjJDEjJDIjJDgz",
+      "name": "서울하이약국",
+      "address": "서울특별시 중구 세종대로 11-1, 1층 (남대문로5가)",
+      "phone": "070-4133-8275",
+      "latitude": 37.5582278,
+      "longitude": 126.9731339
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMTkxIzUxIyQxIyQxIyQ3MiQ0NjE0ODEjNTEjJDEjJDIjJDgz",
+      "name": "판도라숭례문약국",
+      "address": "서울특별시 중구 세종대로 13, 1층 (남대문로5가)",
+      "phone": "02-3789-2638",
+      "latitude": 37.558326,
+      "longitude": 126.9731076
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkMzgxNzAyIzUxIyQxIyQ1IyQxMyQzNjEwMDIjNzEjJDEjJDgjJDgz",
+      "name": "메디팜최약국",
+      "address": "서울특별시 용산구 청파로 324, 1층 (청파동1가)",
+      "phone": "02-715-6009",
+      "latitude": 37.54858,
+      "longitude": 126.9702423
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMTkxIzIxIyQyIyQ1IyQwMCQzNjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "서울수약국",
+      "address": "서울특별시 중구 만리재로 177, 한라비발디 센트랄상가 9호 (만리동2가)",
+      "phone": "02-363-3383",
+      "latitude": 37.5547038,
+      "longitude": 126.9654931
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkMCMkMDMkNTgxOTYxIzUxIyQxIyQxIyQ3MiQzNjE4MzIjNzEjJDEjJDgjJDgz",
+      "name": "다정약국",
+      "address": "서울특별시 용산구 한강대로104길 51, 1층 (동자동, 남영빌딩(제1호))",
+      "phone": "6497-2899",
+      "latitude": 37.5505792,
+      "longitude": 126.9749907
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ1IyQ5MiQyNjEwMDIjODEjJDEjJDIjJDgz",
+      "name": "새건우약국",
+      "address": "서울특별시 용산구 후암로 91-1, (동자동)",
+      "phone": "02-752-4027",
+      "latitude": 37.5533153,
+      "longitude": 126.9752959
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ5IyQ3OSQzNjE4MzIjNTEjJDEjJDIjJDgz",
+      "name": "인우약국",
+      "address": "서울특별시 중구 중림로 21, (중림동)",
+      "phone": "02-392-7291",
+      "latitude": 37.5589283,
+      "longitude": 126.9660277
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzUxIyQxIyQxIyQxMyQzNjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "소아제일약국",
+      "address": "서울특별시 용산구 청파로 383-8, (서계동, 청운가든)",
+      "phone": "02-711-2223",
+      "latitude": 37.5541481,
+      "longitude": 126.9684892
+    }
+  ],
+  "meta": {
+    "totalCount": 15,
+    "radius": 700,
+    "limit": 20
+  }
+}

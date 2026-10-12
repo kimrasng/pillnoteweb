@@ -1,0 +1,122 @@
+[
+  {
+    "elapsed": 37,
+    "opacity": "1",
+    "phone": {
+      "frame": "box-start",
+      "motion": "push",
+      "progress": "0.050008",
+      "today": "2026-10-12",
+      "transition": "0.000000"
+    },
+    "y": 4510.5
+  },
+  {
+    "elapsed": 320,
+    "opacity": "0.90151",
+    "phone": {
+      "frame": "pharmacy-station",
+      "motion": "hold",
+      "progress": "0.050041",
+      "today": "2026-10-12",
+      "transition": "0.000000"
+    },
+    "y": 38431
+  },
+  {
+    "elapsed": 417,
+    "opacity": "1",
+    "phone": {
+      "frame": "pharmacy-station",
+      "motion": "hold",
+      "progress": "0.050041",
+      "today": "2026-10-12",
+      "transition": "0.000000"
+    },
+    "y": 38431
+  },
+  {
+    "elapsed": 519,
+    "opacity": "1",
+    "phone": {
+      "frame": "pharmacy-station",
+      "motion": "hold",
+      "progress": "0.050041",
+      "today": "2026-10-12",
+      "transition": "0.000000"
+    },
+    "y": 38431
+  },
+  {
+    "elapsed": 567,
+    "opacity": "1",
+    "phone": {
+      "frame": "pharmacy-station",
+      "motion": "hold",
+      "progress": "0.050041",
+      "today": "2026-10-12",
+      "transition": "0.000000"
+    },
+    "y": 38431
+  },
+  {
+    "elapsed": 620,
+    "opacity": "1",
+    "phone": {
+      "frame": "pharmacy-station",
+      "motion": "hold",
+      "progress": "0.050041",
+      "today": "2026-10-12",
+      "transition": "0.000000"
+    },
+    "y": 38431
+  },
+  {
+    "elapsed": 720,
+    "opacity": "1",
+    "phone": {
+      "frame": "pharmacy-station",
+      "motion": "hold",
+      "progress": "0.050041",
+      "today": "2026-10-12",
+      "transition": "0.000000"
+    },
+    "y": 38431
+  },
+  {
+    "elapsed": 817,
+    "opacity": "1",
+    "phone": {
+      "frame": "pharmacy-station",
+      "motion": "hold",
+      "progress": "0.050041",
+      "today": "2026-10-12",
+      "transition": "0.000000"
+    },
+    "y": 38431
+  },
+  {
+    "elapsed": 924,
+    "opacity": "1",
+    "phone": {
+      "frame": "pharmacy-station",
+      "motion": "hold",
+      "progress": "0.050041",
+      "today": "2026-10-12",
+      "transition": "0.000000"
+    },
+    "y": 38431
+  },
+  {
+    "elapsed": 1025,
+    "opacity": "1",
+    "phone": {
+      "frame": "pharmacy-station",
+      "motion": "hold",
+      "progress": "0.050041",
+      "today": "2026-10-12",
+      "transition": "0.000000"
+    },
+    "y": 38431
+  }
+]

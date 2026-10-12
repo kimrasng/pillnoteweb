@@ -1,0 +1,368 @@
+[
+  {
+    "frame": "dose-notification",
+    "motion": "hold",
+    "progress": "0.551285",
+    "screens": [
+      {
+        "opacity": "0",
+        "transform": "translate3d(0%, 0%, 0px) scale(1)"
+      },
+      {
+        "image": "/images/app-icon.png",
+        "opacity": "1",
+        "transform": "translate3d(0%, 0%, 0px) scale(1)"
+      },
+      {
+        "image": "/images/app/home-taken.png",
+        "opacity": "0",
+        "transform": "translate3d(0%, 0%, 0px) scale(1)"
+      }
+    ],
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 24548.5
+  },
+  {
+    "frame": "dose-notification",
+    "motion": "hold",
+    "progress": "0.558465",
+    "screens": [
+      {
+        "opacity": "0",
+        "transform": "translate3d(0%, 0%, 0px) scale(1)"
+      },
+      {
+        "image": "/images/app-icon.png",
+        "opacity": "1",
+        "transform": "translate3d(0%, 0%, 0px) scale(1)"
+      },
+      {
+        "image": "/images/app/home-taken.png",
+        "opacity": "0",
+        "transform": "translate3d(0%, 0%, 0px) scale(1)"
+      }
+    ],
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 24578.5
+  },
+  {
+    "frame": "dose-notification",
+    "motion": "unlock",
+    "progress": "0.565883",
+    "screens": [
+      {
+        "opacity": "0",
+        "transform": "translate3d(0%, 0%, 0px) scale(1)"
+      },
+      {
+        "image": "/images/app-icon.png",
+        "opacity": "1",
+        "transform": "translate3d(0%, 0%, 0px) scale(1)"
+      },
+      {
+        "image": "/images/app/home-taken.png",
+        "opacity": "0",
+        "transform": "translate3d(0%, -2.96209%, 0px) scale(0.26)"
+      }
+    ],
+    "today": "2026-10-12",
+    "touch": {
+      "touchPhase": "down",
+      "touchX": "195",
+      "touchY": "397"
+    },
+    "transition": "0.000000",
+    "y": 24609.5
+  },
+  {
+    "frame": "dose-notification",
+    "motion": "unlock",
+    "progress": "0.573182",
+    "screens": [
+      {
+        "opacity": "0",
+        "transform": "translate3d(0%, 0%, 0px) scale(1)"
+      },
+      {
+        "image": "/images/app-icon.png",
+        "opacity": "1",
+        "transform": "translate3d(0%, 0%, 0px) scale(1)"
+      },
+      {
+        "image": "/images/app/home-taken.png",
+        "opacity": "0",
+        "transform": "translate3d(0%, -2.96209%, 0px) scale(0.26)"
+      }
+    ],
+    "today": "2026-10-12",
+    "touch": {
+      "touchPhase": "down",
+      "touchX": "195",
+      "touchY": "397"
+    },
+    "transition": "0.000000",
+    "y": 24640
+  },
+  {
+    "frame": "dose-notification",
+    "motion": "unlock",
+    "progress": "0.580242",
+    "screens": [
+      {
+        "opacity": "0",
+        "transform": "translate3d(0%, 0%, 0px) scale(1)"
+      },
+      {
+        "image": "/images/app-icon.png",
+        "opacity": "1",
+        "transform": "translate3d(0%, 0%, 0px) scale(1)"
+      },
+      {
+        "image": "/images/app/home-taken.png",
+        "opacity": "0",
+        "transform": "translate3d(0%, -2.96209%, 0px) scale(0.26)"
+      }
+    ],
+    "today": "2026-10-12",
+    "touch": {
+      "touchPhase": "release",
+      "touchX": "195",
+      "touchY": "397"
+    },
+    "transition": "0.000000",
+    "y": 24670.5
+  },
+  {
+    "frame": "dose-notification",
+    "motion": "unlock",
+    "progress": "0.587781",
+    "screens": [
+      {
+        "opacity": "0",
+        "transform": "translate3d(0%, 0%, 0px) scale(1)"
+      },
+      {
+        "image": "/images/app-icon.png",
+        "opacity": "1",
+        "transform": "translate3d(0%, 0%, 0px) scale(1)"
+      },
+      {
+        "image": "/images/app/home-taken.png",
+        "opacity": "0",
+        "transform": "translate3d(0%, -2.96209%, 0px) scale(0.26)"
+      }
+    ],
+    "today": "2026-10-12",
+    "touch": {
+      "touchPhase": "release",
+      "touchX": "195",
+      "touchY": "397"
+    },
+    "transition": "0.000000",
+    "y": 24701
+  },
+  {
+    "frame": "dose-notification",
+    "motion": "unlock",
+    "progress": "0.594721",
+    "screens": [
+      {
+        "opacity": "0",
+        "transform": "translate3d(0%, 0%, 0px) scale(1)"
+      },
+      {
+        "image": "/images/app-icon.png",
+        "opacity": "1",
+        "transform": "translate3d(0%, 0%, 0px) scale(1)"
+      },
+      {
+        "image": "/images/app/home-taken.png",
+        "opacity": "0",
+        "transform": "translate3d(0%, -2.96209%, 0px) scale(0.26)"
+      }
+    ],
+    "today": "2026-10-12",
+    "touch": {
+      "touchPhase": "release",
+      "touchX": "195",
+      "touchY": "397"
+    },
+    "transition": "0.000000",
+    "y": 24730
+  },
+  {
+    "frame": "dose-notification",
+    "motion": "unlock",
+    "progress": "0.602379",
+    "screens": [
+      {
+        "opacity": "0",
+        "transform": "translate3d(0%, 0%, 0px) scale(1)"
+      },
+      {
+        "image": "/images/app-icon.png",
+        "opacity": "1",
+        "transform": "translate3d(0%, 0%, 0px) scale(1)"
+      },
+      {
+        "image": "/images/app/home-taken.png",
+        "opacity": "0",
+        "transform": "translate3d(0%, -2.96209%, 0px) scale(0.26)"
+      }
+    ],
+    "today": "2026-10-12",
+    "touch": {
+      "touchPhase": "release",
+      "touchX": "195",
+      "touchY": "397"
+    },
+    "transition": "0.000000",
+    "y": 24762
+  },
+  {
+    "frame": "dose-notification",
+    "motion": "unlock",
+    "progress": "0.609558",
+    "screens": [
+      {
+        "opacity": "0",
+        "transform": "translate3d(0%, 0%, 0px) scale(1)"
+      },
+      {
+        "image": "/images/app-icon.png",
+        "opacity": "1",
+        "transform": "translate3d(0%, 0%, 0px) scale(1)"
+      },
+      {
+        "image": "/images/app/home-taken.png",
+        "opacity": "0.013477",
+        "transform": "translate3d(0%, -2.95876%, 0px) scale(0.260831)"
+      }
+    ],
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 24792
+  },
+  {
+    "frame": "dose-notification",
+    "motion": "unlock",
+    "progress": "0.616977",
+    "screens": [
+      {
+        "opacity": "0",
+        "transform": "translate3d(0%, 0%, 0px) scale(1)"
+      },
+      {
+        "image": "/images/app-icon.png",
+        "opacity": "1",
+        "transform": "translate3d(0%, 0%, 0px) scale(1)"
+      },
+      {
+        "image": "/images/app/home-taken.png",
+        "opacity": "0.245313",
+        "transform": "translate3d(0%, -2.90153%, 0px) scale(0.275128)"
+      }
+    ],
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 24823
+  },
+  {
+    "frame": "dose-notification",
+    "motion": "unlock",
+    "progress": "0.624276",
+    "screens": [
+      {
+        "opacity": "0",
+        "transform": "translate3d(0%, 0%, 0px) scale(1)"
+      },
+      {
+        "image": "/images/app-icon.png",
+        "opacity": "1",
+        "transform": "translate3d(0%, 0%, 0px) scale(1)"
+      },
+      {
+        "image": "/images/app/home-taken.png",
+        "opacity": "0.723968",
+        "transform": "translate3d(0%, -2.78338%, 0px) scale(0.304645)"
+      }
+    ],
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 24853.5
+  },
+  {
+    "frame": "dose-notification",
+    "motion": "unlock",
+    "progress": "0.631575",
+    "screens": [
+      {
+        "opacity": "0",
+        "transform": "translate3d(0%, 0%, 0px) scale(1)"
+      },
+      {
+        "image": "/images/app-icon.png",
+        "opacity": "1",
+        "transform": "translate3d(0%, 0%, 0px) scale(1)"
+      },
+      {
+        "image": "/images/app/home-taken.png",
+        "opacity": "1",
+        "transform": "translate3d(0%, -2.61346%, 0px) scale(0.347096)"
+      }
+    ],
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 24884
+  },
+  {
+    "frame": "dose-notification",
+    "motion": "unlock",
+    "progress": "0.638755",
+    "screens": [
+      {
+        "opacity": "0",
+        "transform": "translate3d(0%, 0%, 0px) scale(1)"
+      },
+      {
+        "image": "/images/app-icon.png",
+        "opacity": "1",
+        "transform": "translate3d(0%, 0%, 0px) scale(1)"
+      },
+      {
+        "image": "/images/app/home-taken.png",
+        "opacity": "1",
+        "transform": "translate3d(0%, -2.40505%, 0px) scale(0.399161)"
+      }
+    ],
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 24914
+  },
+  {
+    "frame": "dose-notification",
+    "motion": "unlock",
+    "progress": "0.646054",
+    "screens": [
+      {
+        "opacity": "0",
+        "transform": "translate3d(0%, 0%, 0px) scale(1)"
+      },
+      {
+        "image": "/images/app-icon.png",
+        "opacity": "1",
+        "transform": "translate3d(0%, 0%, 0px) scale(1)"
+      },
+      {
+        "image": "/images/app/home-taken.png",
+        "opacity": "1",
+        "transform": "translate3d(0%, -2.1606%, 0px) scale(0.460231)"
+      }
+    ],
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 24944.5
+  }
+]

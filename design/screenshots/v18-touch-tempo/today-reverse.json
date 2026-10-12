@@ -1,0 +1,95 @@
+[
+  {
+    "native": {
+      "nativeClip": "home-start--box-start",
+      "nativeCount": "43",
+      "nativeDisplayed": "/images/app/native/99e540213faabc6c9b3b.webp",
+      "nativeIndex": "5"
+    },
+    "y": 2625.5
+  },
+  {
+    "native": {
+      "nativeClip": "home-start--box-start",
+      "nativeCount": "43",
+      "nativeDisplayed": "/images/app/native/d9d9a7a62b9f4e06adca.webp",
+      "nativeIndex": "4"
+    },
+    "touch": {
+      "touchPhase": "release",
+      "touchX": "146.25",
+      "touchY": "793"
+    },
+    "y": 2577
+  },
+  {
+    "native": {
+      "nativeClip": "home-start--box-start",
+      "nativeCount": "43",
+      "nativeDisplayed": "/images/app/native/d9d9a7a62b9f4e06adca.webp",
+      "nativeIndex": "4"
+    },
+    "touch": {
+      "touchPhase": "release",
+      "touchX": "146.25",
+      "touchY": "793"
+    },
+    "y": 2528.5
+  },
+  {
+    "native": {
+      "nativeClip": "home-start--box-start",
+      "nativeCount": "43",
+      "nativeDisplayed": "/images/app/native/d9d9a7a62b9f4e06adca.webp",
+      "nativeIndex": "4"
+    },
+    "touch": {
+      "touchPhase": "release",
+      "touchX": "146.25",
+      "touchY": "793"
+    },
+    "y": 2480
+  },
+  {
+    "native": {
+      "nativeClip": "home-start--box-start",
+      "nativeCount": "43",
+      "nativeDisplayed": "/images/app/native/d9d9a7a62b9f4e06adca.webp",
+      "nativeIndex": "4"
+    },
+    "touch": {
+      "touchPhase": "release",
+      "touchX": "146.25",
+      "touchY": "793"
+    },
+    "y": 2431.5
+  },
+  {
+    "native": {
+      "nativeClip": "home-start--box-start",
+      "nativeCount": "43",
+      "nativeDisplayed": "/images/app/native/d9d9a7a62b9f4e06adca.webp",
+      "nativeIndex": "3"
+    },
+    "touch": {
+      "touchPhase": "down",
+      "touchX": "146.25",
+      "touchY": "793"
+    },
+    "y": 2383.5
+  },
+  {
+    "native": {
+      "nativeClip": "home-start--box-start",
+      "nativeCount": "43",
+      "nativeDisplayed": "/images/app/native/d9d9a7a62b9f4e06adca.webp",
+      "nativeIndex": "2"
+    },
+    "touch": {
+      "touchPhase": "down",
+      "touchX": "146.25",
+      "touchY": "793"
+    },
+    "y": 2334.5
+  }
+]

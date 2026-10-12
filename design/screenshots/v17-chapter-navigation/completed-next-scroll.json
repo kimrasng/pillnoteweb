@@ -1,0 +1,170 @@
+[
+  {
+    "elapsed": 34,
+    "opacity": "1",
+    "phone": {
+      "frame": "box-start",
+      "motion": "hold",
+      "progress": "0.621566",
+      "today": "2026-10-12",
+      "transition": "0.000000"
+    },
+    "y": 3079
+  },
+  {
+    "elapsed": 425,
+    "opacity": "1",
+    "phone": {
+      "frame": "box-start",
+      "motion": "hold",
+      "progress": "0.737223",
+      "today": "2026-10-12",
+      "transition": "0.000000"
+    },
+    "y": 3377.5
+  },
+  {
+    "elapsed": 484,
+    "opacity": "1",
+    "phone": {
+      "frame": "box-start",
+      "motion": "push",
+      "progress": "0.787400",
+      "today": "2026-10-12",
+      "transition": "0.188254"
+    },
+    "y": 3507
+  },
+  {
+    "elapsed": 626,
+    "opacity": "1",
+    "phone": {
+      "frame": "box-start",
+      "motion": "push",
+      "progress": "0.903638",
+      "today": "2026-10-12",
+      "transition": "0.632073"
+    },
+    "y": 3807
+  },
+  {
+    "elapsed": 728,
+    "opacity": "1",
+    "phone": {
+      "frame": "box-start",
+      "motion": "push",
+      "progress": "0.991786",
+      "today": "2026-10-12",
+      "transition": "0.968637"
+    },
+    "y": 4034.5
+  },
+  {
+    "elapsed": 928,
+    "opacity": "1",
+    "phone": {
+      "frame": "box-start",
+      "motion": "hold",
+      "progress": "0.035933",
+      "today": "2026-10-12",
+      "transition": "0.000000"
+    },
+    "y": 4382.5
+  },
+  {
+    "elapsed": 994,
+    "opacity": "1",
+    "phone": {
+      "frame": "box-start",
+      "motion": "hold",
+      "progress": "0.043190",
+      "today": "2026-10-12",
+      "transition": "0.000000"
+    },
+    "y": 4448.5
+  },
+  {
+    "elapsed": 1131,
+    "opacity": "1",
+    "phone": {
+      "frame": "box-start",
+      "motion": "push",
+      "progress": "0.049843",
+      "today": "2026-10-12",
+      "transition": "0.000000"
+    },
+    "y": 4509
+  },
+  {
+    "elapsed": 1238,
+    "opacity": "1",
+    "phone": {
+      "frame": "box-start",
+      "motion": "push",
+      "progress": "0.050008",
+      "today": "2026-10-12",
+      "transition": "0.000000"
+    },
+    "y": 4510.5
+  },
+  {
+    "elapsed": 1436,
+    "opacity": "1",
+    "phone": {
+      "frame": "box-start",
+      "motion": "push",
+      "progress": "0.050008",
+      "today": "2026-10-12",
+      "transition": "0.000000"
+    },
+    "y": 4510.5
+  },
+  {
+    "elapsed": 1533,
+    "opacity": "1",
+    "phone": {
+      "frame": "box-start",
+      "motion": "push",
+      "progress": "0.050008",
+      "today": "2026-10-12",
+      "transition": "0.000000"
+    },
+    "y": 4510.5
+  },
+  {
+    "elapsed": 1691,
+    "opacity": "1",
+    "phone": {
+      "frame": "box-start",
+      "motion": "push",
+      "progress": "0.050008",
+      "today": "2026-10-12",
+      "transition": "0.000000"
+    },
+    "y": 4510.5
+  },
+  {
+    "elapsed": 1741,
+    "opacity": "1",
+    "phone": {
+      "frame": "box-start",
+      "motion": "push",
+      "progress": "0.050008",
+      "today": "2026-10-12",
+      "transition": "0.000000"
+    },
+    "y": 4510.5
+  },
+  {
+    "elapsed": 1925,
+    "opacity": "1",
+    "phone": {
+      "frame": "box-start",
+      "motion": "push",
+      "progress": "0.050008",
+      "today": "2026-10-12",
+      "transition": "0.000000"
+    },
+    "y": 4510.5
+  }
+]

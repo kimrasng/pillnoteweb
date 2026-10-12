@@ -1,0 +1,292 @@
+[
+  {
+    "home": [
+      {
+        "opacity": "0",
+        "transform": "translate3d(0%, -2.96209%, 0px) scale(0.26)"
+      }
+    ],
+    "phone": {
+      "frame": "dose-notification",
+      "motion": "unlock",
+      "progress": "0.497478",
+      "today": "2026-10-12",
+      "transition": "0.000000"
+    },
+    "touch": {
+      "touchPhase": "down",
+      "touchX": "195",
+      "touchY": "397"
+    },
+    "y": 28378
+  },
+  {
+    "home": [
+      {
+        "opacity": "0",
+        "transform": "translate3d(0%, -2.96209%, 0px) scale(0.26)"
+      }
+    ],
+    "phone": {
+      "frame": "dose-notification",
+      "motion": "unlock",
+      "progress": "0.507861",
+      "today": "2026-10-12",
+      "transition": "0.000000"
+    },
+    "touch": {
+      "touchPhase": "down",
+      "touchX": "195",
+      "touchY": "397"
+    },
+    "y": 28427
+  },
+  {
+    "home": [
+      {
+        "opacity": "0",
+        "transform": "translate3d(0%, -2.96209%, 0px) scale(0.26)"
+      }
+    ],
+    "phone": {
+      "frame": "dose-notification",
+      "motion": "unlock",
+      "progress": "0.518138",
+      "today": "2026-10-12",
+      "transition": "0.000000"
+    },
+    "touch": {
+      "touchPhase": "down",
+      "touchX": "195",
+      "touchY": "397"
+    },
+    "y": 28475.5
+  },
+  {
+    "home": [
+      {
+        "opacity": "0",
+        "transform": "translate3d(0%, -2.96209%, 0px) scale(0.26)"
+      }
+    ],
+    "phone": {
+      "frame": "dose-notification",
+      "motion": "unlock",
+      "progress": "0.528415",
+      "today": "2026-10-12",
+      "transition": "0.000000"
+    },
+    "touch": {
+      "touchPhase": "down",
+      "touchX": "195",
+      "touchY": "397"
+    },
+    "y": 28524
+  },
+  {
+    "home": [
+      {
+        "opacity": "0",
+        "transform": "translate3d(0%, -2.96209%, 0px) scale(0.26)"
+      }
+    ],
+    "phone": {
+      "frame": "dose-notification",
+      "motion": "unlock",
+      "progress": "0.538692",
+      "today": "2026-10-12",
+      "transition": "0.000000"
+    },
+    "touch": {
+      "touchPhase": "down",
+      "touchX": "195",
+      "touchY": "397"
+    },
+    "y": 28572.5
+  },
+  {
+    "home": [
+      {
+        "opacity": "0",
+        "transform": "translate3d(0%, -2.96209%, 0px) scale(0.26)"
+      }
+    ],
+    "phone": {
+      "frame": "dose-notification",
+      "motion": "unlock",
+      "progress": "0.548969",
+      "today": "2026-10-12",
+      "transition": "0.000000"
+    },
+    "touch": {
+      "touchPhase": "release",
+      "touchX": "195",
+      "touchY": "397"
+    },
+    "y": 28621
+  },
+  {
+    "home": [
+      {
+        "opacity": "0",
+        "transform": "translate3d(0%, -2.96209%, 0px) scale(0.26)"
+      }
+    ],
+    "phone": {
+      "frame": "dose-notification",
+      "motion": "unlock",
+      "progress": "0.559245",
+      "today": "2026-10-12",
+      "transition": "0.000000"
+    },
+    "touch": {
+      "touchPhase": "release",
+      "touchX": "195",
+      "touchY": "397"
+    },
+    "y": 28669.5
+  },
+  {
+    "home": [
+      {
+        "opacity": "0",
+        "transform": "translate3d(0%, -2.96209%, 0px) scale(0.26)"
+      }
+    ],
+    "phone": {
+      "frame": "dose-notification",
+      "motion": "unlock",
+      "progress": "0.569522",
+      "today": "2026-10-12",
+      "transition": "0.000000"
+    },
+    "touch": {
+      "touchPhase": "release",
+      "touchX": "195",
+      "touchY": "397"
+    },
+    "y": 28718
+  },
+  {
+    "home": [
+      {
+        "opacity": "0",
+        "transform": "translate3d(0%, -2.96209%, 0px) scale(0.26)"
+      }
+    ],
+    "phone": {
+      "frame": "dose-notification",
+      "motion": "unlock",
+      "progress": "0.579799",
+      "today": "2026-10-12",
+      "transition": "0.000000"
+    },
+    "touch": {
+      "touchPhase": "release",
+      "touchX": "195",
+      "touchY": "397"
+    },
+    "y": 28766.5
+  },
+  {
+    "home": [
+      {
+        "opacity": "0",
+        "transform": "translate3d(0%, -2.96209%, 0px) scale(0.26)"
+      }
+    ],
+    "phone": {
+      "frame": "dose-notification",
+      "motion": "unlock",
+      "progress": "0.590076",
+      "today": "2026-10-12",
+      "transition": "0.000000"
+    },
+    "touch": {
+      "touchPhase": "release",
+      "touchX": "195",
+      "touchY": "397"
+    },
+    "y": 28815
+  },
+  {
+    "home": [
+      {
+        "opacity": "0.0970723",
+        "transform": "translate3d(0%, -2.93812%, 0px) scale(0.265986)"
+      }
+    ],
+    "phone": {
+      "frame": "dose-notification",
+      "motion": "unlock",
+      "progress": "0.600353",
+      "today": "2026-10-12",
+      "transition": "0.000000"
+    },
+    "y": 28863.5
+  },
+  {
+    "home": [
+      {
+        "opacity": "0.779007",
+        "transform": "translate3d(0%, -2.76979%, 0px) scale(0.308039)"
+      }
+    ],
+    "phone": {
+      "frame": "dose-notification",
+      "motion": "unlock",
+      "progress": "0.610629",
+      "today": "2026-10-12",
+      "transition": "0.000000"
+    },
+    "y": 28912
+  },
+  {
+    "home": [
+      {
+        "opacity": "1",
+        "transform": "translate3d(0%, -2.47276%, 0px) scale(0.382245)"
+      }
+    ],
+    "phone": {
+      "frame": "dose-notification",
+      "motion": "unlock",
+      "progress": "0.620906",
+      "today": "2026-10-12",
+      "transition": "0.000000"
+    },
+    "y": 28960.5
+  },
+  {
+    "home": [
+      {
+        "opacity": "1",
+        "transform": "translate3d(0%, -2.0853%, 0px) scale(0.479041)"
+      }
+    ],
+    "phone": {
+      "frame": "dose-notification",
+      "motion": "unlock",
+      "progress": "0.631183",
+      "today": "2026-10-12",
+      "transition": "0.000000"
+    },
+    "y": 29009
+  },
+  {
+    "home": [
+      {
+        "opacity": "1",
+        "transform": "translate3d(0%, -1.6457%, 0px) scale(0.588864)"
+      }
+    ],
+    "phone": {
+      "frame": "dose-notification",
+      "motion": "unlock",
+      "progress": "0.641460",
+      "today": "2026-10-12",
+      "transition": "0.000000"
+    },
+    "y": 29057.5
+  }
+]

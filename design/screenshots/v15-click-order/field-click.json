@@ -1,0 +1,338 @@
+[
+  {
+    "frame": "guardian-invite-empty",
+    "motion": "hold",
+    "progress": "0.240117",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 29256.5
+  },
+  {
+    "frame": "guardian-invite-empty",
+    "motion": "hold",
+    "progress": "0.242702",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 29287
+  },
+  {
+    "frame": "guardian-invite-empty",
+    "motion": "typing",
+    "native": {
+      "nativeClip": "guardian-invite-empty--guardian-invite",
+      "nativeCount": "117",
+      "nativeDisplayed": "/images/app/guardian-invite-empty.png",
+      "nativeIndex": "0"
+    },
+    "progress": "0.245245",
+    "today": "2026-10-12",
+    "touch": {
+      "touchPhase": "down",
+      "touchX": "195",
+      "touchY": "375"
+    },
+    "transition": "0.000000",
+    "y": 29317
+  },
+  {
+    "frame": "guardian-invite-empty",
+    "motion": "typing",
+    "native": {
+      "nativeClip": "guardian-invite-empty--guardian-invite",
+      "nativeCount": "117",
+      "nativeDisplayed": "/images/app/native/a61098ca238afd6d5b8a.webp",
+      "nativeIndex": "1"
+    },
+    "progress": "0.247873",
+    "today": "2026-10-12",
+    "touch": {
+      "touchPhase": "down",
+      "touchX": "195",
+      "touchY": "375"
+    },
+    "transition": "0.000000",
+    "y": 29348
+  },
+  {
+    "frame": "guardian-invite-empty",
+    "motion": "typing",
+    "native": {
+      "nativeClip": "guardian-invite-empty--guardian-invite",
+      "nativeCount": "117",
+      "nativeDisplayed": "/images/app/native/a61098ca238afd6d5b8a.webp",
+      "nativeIndex": "2"
+    },
+    "progress": "0.250373",
+    "today": "2026-10-12",
+    "touch": {
+      "touchPhase": "down",
+      "touchX": "195",
+      "touchY": "375"
+    },
+    "transition": "0.000000",
+    "y": 29377.5
+  },
+  {
+    "frame": "guardian-invite-empty",
+    "motion": "typing",
+    "native": {
+      "nativeClip": "guardian-invite-empty--guardian-invite",
+      "nativeCount": "117",
+      "nativeDisplayed": "/images/app/native/a61098ca238afd6d5b8a.webp",
+      "nativeIndex": "4"
+    },
+    "progress": "0.253043",
+    "today": "2026-10-12",
+    "touch": {
+      "touchPhase": "release",
+      "touchX": "195",
+      "touchY": "375"
+    },
+    "transition": "0.000000",
+    "y": 29409
+  },
+  {
+    "frame": "guardian-invite-empty",
+    "motion": "typing",
+    "native": {
+      "nativeClip": "guardian-invite-empty--guardian-invite",
+      "nativeCount": "117",
+      "nativeDisplayed": "/images/app/native/a61098ca238afd6d5b8a.webp",
+      "nativeIndex": "4"
+    },
+    "progress": "0.255586",
+    "today": "2026-10-12",
+    "touch": {
+      "touchPhase": "release",
+      "touchX": "195",
+      "touchY": "375"
+    },
+    "transition": "0.000000",
+    "y": 29439
+  },
+  {
+    "frame": "guardian-invite-empty",
+    "motion": "typing",
+    "native": {
+      "nativeClip": "guardian-invite-empty--guardian-invite",
+      "nativeCount": "117",
+      "nativeDisplayed": "/images/app/native/a61098ca238afd6d5b8a.webp",
+      "nativeIndex": "4"
+    },
+    "progress": "0.258128",
+    "today": "2026-10-12",
+    "touch": {
+      "touchPhase": "release",
+      "touchX": "195",
+      "touchY": "375"
+    },
+    "transition": "0.000000",
+    "y": 29469
+  },
+  {
+    "frame": "guardian-invite-empty",
+    "motion": "typing",
+    "native": {
+      "nativeClip": "guardian-invite-empty--guardian-invite",
+      "nativeCount": "117",
+      "nativeDisplayed": "/images/app/native/a61098ca238afd6d5b8a.webp",
+      "nativeIndex": "4"
+    },
+    "progress": "0.260713",
+    "today": "2026-10-12",
+    "touch": {
+      "touchPhase": "release",
+      "touchX": "195",
+      "touchY": "375"
+    },
+    "transition": "0.000000",
+    "y": 29499.5
+  },
+  {
+    "frame": "guardian-invite-empty",
+    "motion": "typing",
+    "native": {
+      "nativeClip": "guardian-invite-empty--guardian-invite",
+      "nativeCount": "117",
+      "nativeDisplayed": "/images/app/native/a61098ca238afd6d5b8a.webp",
+      "nativeIndex": "4"
+    },
+    "progress": "0.263298",
+    "today": "2026-10-12",
+    "touch": {
+      "touchPhase": "release",
+      "touchX": "195",
+      "touchY": "375"
+    },
+    "transition": "0.000000",
+    "y": 29530
+  },
+  {
+    "frame": "guardian-invite-empty",
+    "motion": "typing",
+    "native": {
+      "nativeClip": "guardian-invite-empty--guardian-invite",
+      "nativeCount": "117",
+      "nativeDisplayed": "/images/app/native/bfabd307c30abd8d5572.webp",
+      "nativeIndex": "7"
+    },
+    "progress": "0.265926",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 29561
+  },
+  {
+    "frame": "guardian-invite-empty",
+    "motion": "typing",
+    "native": {
+      "nativeClip": "guardian-invite-empty--guardian-invite",
+      "nativeCount": "117",
+      "nativeDisplayed": "/images/app/native/a0a9c2ba440e2ad06862.webp",
+      "nativeIndex": "9"
+    },
+    "progress": "0.268511",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 29591.5
+  },
+  {
+    "frame": "guardian-invite-empty",
+    "motion": "typing",
+    "native": {
+      "nativeClip": "guardian-invite-empty--guardian-invite",
+      "nativeCount": "117",
+      "nativeDisplayed": "/images/app/native/404a9e89a69c2a18f89e.webp",
+      "nativeIndex": "11"
+    },
+    "progress": "0.271096",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 29622
+  },
+  {
+    "frame": "guardian-invite-empty",
+    "motion": "typing",
+    "native": {
+      "nativeClip": "guardian-invite-empty--guardian-invite",
+      "nativeCount": "117",
+      "nativeDisplayed": "/images/app/native/1630105c8e4c704f7b02.webp",
+      "nativeIndex": "14"
+    },
+    "progress": "0.273639",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 29652
+  },
+  {
+    "frame": "guardian-invite-empty",
+    "motion": "typing",
+    "native": {
+      "nativeClip": "guardian-invite-empty--guardian-invite",
+      "nativeCount": "117",
+      "nativeDisplayed": "/images/app/native/a55354693fdafa17f449.webp",
+      "nativeIndex": "16"
+    },
+    "progress": "0.276266",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 29683
+  },
+  {
+    "frame": "guardian-invite-empty",
+    "motion": "typing",
+    "native": {
+      "nativeClip": "guardian-invite-empty--guardian-invite",
+      "nativeCount": "117",
+      "nativeDisplayed": "/images/app/native/a55354693fdafa17f449.webp",
+      "nativeIndex": "18"
+    },
+    "progress": "0.278851",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 29713.5
+  },
+  {
+    "frame": "guardian-invite-empty",
+    "motion": "typing",
+    "native": {
+      "nativeClip": "guardian-invite-empty--guardian-invite",
+      "nativeCount": "117",
+      "nativeDisplayed": "/images/app/native/bfd2f862c1edd9a29d02.webp",
+      "nativeIndex": "21"
+    },
+    "progress": "0.281436",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 29744
+  },
+  {
+    "frame": "guardian-invite-empty",
+    "motion": "typing",
+    "native": {
+      "nativeClip": "guardian-invite-empty--guardian-invite",
+      "nativeCount": "117",
+      "nativeDisplayed": "/images/app/native/bfd2f862c1edd9a29d02.webp",
+      "nativeIndex": "23"
+    },
+    "progress": "0.284022",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 29774.5
+  },
+  {
+    "frame": "guardian-invite-empty",
+    "motion": "typing",
+    "native": {
+      "nativeClip": "guardian-invite-empty--guardian-invite",
+      "nativeCount": "117",
+      "nativeDisplayed": "/images/app/native/b8b52547adbbaf696628.webp",
+      "nativeIndex": "26"
+    },
+    "progress": "0.286607",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 29805
+  },
+  {
+    "frame": "guardian-invite-empty",
+    "motion": "typing",
+    "native": {
+      "nativeClip": "guardian-invite-empty--guardian-invite",
+      "nativeCount": "117",
+      "nativeDisplayed": "/images/app/native/ab710eef828bf17bcfb8.webp",
+      "nativeIndex": "28"
+    },
+    "progress": "0.289149",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 29835
+  },
+  {
+    "frame": "guardian-invite-empty",
+    "motion": "typing",
+    "native": {
+      "nativeClip": "guardian-invite-empty--guardian-invite",
+      "nativeCount": "117",
+      "nativeDisplayed": "/images/app/native/637ddc6f9d2280a809e7.webp",
+      "nativeIndex": "30"
+    },
+    "progress": "0.291650",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 29864.5
+  },
+  {
+    "frame": "guardian-invite-empty",
+    "motion": "typing",
+    "native": {
+      "nativeClip": "guardian-invite-empty--guardian-invite",
+      "nativeCount": "117",
+      "nativeDisplayed": "/images/app/native/272eecf4e1e67c42f232.webp",
+      "nativeIndex": "33"
+    },
+    "progress": "0.294277",
+    "today": "2026-10-12",
+    "transition": "0.000000",
+    "y": 29895.5
+  }
+]

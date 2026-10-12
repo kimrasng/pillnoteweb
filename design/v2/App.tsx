@@ -467,8 +467,8 @@ export default function App() {
         </a>
         <div>
           <span>Developed by Dohyun Kim</span>
-          <a href="mailto:me@kimrasng.kr">
-            me@kimrasng.kr <ArrowRight size={12} />
+          <a href="mailto:dohyun.kim@pillnote.app">
+            dohyun.kim@pillnote.app <ArrowRight size={12} />
           </a>
         </div>
         <span>© {new Date().getFullYear()} PillNote</span>
@@ -507,7 +507,7 @@ export default function App() {
           PillNote를 곧 앱으로 만나볼 수 있도록 준비하고 있어요. 출시 일정과
           다운로드 링크는 이곳에서 안내할게요.
         </p>
-        <a href="mailto:me@kimrasng.kr">
+        <a href="mailto:dohyun.kim@pillnote.app">
           개발자에게 문의하기 <ArrowRight size={17} />
         </a>
       </dialog>

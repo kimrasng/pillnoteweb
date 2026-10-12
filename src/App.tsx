@@ -526,8 +526,8 @@ export default function App() {
         </a>
         <div>
           <span>{copy.developer}</span>
-          <a href="mailto:me@kimrasng.kr">
-            me@kimrasng.kr
+          <a href="mailto:dohyun.kim@pillnote.app">
+            dohyun.kim@pillnote.app
             <ArrowRight size={12} />
           </a>
         </div>

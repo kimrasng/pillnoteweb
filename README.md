@@ -76,4 +76,4 @@ npm run preview
 - `design/QA.md`: 검증 내역
 - `design/v1/`, `design/v2/`: 이전 시안 보관
 
-개발자: **Dohyun Kim** · **me@kimrasng.kr**
+개발자: **Dohyun Kim** · **dohyun.kim@pillnote.app**

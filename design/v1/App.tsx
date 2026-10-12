@@ -414,7 +414,7 @@ function LaunchDialog({ onClose }: { onClose: () => void }) {
           Android 출시 예정
         </span>
       </div>
-      <a className="button button-blue" href="mailto:me@kimrasng.kr">
+      <a className="button button-blue" href="mailto:dohyun.kim@pillnote.app">
         <Mail size={17} />
         개발자에게 문의하기
         <ArrowUpRight size={17} />
@@ -559,7 +559,7 @@ export default function App() {
             >
               궁금한 점
             </a>
-            <a href="mailto:me@kimrasng.kr" onClick={navigate}>
+            <a href="mailto:dohyun.kim@pillnote.app" onClick={navigate}>
               문의하기
               <ArrowUpRight size={13} />
             </a>
@@ -1129,7 +1129,7 @@ export default function App() {
           <div className="footer-links">
             <a href="#experience">서비스 소개</a>
             <a href="#faq">궁금한 점</a>
-            <a href="mailto:me@kimrasng.kr">
+            <a href="mailto:dohyun.kim@pillnote.app">
               문의하기
               <ArrowUpRight size={14} />
             </a>
@@ -1143,8 +1143,8 @@ export default function App() {
             <span>
               Designed & developed by <strong>Dohyun Kim</strong>
             </span>
-            <a href="mailto:me@kimrasng.kr">
-              me@kimrasng.kr
+            <a href="mailto:dohyun.kim@pillnote.app">
+              dohyun.kim@pillnote.app
               <ArrowUpRight size={13} />
             </a>
           </div>

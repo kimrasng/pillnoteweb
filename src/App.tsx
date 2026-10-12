@@ -7,7 +7,14 @@ import useWeightedScroll from "./useWeightedScroll";
 import useChapterNavigation from "./useChapterNavigation";
 import { useLocale } from "./LocaleProvider";
 import LanguageSwitch from "./LanguageSwitch";
-import { RELEASES_URL } from "./links";
+import { CONTACT_EMAIL, RELEASES_URL } from "./links";
+import {
+  DataGuide,
+  DownloadGuide,
+  ProductOverview,
+  ProductStatus,
+} from "./ProductInfo";
+import { productTranslations } from "./productCopy";
 import { chapterNavigationMode, NAVIGATION_FADE_MS } from "./navigation";
 import {
   getChapterScreens,
@@ -76,18 +83,32 @@ function BrandIntro({
         transform: `translateY(calc(${-shrink * 40}px - ${reveal} * min(38svh, 360px))) scale(${1 - shrink * 0.12})`,
       }}
       aria-hidden={opacity === 0}
+      inert={reveal >= 0.12}
     >
       <div className="intro-title-group locale-copy">
         <h1 className="intro-heading">
           <span>{copy.intro.title}</span>
           <strong>PillNote</strong>
         </h1>
-        <p
-          className="intro-description"
+        <div
+          className="intro-body"
           style={{ opacity: 1 - smoothstep(0, 0.12, reveal) }}
         >
-          {copy.intro.description}
-        </p>
+          <p className="intro-audience">{copy.intro.audience}</p>
+          <p className="intro-description">{copy.intro.description}</p>
+          <p className="intro-conditions">{copy.intro.conditions}</p>
+          <div className="intro-actions">
+            <a className="primary-action" href="#download">
+              {copy.release}
+              <ArrowRight size={18} />
+            </a>
+            <a href="#features">
+              {copy.intro.features}
+              <ArrowDown size={18} />
+            </a>
+          </div>
+          <p className="intro-platform">{copy.intro.platform}</p>
+        </div>
       </div>
       <div
         className="intro-scroll-cue locale-copy"
@@ -219,6 +240,7 @@ function StoryViewport({
       <section
         className="film-stage"
         id="app-story"
+        tabIndex={-1}
         style={stageStyle}
         aria-label={copy.storyLabel}
       >
@@ -233,6 +255,7 @@ function StoryViewport({
             visibility: reveal === 0 ? "hidden" : "visible",
           }}
           aria-hidden={reveal === 0}
+          inert={reveal === 0}
         >
           <div
             className="stage-layout"
@@ -308,7 +331,8 @@ function StoryViewport({
 }
 
 export default function App() {
-  const { copy } = useLocale();
+  const { copy, locale } = useLocale();
+  const productCopy = productTranslations[locale];
   const [state, setState] = useState(() =>
     getScrollState(0, window.innerHeight, scenes.length),
   );
@@ -349,6 +373,27 @@ export default function App() {
     };
   }, [naturalFlow]);
   useEffect(() => {
+    // Initial hash targets are rendered by React after the browser's first anchor lookup.
+    const navigateToHash = () => {
+      let id: string;
+      try {
+        id = decodeURIComponent(window.location.hash.slice(1));
+      } catch {
+        return;
+      }
+      const target = document.getElementById(id);
+      if (!target) return;
+      window.dispatchEvent(new Event("pillnote:navigation-start"));
+      target.scrollIntoView({ behavior: "instant", block: "start" });
+    };
+    const frame = requestAnimationFrame(navigateToHash);
+    window.addEventListener("hashchange", navigateToHash);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("hashchange", navigateToHash);
+    };
+  }, []);
+  useEffect(() => {
     scenes
       .flatMap((scene) => scene.frames)
       .filter((frame) => !notificationScreens.has(frame.image))
@@ -359,11 +404,24 @@ export default function App() {
   }, []);
   function goHome() {
     if (mobileMenu.current) mobileMenu.current.open = false;
-    navigateTo(0);
+    if (window.location.hash)
+      history.replaceState(
+        history.state,
+        "",
+        location.pathname + location.search,
+      );
+    navigateTo(0, "direct");
   }
   function goToScene(index: number, fromChapterNav = false) {
     if (mobileMenu.current) mobileMenu.current.open = false;
     if (!story.current) return;
+    // The cinematic navigation has its own scroll coordinates, rather than a static section hash.
+    if (window.location.hash)
+      history.replaceState(
+        history.state,
+        "",
+        location.pathname + location.search,
+      );
     if (naturalFlow && index > 0) {
       const element = document.getElementById(`scene-${index}`);
       if (element)
@@ -391,7 +449,7 @@ export default function App() {
   }
   return (
     <>
-      <a className="skip-link" href="#about">
+      <a className="skip-link" href="#features">
         {copy.skip}
       </a>
       <header
@@ -415,14 +473,14 @@ export default function App() {
           <button className="locale-copy" onClick={() => goToScene(0)}>
             {copy.explore}
           </button>
-          <a className="locale-copy" href="#about">
+          <a className="locale-copy" href="#features">
             {copy.guide}
           </a>
           <LanguageSwitch className="desktop-language" />
           <a
             className="release-button"
             aria-label={copy.release}
-            href={RELEASES_URL}
+            href="#download"
           >
             <span className="release-label-full locale-copy">
               {copy.release}
@@ -441,13 +499,22 @@ export default function App() {
                 {copy.explore}
               </button>
               <a
-                href="#about"
+                href="#features"
                 className="locale-copy"
                 onClick={() => {
                   if (mobileMenu.current) mobileMenu.current.open = false;
                 }}
               >
                 {copy.guide}
+              </a>
+              <a
+                href="#product"
+                className="locale-copy"
+                onClick={() => {
+                  if (mobileMenu.current) mobileMenu.current.open = false;
+                }}
+              >
+                {productCopy.product.title}
               </a>
               <div className="mobile-language-row">
                 <span className="locale-copy">{copy.language}</span>
@@ -489,10 +556,25 @@ export default function App() {
             ))}
           </div>
         )}
-        <section className="about-section" id="about">
+        <ProductOverview
+          onExplore={() => {
+            goToScene(0, true);
+            document
+              .getElementById("app-story")
+              ?.focus({ preventScroll: true });
+          }}
+        />
+        <ProductStatus />
+        <DownloadGuide />
+        <section
+          className="about-section"
+          id="about"
+          tabIndex={-1}
+          aria-labelledby="faq-title"
+        >
           <div className="about-intro locale-copy">
             <img src="/images/app-icon.png" alt="" />
-            <h2>{copy.about.title}</h2>
+            <h2 id="faq-title">{copy.about.title}</h2>
             <p>{copy.about.features}</p>
             <a className="about-release" href={RELEASES_URL}>
               {copy.about.release}
@@ -507,10 +589,17 @@ export default function App() {
                   <ChevronDown size={19} />
                 </summary>
                 <p>{faq.answer}</p>
+                {faq.link && (
+                  <a className="faq-link" href={faq.link.href}>
+                    {faq.link.label}
+                    <ArrowRight size={16} />
+                  </a>
+                )}
               </details>
             ))}
           </div>
         </section>
+        <DataGuide />
       </main>
       <footer className="site-footer">
         <a
@@ -526,11 +615,19 @@ export default function App() {
         </a>
         <div>
           <span>{copy.developer}</span>
-          <a href="mailto:dohyun.kim@pillnote.app">
-            dohyun.kim@pillnote.app
+          <a href={`mailto:${CONTACT_EMAIL}`}>
+            {CONTACT_EMAIL}
             <ArrowRight size={12} />
           </a>
         </div>
+        <nav
+          className="footer-links locale-copy"
+          aria-label={productCopy.data.label}
+        >
+          <a href="#privacy">{productCopy.privacyLink}</a>
+          <a href="#data-deletion">{productCopy.deletionLink}</a>
+          <a href="#about">{locale === "ko" ? "자주 묻는 질문" : "FAQ"}</a>
+        </nav>
         <span>© {new Date().getFullYear()} PillNote</span>
       </footer>
     </>

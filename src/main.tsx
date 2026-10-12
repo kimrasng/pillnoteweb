@@ -5,6 +5,10 @@ import { LocaleProvider } from "./LocaleProvider";
 import "./styles.css";
 import "./design-system.css";
 
+// Static hash destinations are restored after React renders them. Browser pixel
+// restoration could otherwise overwrite the anchor after a language change.
+history.scrollRestoration = window.location.hash ? "manual" : "auto";
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <LocaleProvider>

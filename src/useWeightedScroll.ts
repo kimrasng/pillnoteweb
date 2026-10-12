@@ -73,6 +73,18 @@ export default function useWeightedScroll(disabled: boolean) {
         element.closest("dialog, input, textarea, select")
       )
         return;
+      // Let long hero copy scroll within the available screen at small sizes or text zoom.
+      const intro = element.closest(".intro-title-group");
+      if (intro && intro.scrollHeight > intro.clientHeight) {
+        if (
+          (event.deltaY > 0 &&
+            intro.scrollTop < intro.scrollHeight - intro.clientHeight - 1) ||
+          (event.deltaY < 0 && intro.scrollTop > 0)
+        ) {
+          stop();
+          return;
+        }
+      }
       const max = document.documentElement.scrollHeight - window.innerHeight;
       const sign = Math.sign(event.deltaY);
       if (

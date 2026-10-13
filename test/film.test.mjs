@@ -364,3 +364,23 @@ test("notification cards pause after the completed tap before unlocking the app"
     );
   }
 });
+
+
+test("both lock transitions reveal the lock screen continuously without a blackout", () => {
+  const guardian = scenes.find((scene) => scene.id === 'guardian');
+  const target = guardian.frames.find((frame) => frame.motion === 'lock');
+  const boxIndex = scenes.findIndex((scene) => scene.id === 'box');
+  for (const blend of [0.01, 0.15, 0.3, 0.5, 0.75, 0.99]) {
+    const states = [
+      getFilmState(guardian, target.at - target.duration * (1 - blend)),
+      getFilmState(scenes[boxIndex], 1, false, scenes[boxIndex + 1], blend),
+    ];
+    for (const state of states) {
+      assert.equal(state.motion, 'lock');
+      assert.equal('power' in state, false);
+      const lock = state.frames.find((frame) => frame.image.endsWith('-lock'));
+      assert.ok(lock.opacity > 0 && lock.opacity < 1);
+      assert.ok(state.frames.some((frame) => frame.opacity === 1));
+    }
+  }
+});

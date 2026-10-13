@@ -15,14 +15,17 @@ import {
   ProductStatus,
 } from "./ProductInfo";
 import { productTranslations } from "./productCopy";
-import { chapterNavigationMode, NAVIGATION_FADE_MS } from "./navigation";
+import {
+  chapterDestination,
+  chapterNavigationMode,
+  NAVIGATION_FADE_MS,
+} from "./navigation";
 import {
   getChapterScreens,
   INTRO_SCREENS,
   clamp01,
   getScrollState,
   getStoryScreens,
-  sceneScrollOffset,
   smoothstep,
   introHandoff,
   type ScrollState,
@@ -160,6 +163,10 @@ function FlowScene({
       const phone = track.current.querySelector(".phone-film");
       if (!phone) return;
       const rect = track.current.getBoundingClientRect();
+      if (rect.top >= innerHeight || rect.bottom <= 0) {
+        setProgress(rect.bottom <= 0 ? 1 : 0);
+        return;
+      }
       const phoneRect = phone.getBoundingClientRect();
       const top = parseFloat(getComputedStyle(phone).top) || 64;
       const pinned = getComputedStyle(phone).position === "sticky";
@@ -350,20 +357,24 @@ function StoryViewport({
   );
 }
 
-export default function App() {
-  const { copy, locale } = useLocale();
-  const productCopy = productTranslations[locale];
+function StoryExperience({
+  story,
+  reducedMotion,
+  naturalFlow,
+  goToScene,
+  navigationOpacity,
+  onStateChange,
+}: {
+  story: React.RefObject<HTMLDivElement | null>;
+  reducedMotion: boolean;
+  naturalFlow: boolean;
+  goToScene: (index: number) => void;
+  navigationOpacity: number;
+  onStateChange: (state: ScrollState) => void;
+}) {
   const [state, setState] = useState(() =>
-    getScrollState(0, window.innerHeight, scenes.length),
+    getScrollState(0, innerHeight, scenes.length),
   );
-  const story = useRef<HTMLDivElement>(null);
-  const mobileMenu = useRef<HTMLDetailsElement>(null);
-  const reducedMotion = useMedia("(prefers-reduced-motion: reduce)");
-  const naturalFlow = useMedia(
-    "(max-width: 1024px) and (max-height: 480px) and (orientation: landscape)",
-  );
-  useWeightedScroll(reducedMotion);
-  const { navigateTo, contentOpacity } = useChapterNavigation(reducedMotion);
   useLayoutEffect(() => {
     let frame = 0;
     const update = () => {
@@ -372,13 +383,21 @@ export default function App() {
       const height =
         document.querySelector(".story-viewport")?.getBoundingClientRect()
           .height || window.innerHeight;
-      setState(
-        getScrollState(
-          -story.current.getBoundingClientRect().top,
-          height,
-          scenes.length,
-        ),
+      const nextState = getScrollState(
+        -story.current.getBoundingClientRect().top,
+        height,
+        scenes.length,
       );
+      setState((previous) =>
+        Object.keys(nextState).every(
+          (key) =>
+            previous[key as keyof ScrollState] ===
+            nextState[key as keyof ScrollState],
+        )
+          ? previous
+          : nextState,
+      );
+      onStateChange(nextState);
     };
     const schedule = () => {
       if (!frame) frame = requestAnimationFrame(update);
@@ -391,7 +410,57 @@ export default function App() {
       window.removeEventListener("scroll", schedule);
       window.removeEventListener("resize", schedule);
     };
-  }, [naturalFlow]);
+  }, [naturalFlow, onStateChange, story]);
+  return (
+    <>
+      <div
+        className={`scroll-story ${naturalFlow ? "intro-only" : ""}`}
+        ref={story}
+        style={
+          {
+            "--story-screens": naturalFlow
+              ? INTRO_SCREENS + 1
+              : getStoryScreens(scenes.length),
+          } as React.CSSProperties
+        }
+      >
+        <StoryViewport
+          state={state}
+          reducedMotion={reducedMotion}
+          naturalFlow={naturalFlow}
+          goToScene={goToScene}
+          navigationOpacity={navigationOpacity}
+        />
+      </div>
+      {naturalFlow && (
+        <div className="natural-story">
+          {scenes.slice(1).map((scene, index) => (
+            <FlowScene
+              scene={scene}
+              index={index + 1}
+              reducedMotion={reducedMotion}
+              key={scene.id}
+            />
+          ))}
+        </div>
+      )}
+    </>
+  );
+}
+
+export default function App() {
+  const { copy, locale } = useLocale();
+  const productCopy = productTranslations[locale];
+  const state = useRef(getScrollState(0, window.innerHeight, scenes.length));
+  const header = useRef<HTMLElement>(null);
+  const story = useRef<HTMLDivElement>(null);
+  const mobileMenu = useRef<HTMLDetailsElement>(null);
+  const reducedMotion = useMedia("(prefers-reduced-motion: reduce)");
+  const naturalFlow = useMedia(
+    "(max-width: 1024px) and (max-height: 480px) and (orientation: landscape)",
+  );
+  useWeightedScroll(reducedMotion);
+  const { navigateTo, contentOpacity } = useChapterNavigation(reducedMotion);
   useEffect(() => {
     // Initial hash targets are rendered by React after the browser's first anchor lookup.
     const navigateToHash = () => {
@@ -453,15 +522,14 @@ export default function App() {
         .height || window.innerHeight;
     const top = window.scrollY + story.current.getBoundingClientRect().top;
     navigateTo(
-      top +
-        (naturalFlow
-          ? INTRO_SCREENS * height
-          : sceneScrollOffset(index, height)),
+      naturalFlow
+        ? top + INTRO_SCREENS * height
+        : chapterDestination(top, index, height),
       fromChapterNav
         ? chapterNavigationMode(
-            state.activeIndex,
-            state.progress,
-            scenes[state.activeIndex].frames.at(-1)!.at,
+            state.current.activeIndex,
+            state.current.progress,
+            scenes[state.current.activeIndex].frames.at(-1)!.at,
             index,
           )
         : "scroll",
@@ -472,12 +540,7 @@ export default function App() {
       <a className="skip-link" href="#features">
         <LocaleText>{copy.skip}</LocaleText>
       </a>
-      <header
-        className="site-header"
-        style={{
-          backgroundColor: `rgba(255, 255, 255, ${smoothstep(0.48, 0.95, state.introProgress) * 0.94})`,
-        }}
-      >
+      <header className="site-header" ref={header}>
         <a
           className="brand"
           href="#top"
@@ -548,37 +611,18 @@ export default function App() {
         </nav>
       </header>
       <main id="top">
-        <div
-          className={`scroll-story ${naturalFlow ? "intro-only" : ""}`}
-          ref={story}
-          style={
-            {
-              "--story-screens": naturalFlow
-                ? INTRO_SCREENS + 1
-                : getStoryScreens(scenes.length),
-            } as React.CSSProperties
-          }
-        >
-          <StoryViewport
-            state={state}
-            reducedMotion={reducedMotion}
-            naturalFlow={naturalFlow}
-            goToScene={(index) => goToScene(index, true)}
-            navigationOpacity={contentOpacity}
-          />
-        </div>
-        {naturalFlow && (
-          <div className="natural-story">
-            {scenes.slice(1).map((scene, index) => (
-              <FlowScene
-                scene={scene}
-                index={index + 1}
-                reducedMotion={reducedMotion}
-                key={scene.id}
-              />
-            ))}
-          </div>
-        )}
+        <StoryExperience
+          story={story}
+          reducedMotion={reducedMotion}
+          naturalFlow={naturalFlow}
+          goToScene={(index) => goToScene(index, true)}
+          navigationOpacity={contentOpacity}
+          onStateChange={(nextState) => {
+            state.current = nextState;
+            if (header.current)
+              header.current.style.backgroundColor = `rgba(255, 255, 255, ${smoothstep(0.48, 0.95, nextState.introProgress) * 0.94})`;
+          }}
+        />
         <ProductOverview
           onExplore={() => {
             goToScene(0, true);
@@ -631,48 +675,44 @@ export default function App() {
         <DataGuide />
       </main>
       <footer className="site-footer">
-        <a
-          className="brand"
-          href="#top"
-          onClick={(event) => {
-            event.preventDefault();
-            goHome();
-          }}
-        >
-          <img src="/images/pillnote-logo.webp" alt="" />
-          <span>PillNote</span>
-        </a>
-        <div>
-          <span>{copy.developer}</span>
-          <a href={`mailto:${CONTACT_EMAIL}`}>
-            {CONTACT_EMAIL}
-            <ArrowRight size={12} />
+        <div className="footer-inner">
+          <a
+            className="footer-brand"
+            href="#top"
+            onClick={(event) => {
+              event.preventDefault();
+              goHome();
+            }}
+          >
+            PillNote
           </a>
+          <nav
+            className="footer-links"
+            aria-label={locale === "ko" ? "사이트 안내" : "Site information"}
+          >
+            <a href={COMPANY_PROFILE_URL}>
+              <LocaleText>{productCopy.productNavigation}</LocaleText>
+            </a>
+            <a href="#privacy">
+              <LocaleText>
+                {locale === "ko" ? "개인정보·데이터" : "Privacy & data"}
+              </LocaleText>
+            </a>
+            <a href="#data-deletion">
+              <LocaleText>
+                {locale === "ko"
+                  ? "계정·데이터 삭제"
+                  : "Account & data deletion"}
+              </LocaleText>
+            </a>
+            <a href={`mailto:${CONTACT_EMAIL}`}>
+              <LocaleText>{locale === "ko" ? "문의" : "Contact"}</LocaleText>
+            </a>
+          </nav>
+          <span className="footer-copyright">
+            © {new Date().getFullYear()} PillNote
+          </span>
         </div>
-        <nav
-          className="footer-links"
-          aria-label={
-            locale === "ko"
-              ? "회사 및 서비스 안내"
-              : "Company and service information"
-          }
-        >
-          <a href={COMPANY_PROFILE_URL}>
-            <LocaleText>{productCopy.productNavigation}</LocaleText>
-          </a>
-          <a href="#privacy">
-            <LocaleText>{productCopy.privacyLink}</LocaleText>
-          </a>
-          <a href="#data-deletion">
-            <LocaleText>{productCopy.deletionLink}</LocaleText>
-          </a>
-          <a href="#about">
-            <LocaleText>
-              {locale === "ko" ? "자주 묻는 질문" : "FAQ"}
-            </LocaleText>
-          </a>
-        </nav>
-        <span>© {new Date().getFullYear()} PillNote</span>
       </footer>
     </>
   );

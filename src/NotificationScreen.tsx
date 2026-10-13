@@ -2,12 +2,17 @@ import { LockKeyhole, LockKeyholeOpen, Flashlight, Camera } from "lucide-react";
 import type { CSSProperties } from "react";
 import { useLocale } from "./LocaleProvider";
 
-export const notificationScreens = new Set([
-  "dose-lock",
-  "dose-notification",
-  "guardian-notification",
-  "guardian-lock",
-]);
+export { notificationScreens } from "./notificationScreens";
+
+export function LockWallpaper() {
+  return (
+    <div className="lock-wallpaper" aria-hidden="true">
+      <i />
+      <i />
+      <i />
+    </div>
+  );
+}
 
 export default function NotificationScreen({
   image,
@@ -41,11 +46,7 @@ export default function NotificationScreen({
         } as CSSProperties
       }
     >
-      <div className="lock-wallpaper" aria-hidden="true">
-        <i />
-        <i />
-        <i />
-      </div>
+      <LockWallpaper />
       <div className="lock-auth" aria-hidden="true">
         {opening > 0 ? <LockKeyholeOpen /> : <LockKeyhole />}
       </div>

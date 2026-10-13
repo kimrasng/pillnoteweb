@@ -2,12 +2,16 @@ import { getFilmState } from "./film";
 import type { Scene } from "./story";
 import CaptureDates, { useCurrentDate } from "./CaptureDates";
 import { dateKey } from "./dates";
-import NotificationScreen, { notificationScreens } from "./NotificationScreen";
+import NotificationScreen, {
+  LockWallpaper,
+  notificationScreens,
+} from "./NotificationScreen";
 import { getTypingState } from "./typing";
 import { useLocale } from "./LocaleProvider";
 import { useEffect } from "react";
 import NativeRaster, { warmRasterFrames } from "./NativeRaster";
 import TouchIndicator from "./TouchIndicator";
+import { sampleNativeClip } from "./native";
 import DoseCheckFeedback from "./DoseCheckFeedback";
 
 const clip = ([top, right, bottom, left]: number[], radius = 0) =>
@@ -85,6 +89,24 @@ export default function PhoneFilm({
     nextScene,
     transition,
   );
+  // Begin warming the next action during its still hold, before the gesture.
+  const upcomingIndex = scene.frames.findIndex((frame) => frame.at > progress);
+  const upcomingFrom =
+    upcomingIndex < 0
+      ? scene.frames.at(-1)!
+      : scene.frames[Math.max(0, upcomingIndex - 1)];
+  const upcomingTo =
+    upcomingIndex < 0 ? nextScene?.frames[0] : scene.frames[upcomingIndex];
+  useEffect(() => {
+    if (reducedMotion || !upcomingTo || film.transition > 0) return;
+    const sample = sampleNativeClip(upcomingFrom.image, upcomingTo.image, 0);
+    if (sample) warmRasterFrames(sample.neighbors);
+  }, [
+    upcomingFrom.image,
+    upcomingTo?.image,
+    reducedMotion,
+    film.transition > 0,
+  ]);
   const displayScene = film.transition >= 0.5 && nextScene ? nextScene : scene;
   const label = screenLabel ?? copy.scenes[displayScene.id].label;
   const typing = getTypingState(film.searchProgress);
@@ -106,6 +128,12 @@ export default function PhoneFilm({
       : displayScene.id === "guardian"
         ? "8:30"
         : "9:41";
+  const bleedImage =
+    film.motion === "lock"
+      ? (film.frames.find(
+          (frame) => notificationScreens.has(frame.image) && frame.weight > 0,
+        )?.image ?? film.backgroundImage)
+      : film.backgroundImage;
   return (
     <figure
       className="phone-film"
@@ -122,15 +150,10 @@ export default function PhoneFilm({
       <div className="phone-shell">
         <div className="phone-display">
           <div className="phone-bleed" aria-hidden="true">
-            {film.native ? (
-              <img
-                className="app-capture"
-                src={film.native.frame.image}
-                alt=""
-                draggable={false}
-              />
+            {notificationScreens.has(bleedImage) ? (
+              <LockWallpaper />
             ) : (
-              <Screen image={film.backgroundImage} now={now} />
+              <Screen image={bleedImage} now={now} />
             )}
             <div
               className="phone-bleed-shade"
@@ -138,37 +161,41 @@ export default function PhoneFilm({
             />
           </div>
           <div className="phone-content">
-            {film.frames.map((item, index) => (
-              <div
-                className={`capture-layer ${index === film.dominantFrame ? "is-current" : ""}`}
-                key={item.image}
-                style={{
-                  opacity: item.opacity,
-                  zIndex: item.zIndex,
-                  clipPath: clip(item.clip),
-                }}
-                aria-hidden={index !== film.dominantFrame}
-              >
-                <div
-                  className="capture-surface"
-                  style={{
-                    transform: `translate3d(${item.x}%, ${(item.y / 844) * 100}%, 0) scale(${item.scale})`,
-                    clipPath: clip(item.contentClip, item.radius),
-                  }}
-                >
-                  <Screen
-                    image={item.image}
-                    now={now}
-                    label={label}
-                    visible={index === film.dominantFrame}
-                    opening={film.unlockProgress}
-                    pressed={film.touches.some(
-                      (touch) => touch.opacity > 0 && touch.phase === "down",
-                    )}
-                  />
-                </div>
-              </div>
-            ))}
+            {film.frames.map(
+              (item, index) =>
+                item.opacity > 0 && (
+                  <div
+                    className={`capture-layer ${index === film.dominantFrame ? "is-current" : ""}`}
+                    key={item.image}
+                    style={{
+                      opacity: item.opacity,
+                      zIndex: item.zIndex,
+                      clipPath: clip(item.clip),
+                    }}
+                    aria-hidden={index !== film.dominantFrame}
+                  >
+                    <div
+                      className="capture-surface"
+                      style={{
+                        transform: `translate3d(${item.x}%, ${(item.y / 844) * 100}%, 0) scale(${item.scale})`,
+                        clipPath: clip(item.contentClip, item.radius),
+                      }}
+                    >
+                      <Screen
+                        image={item.image}
+                        now={now}
+                        label={label}
+                        visible={index === film.dominantFrame}
+                        opening={film.unlockProgress}
+                        pressed={film.touches.some(
+                          (touch) =>
+                            touch.opacity > 0 && touch.phase === "down",
+                        )}
+                      />
+                    </div>
+                  </div>
+                ),
+            )}
             <NativeRaster sample={film.native} now={now} />
             {film.doseProgress !== null && (
               <DoseCheckFeedback progress={film.doseProgress} />
@@ -236,13 +263,6 @@ export default function PhoneFilm({
               aria-hidden="true"
             />
             {!reducedMotion && <TouchIndicator touches={film.touches} />}
-            {film.power > 0 && (
-              <div
-                className="phone-power"
-                style={{ opacity: film.power }}
-                aria-hidden="true"
-              />
-            )}
           </div>
         </div>
         <img

@@ -1,9 +1,10 @@
 import { useEffect } from "react";
+import { playbackRasterReady } from "./playbackRaster.ts";
 import {
   accumulateGesture,
   nextPlaybackStep,
   playbackEnd,
-  playbackPosition,
+  createPlaybackClock,
   scrollThreshold,
 } from "./playback.ts";
 
@@ -105,34 +106,35 @@ export default function useWeightedScroll(disabled: boolean) {
       const to = gesture.direction > 0 ? step.end : step.start;
       g.story.dataset.playbackState = "running";
       window.scrollTo({ top: g.origin + from * g.height, behavior: "instant" });
-      const started = performance.now();
+      const clock = createPlaybackClock(
+        from,
+        to,
+        step.duration,
+        performance.now(),
+        step.holds,
+      );
       const tick = (time: number) => {
-        const current = geometry();
-        if (!current) {
-          stop();
+        // Geometry is stable during an action; resize cancels playback.
+        const sample = clock.advance(time, playbackRasterReady);
+        if (!sample) {
+          raf = requestAnimationFrame(tick);
           return;
         }
-        const position = playbackPosition(
-          from,
-          to,
-          time - started,
-          step.duration,
-        );
         window.scrollTo({
           // Native scrolling can round fractional pixels below the endpoint.
           // Land one pixel inside the stable hold after the final capture.
           top:
-            current.origin +
-            position * current.height +
-            (time - started >= step.duration ? gesture.direction : 0),
+            g.origin +
+            sample.position * g.height +
+            (sample.complete ? gesture.direction : 0),
           behavior: "instant",
         });
-        if (time - started < step.duration) raf = requestAnimationFrame(tick);
+        if (!sample.complete) raf = requestAnimationFrame(tick);
         else {
           raf = 0;
           accumulated = 0;
           blockedUntil = time + 250;
-          current.story.dataset.playbackState = "idle";
+          g.story.dataset.playbackState = "idle";
         }
       };
       raf = requestAnimationFrame(tick);
@@ -198,16 +200,22 @@ export default function useWeightedScroll(disabled: boolean) {
     window.addEventListener("touchstart", touchStart, { passive: true });
     window.addEventListener("touchmove", touchMove, { passive: false });
     window.addEventListener("touchend", touchEnd);
+    window.addEventListener("touchcancel", touchEnd);
     window.addEventListener("keydown", key);
     window.addEventListener("pillnote:navigation-start", stop);
+    window.addEventListener("resize", stop);
+    document.addEventListener("visibilitychange", stop);
     return () => {
       stop();
       window.removeEventListener("wheel", wheel);
       window.removeEventListener("touchstart", touchStart);
       window.removeEventListener("touchmove", touchMove);
       window.removeEventListener("touchend", touchEnd);
+      window.removeEventListener("touchcancel", touchEnd);
       window.removeEventListener("keydown", key);
       window.removeEventListener("pillnote:navigation-start", stop);
+      window.removeEventListener("resize", stop);
+      document.removeEventListener("visibilitychange", stop);
     };
   }, [disabled]);
 }

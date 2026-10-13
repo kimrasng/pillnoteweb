@@ -109,6 +109,12 @@ void main() {
     }, pressTarget: find.text('보호자 연결'), overridePress: true);
     capture.reportPoint(tester, 'guardian.open', find.text('보호자 초대'));
     await motion.record(tester, 'guardian-base', 'guardian-invite-empty', () async {}, pressTarget: find.text('보호자 초대'), milliseconds: 480);
+    expect(find.text('example@example.com'), findsOneWidget);
+    expect(find.text('예: 홍길동'), findsOneWidget);
+    for (final field in tester.widgetList<TextField>(find.descendant(of: find.byType(AlertDialog), matching: find.byType(TextField)))) {
+      expect(field.decoration!.hintStyle!.color, const Color(0xFF92949E));
+      expect(field.decoration!.floatingLabelBehavior, FloatingLabelBehavior.always);
+    }
     final inputFrames = <String>['guardian-invite-empty'];
     final inputTouches = <Map<String, dynamic>>[];
     final focusStages = <Map<String, dynamic>>[];

@@ -3,42 +3,12 @@ import type { NativeFrame, NativeSample } from "./native";
 import CaptureDates from "./CaptureDates";
 import { createRasterQueue } from "./rasterQueue";
 
-// Decode nearby frames only; bound memory while scrolling in either direction.
-const decoded = new Map<string, HTMLImageElement>();
-const pending = new Map<string, Promise<HTMLImageElement>>();
-const MAX_DECODED = 24;
-function loadFrame(frame: NativeFrame) {
-  const cached = decoded.get(frame.image);
-  if (cached) {
-    decoded.delete(frame.image);
-    decoded.set(frame.image, cached);
-    return cached;
-  }
-  const request = pending.get(frame.image);
-  if (request) return request;
-  const img = new Image();
-  img.src = frame.image;
-  const promise = img
-    .decode()
-    .then(() => {
-      pending.delete(frame.image);
-      decoded.set(frame.image, img);
-      while (decoded.size > MAX_DECODED)
-        decoded.delete(decoded.keys().next().value!);
-      return img;
-    })
-    .catch((error) => {
-      pending.delete(frame.image);
-      throw error;
-    });
-  pending.set(frame.image, promise);
-  return promise;
-}
-
-export function warmRasterFrames(frames: NativeFrame[]) {
-  for (const frame of frames)
-    void Promise.resolve(loadFrame(frame)).catch(() => {});
-}
+import {
+  getDecodedFrame,
+  loadRasterFrame,
+  warmRasterFrames,
+} from "./rasterFrames";
+export { warmRasterFrames } from "./rasterFrames";
 
 type RasterFrame = NativeFrame & { clipId: string };
 type ReadyFrame = { frame: RasterFrame; image: HTMLImageElement };
@@ -55,7 +25,7 @@ export default function NativeRaster({
   const queue = useMemo(
     () =>
       createRasterQueue<RasterFrame, HTMLImageElement>(
-        loadFrame,
+        loadRasterFrame,
         (frame, image) => setReady({ frame, image }),
       ),
     [],
@@ -67,9 +37,12 @@ export default function NativeRaster({
     }
     // A new clip starts from its own endpoint, never a stale canvas from a
     // different clip. This fallback is also decoded before any paint.
-    if (!decoded.has(sample.frame.image) && ready?.frame.clipId !== sample.id) {
+    if (
+      !getDecodedFrame(sample.frame.image) &&
+      ready?.frame.clipId !== sample.id
+    ) {
       const from = sample.neighbors[0];
-      const image = decoded.get(from.image);
+      const image = getDecodedFrame(from.image);
       if (image) setReady({ frame: { ...from, clipId: sample.id }, image });
     }
     queue.select({ ...sample.frame, clipId: sample.id });

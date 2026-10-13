@@ -91,13 +91,20 @@ class _PushalarmState extends State<Pushalarm> {
               onChanged: (value) => email = value,
               decoration: const InputDecoration(
                 labelText: '보호자 이메일',
-                hintText: 'guardian@example.com',
+                hintText: 'example@example.com',
+                hintStyle: TextStyle(color: Color(0xFF92949E)),
+                floatingLabelBehavior: FloatingLabelBehavior.always,
               ),
             ),
             const SizedBox(height: 12),
             TextFormField(
               onChanged: (value) => name = value,
-              decoration: const InputDecoration(labelText: '이름 (선택)'),
+              decoration: const InputDecoration(
+                labelText: '이름 (선택)',
+                hintText: '예: 홍길동',
+                hintStyle: TextStyle(color: Color(0xFF92949E)),
+                floatingLabelBehavior: FloatingLabelBehavior.always,
+              ),
             ),
           ],
         ),

@@ -1,5 +1,9 @@
 # PillNote 실제 앱 화면 캡처
 
+## 2026-10-14: 보호자 초대 입력 힌트
+
+실제 앱의 보호자 초대 이메일 힌트를 `example@example.com`, 이름 힌트를 `예: 홍길동`으로 지정했다. 힌트는 연한 회색 `#92949E`이며 입력한 텍스트는 기존 진한 색을 유지한다. floatingLabelBehavior.always로 입력 전에도 라벨과 힌트를 함께 표시한다. `capture_pushalarm.dart`에 같은 수정을 반영하고, 팝업 열기·포커스·이메일/이름 입력·팝업 닫기의 실제 Flutter 프레임을 다시 촬영했다. main 캡처 테스트 1개(00:47), showcase 캡처 테스트 1개(00:40) 통과. showcase는 두 힌트의 존재, 색상, floating label 설정을 검증한다. 임시 복사한 테스트 5개는 보관본과 바이트 일치를 확인한 뒤 제거했다. 이메일 입력 전 400ms 대기는 웹 재생 시계에서 그대로 유지한다.
+
 ## 2026-10-13: 약 정보 상세 캡처
 
 기존 공개 API의 `/v1/drugs/202106092` 상세 응답을 `tylenol-detail.json`에 보존했다. `website_drug_info_test.dart`는 이 응답과 기존 식약처 제품 사진을 사용해 실제 Pillinfo 화면을 렌더한다. canSelect=false인 상세 조회 화면이며 약효·복용법·주의사항 문구를 만들거나 변경하지 않았다. 운영 API 연결은 MockClient로 격리했다. 캡처 테스트 1개 통과. `drug-info.png`(780×1688)와 PNG manifest·날짜 메타데이터를 추가했다.

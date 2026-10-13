@@ -53,7 +53,7 @@
     "height": 1688,
     "logicalWidth": 390,
     "logicalHeight": 844,
-    "sha256": "e58dc7517b2c87d5bf2ba0f3395de17226c2b6382a22dbc815903bdaa4f9d868"
+    "sha256": "fbf666265a6520ae2a6b2eb913697a124b9cc51ab75837756cbfe267e3a70ddf"
   },
   {
     "file": "guardian-invite.png",
@@ -141,7 +141,7 @@
     "height": 1688,
     "logicalWidth": 390,
     "logicalHeight": 844,
-    "sha256": "2c880027d9b345912d845d98594d929b6d42ead0e606f88a8e491e222e232179"
+    "sha256": "83da07bba8a19cc38364de548c59c7760291f0188756b1ec765f92908c0a7b87"
   },
   {
     "file": "pharmacy-list.png",
@@ -149,7 +149,7 @@
     "height": 1688,
     "logicalWidth": 390,
     "logicalHeight": 844,
-    "sha256": "742893b13fc1a3ea5691e79b3cea2e409bb6ec635360ab2cb3c48488e2578093"
+    "sha256": "154495577e49e61053383621b8008b87e030666cfd4efcc2bad778cf932ed756"
   },
   {
     "file": "pharmacy-map.png",
@@ -165,7 +165,7 @@
     "height": 1688,
     "logicalWidth": 390,
     "logicalHeight": 844,
-    "sha256": "88c06e0d82c0549fb7d7c750efd9325442a9e2ed527c9bee81e0d8b070449f73"
+    "sha256": "30648444163991ecd7e30071ecf26ad43d0581c8cab34ee288db79ba5cd653dd"
   },
   {
     "file": "pharmacy.png",

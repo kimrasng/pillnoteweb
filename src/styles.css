@@ -451,22 +451,6 @@ main {
 .deletion-guide {
   margin-top: 64px;
 }
-.site-footer {
-  flex-wrap: wrap;
-}
-.footer-links {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.footer-links a {
-  min-height: 30px;
-  display: inline-flex;
-  align-items: center;
-  color: var(--color-secondary);
-  text-decoration: underline;
-  text-underline-offset: 4px;
-}
 @media (max-width: 740px) {
   .intro-body {
     margin-top: 20px;
@@ -671,6 +655,7 @@ main {
   position: absolute;
   inset: 0;
   transform-origin: center;
+  will-change: transform, opacity;
 }
 .film-shade {
   position: absolute;
@@ -696,6 +681,7 @@ main {
   inset: 0;
   z-index: 6;
   overflow: hidden;
+  contain: layout paint;
 }
 .native-raster canvas {
   display: block;
@@ -1006,33 +992,56 @@ main {
   word-break: keep-all;
 }
 .site-footer {
-  margin: 0 44px;
-  border-top: 1px solid #eaf0f5;
-  padding: 35px 0 50px;
+  background: #fff;
+  border-top: 1px solid #e3e6eb;
+  padding: 20px 44px;
+}
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
   display: flex;
   align-items: center;
-  gap: 50px;
-  color: #95a2b4;
+  gap: 32px;
 }
-.site-footer .brand {
-  color: #47566c;
-}
-.site-footer .brand img {
-  height: 26px;
-  width: 26px;
-}
-.site-footer > div {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.site-footer > div > a {
-  display: flex;
+.footer-brand {
+  color: var(--color-text);
+  flex-shrink: 0;
+  display: inline-flex;
   align-items: center;
-  gap: 10px;
+  min-height: 44px;
 }
-.site-footer > span {
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 24px;
+}
+.footer-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+.footer-copyright {
   margin-left: auto;
+  white-space: nowrap;
+}
+.site-footer a:hover {
+  color: var(--color-text);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+@media (max-width: 740px) {
+  .site-footer {
+    padding: 16px 28px;
+  }
+  .footer-inner {
+    flex-wrap: wrap;
+    gap: 0 24px;
+  }
+  .footer-links {
+    order: 1;
+    width: 100%;
+    column-gap: 20px;
+  }
 }
 @media (min-width: 1600px) {
   .stage-layout {
@@ -1262,21 +1271,6 @@ main {
   }
   .faq-list details {
     padding: 19px 0;
-  }
-  .site-footer {
-    margin: 0 25px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: start;
-    gap: 25px;
-    padding-top: 25px;
-  }
-  .site-footer > span {
-    margin-left: 0;
-    grid-column: 1/-1;
-  }
-  .site-footer > div {
-    padding-top: 2px;
   }
 }
 @media (max-width: 1024px) and (max-height: 480px) and (orientation: landscape) {
@@ -1563,13 +1557,7 @@ main {
 .phone-home-line.is-locked {
   background: #fff;
 }
-.phone-power {
-  position: absolute;
-  inset: 0;
-  background: #000;
-  z-index: 16;
-  pointer-events: none;
-}
+
 .dose-feedback {
   position: absolute;
   inset: 0;

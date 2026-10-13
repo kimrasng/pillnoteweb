@@ -27,8 +27,3 @@ export function doseFeedback(progress: number) {
     newTextOpacity: ease((move - 0.2) / 0.8),
   };
 }
-
-export function lockPower(progress: number) {
-  const t = clamp(progress);
-  return t < 0.3 ? ease(t / 0.3) : 1 - ease((t - 0.48) / 0.52);
-}

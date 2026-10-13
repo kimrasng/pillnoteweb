@@ -110,8 +110,8 @@ export function getScreenMotion(frame: CaptureFrame, amount: number) {
       to.scale = 0.94 + 0.06 * t;
       break;
     case "lock":
-      // The display briefly sleeps before the lock screen wakes.
-      to.opacity = Number(t >= 0.4);
+      // Move directly to the lock screen without a display-off interval.
+      to.opacity = t;
       break;
   }
   return { from, to, shade, pinnedHeader };

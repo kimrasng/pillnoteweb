@@ -1,3 +1,5 @@
+import { sceneScrollOffset } from "./scroll.ts";
+
 export type NavigationMode = "scroll" | "direct";
 export const NAVIGATION_FADE_MS = 160;
 
@@ -20,4 +22,14 @@ export function navigationEase(progress: number) {
 export function navigationDuration(distance: number, viewportHeight: number) {
   const screens = Math.abs(distance) / Math.max(1, viewportHeight);
   return Math.min(2800, 850 + 400 * Math.log1p(screens));
+}
+
+// Browsers can quantize scrollY to whole CSS pixels. Land safely inside the
+// requested chapter, even when its authored boundary is fractional.
+export function chapterDestination(
+  origin: number,
+  index: number,
+  height: number,
+) {
+  return Math.ceil(origin + sceneScrollOffset(index, height)) + 1;
 }

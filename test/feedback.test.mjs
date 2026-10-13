@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { doseFeedback, lockPower } from "../src/feedback.ts";
+import { doseFeedback } from "../src/feedback.ts";
 import { getFilmState } from "../src/film.ts";
 import { scenes } from "../src/story.ts";
 
@@ -40,7 +40,7 @@ test("the intake check completes before the list moves, without losing the final
 
 test("feedback freezes, reverses and stays bounded even for invalid input", () => {
   const points = Array.from({ length: 201 }, (_, i) => i / 200);
-  for (const feedback of [doseFeedback, lockPower]) {
+  for (const feedback of [doseFeedback]) {
     assert.deepEqual(
       points.map(feedback),
       points.toReversed().map(feedback).toReversed(),
@@ -48,7 +48,4 @@ test("feedback freezes, reverses and stays bounded even for invalid input", () =
     assert.deepEqual(feedback(NaN), feedback(0));
     assert.deepEqual(feedback(2), feedback(1));
   }
-  assert.equal(lockPower(0), 0);
-  assert.equal(lockPower(0.4), 1);
-  assert.equal(lockPower(1), 0);
 });

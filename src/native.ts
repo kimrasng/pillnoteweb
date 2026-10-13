@@ -8,6 +8,11 @@ export type NativeClip = {
   to: string;
   frames: NativeFrame[];
   stops?: number[];
+  focusStages?: {
+    field: number;
+    readyIndex: number;
+    firstCharacterIndex: number;
+  }[];
   touches?: TouchCue[];
 };
 export type NativeSample = {
@@ -154,4 +159,30 @@ export function sampleNativeClip(
       Math.min(1, (sequence.progress - lastRelease) / (1 - lastRelease)),
     ),
   };
+}
+
+// Find the focused, still-empty capture on the authored action clock.
+export function nativeFocusProgress(
+  from: string,
+  to: string,
+  field: number,
+  extension = 0,
+  pauseExtension = 0,
+) {
+  const clip = (nativeClips as Record<string, NativeClip>)[`${from}--${to}`];
+  const stage = clip?.focusStages?.find((stage) => stage.field === field);
+  if (!stage) return null;
+  const target = (stage.readyIndex + 0.5) / (clip.frames.length - 1);
+  let low = 0,
+    high = 1;
+  for (let i = 0; i < 40; i++) {
+    const middle = (low + high) / 2;
+    if (
+      sampleNativeClip(from, to, middle, extension, pauseExtension)!
+        .captureProgress < target
+    )
+      low = middle;
+    else high = middle;
+  }
+  return (low + high) / 2;
 }

@@ -18,7 +18,7 @@
   --weight-label: 600;
   --color-text: #172033;
   --color-secondary: #536471;
-  --color-accent: #34775e;
+  --color-accent: #2458d3;
   --control-height: 48px;
   --radius-control: 12px;
   --space-1: 8px;
@@ -134,9 +134,9 @@
   grid-template-columns: repeat(2, 1fr);
   height: var(--control-height);
   padding: 3px;
-  border: 1px solid #e2e9e4;
+  border: 1px solid #e3e6eb;
   border-radius: var(--radius-control);
-  background: #eef2ef;
+  background: #f2f3f5;
   flex-shrink: 0;
 }
 .language-switch-thumb {
@@ -145,7 +145,7 @@
   width: calc((100% - 6px) / 2);
   border-radius: 8px;
   background: #fff;
-  box-shadow: 0 1px 5px #183e3012;
+  box-shadow: 0 1px 5px #17203312;
   transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 .language-switch[data-locale="en"] .language-switch-thumb {
@@ -165,10 +165,10 @@
   transition: color 160ms ease;
 }
 .language-switch button[aria-pressed="true"] {
-  color: #184c3c;
+  color: #172033;
 }
 .language-switch button:hover {
-  color: #184c3c;
+  color: #172033;
 }
 .language-transition {
   display: contents;
@@ -281,7 +281,7 @@ html {
     right: 16px;
     width: min(260px, calc(100vw - 32px));
     padding: 8px;
-    border: 1px solid #e5ebe7;
+    border: 1px solid #e3e6eb;
     border-radius: 16px;
     background: #fff;
     box-shadow: 0 12px 32px #17203318;
@@ -305,7 +305,7 @@ html {
   .mobile-language-row {
     margin-top: 8px;
     padding: 8px 16px 0;
-    border-top: 1px solid #e5ebe7;
+    border-top: 1px solid #e3e6eb;
     display: flex;
     align-items: center;
     justify-content: space-between;

@@ -1,5 +1,11 @@
 # PillNote 실제 앱 화면 캡처
 
+## 2026-10-13: 약 정보 상세 캡처
+
+기존 공개 API의 `/v1/drugs/202106092` 상세 응답을 `tylenol-detail.json`에 보존했다. `website_drug_info_test.dart`는 이 응답과 기존 식약처 제품 사진을 사용해 실제 Pillinfo 화면을 렌더한다. canSelect=false인 상세 조회 화면이며 약효·복용법·주의사항 문구를 만들거나 변경하지 않았다. 운영 API 연결은 MockClient로 격리했다. 캡처 테스트 1개 통과. `drug-info.png`(780×1688)와 PNG manifest·날짜 메타데이터를 추가했다.
+
+재현: 이 테스트와 `native_capture_support.dart`를 앱 test 폴더에 임시 복사하고 `flutter test test/website_drug_info_test.dart --no-pub`를 실행한다. 앱의 기존 helpers를 사용한다. 테스트 후 복사한 두 파일만 제거한다. 현재 제품 요약 순환은 drug-info → home-taken → dose-notification(웹 예시) → pharmacy-list이다. 아래는 이전 기록이다.
+
 ## 2026-10-13: 약 상세 화면의 작은 상단 바
 
 사용자 요청에 따라 앱 `lib/screen/management/pilmanagement.dart`의 ‘내 약’ 상세에 `compactHeading: true`를 적용했다. 제목은 18pt 고정이며 기존 뒤로가기 버튼을 유지한다. `stock-taken.png`와 `box-taken--stock-taken` 전환을 실제 Flutter로 다시 촬영했다. 캡처 테스트 2개(00:53), 기존 상단 제목·복약 UI 테스트 13개 통과. 24개 클립·984개 샘플·609개 WebP와 PNG/WebP 해시를 갱신했다. 아래는 이전 기록이다.

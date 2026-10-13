@@ -2,6 +2,7 @@ import { ArrowRight } from "lucide-react";
 import { useEffect, useRef, type CSSProperties } from "react";
 import { LocaleText, useLocale } from "./LocaleProvider";
 import { productTranslations } from "./productCopy";
+import OverviewPreview from "./OverviewPreview";
 import {
   CONTACT_EMAIL,
   HISTORY_URL,
@@ -38,59 +39,72 @@ export function ProductOverview({ onExplore }: { onExplore: () => void }) {
   }, []);
   return (
     <section
-      className="info-section"
+      className="info-section overview-section"
       ref={section}
       id="features"
       tabIndex={-1}
       aria-labelledby="overview-title"
     >
-      <div data-overview-reveal>
+      <div className="overview-heading">
         <p className="scene-label">
           <LocaleText>{overview.label}</LocaleText>
         </p>
-        <h2 id="overview-title">
+        <h2 id="overview-title" data-overview-reveal>
           <LocaleText>{overview.title}</LocaleText>
         </h2>
-        <p className="info-lead">
+        <p className="info-lead" data-overview-reveal>
           <LocaleText>{overview.description}</LocaleText>
         </p>
       </div>
-      <div className="feature-grid">
-        {overview.features.map((feature, index) => (
-          <article
-            key={index}
-            data-overview-reveal
-            style={{ "--overview-delay": `${index * 45}ms` } as CSSProperties}
-          >
+      <div className="overview-layout">
+        <OverviewPreview />
+        <div className="overview-content">
+          <div className="overview-feature-list">
+            {overview.features.map((feature, index) => (
+              <article
+                key={index}
+                style={
+                  { "--overview-delay": `${index * 45}ms` } as CSSProperties
+                }
+              >
+                <h3 data-overview-reveal>
+                  <LocaleText>{feature.title}</LocaleText>
+                </h3>
+                <p
+                  data-overview-reveal
+                  style={
+                    {
+                      "--overview-delay": `${index * 45 + 30}ms`,
+                    } as CSSProperties
+                  }
+                >
+                  <LocaleText>{feature.body}</LocaleText>
+                </p>
+              </article>
+            ))}
+          </div>
+          <p className="info-note" data-overview-reveal>
+            <LocaleText>{overview.conditions}</LocaleText>
+          </p>
+          <div className="companion-feature">
             <h3>
-              <LocaleText>{feature.title}</LocaleText>
+              <LocaleText>{overview.companion.title}</LocaleText>
             </h3>
             <p>
-              <LocaleText>{feature.body}</LocaleText>
+              <LocaleText>{overview.companion.body}</LocaleText>
             </p>
-          </article>
-        ))}
-      </div>
-      <p className="info-note" data-overview-reveal>
-        <LocaleText>{overview.conditions}</LocaleText>
-      </p>
-      <div className="companion-feature" data-overview-reveal>
-        <h3>
-          <LocaleText>{overview.companion.title}</LocaleText>
-        </h3>
-        <p>
-          <LocaleText>{overview.companion.body}</LocaleText>
-        </p>
-      </div>
-      <div className="info-links" data-overview-reveal>
-        <button onClick={onExplore}>
-          <LocaleText>{overview.tour}</LocaleText>
-          <ArrowRight size={18} />
-        </button>
-        <a href="#product">
-          <LocaleText>{overview.status}</LocaleText>
-          <ArrowRight size={18} />
-        </a>
+          </div>
+          <div className="info-links" data-overview-reveal>
+            <button onClick={onExplore}>
+              <LocaleText>{overview.tour}</LocaleText>
+              <ArrowRight size={18} />
+            </button>
+            <a href="#product">
+              <LocaleText>{overview.status}</LocaleText>
+              <ArrowRight size={18} />
+            </a>
+          </div>
+        </div>
       </div>
       <p className="scope-note" data-overview-reveal>
         <LocaleText>{safety}</LocaleText>

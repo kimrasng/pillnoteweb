@@ -1,5 +1,26 @@
 # PillNote Web — 로컬 미리보기 QA
 
+## 2026-10-13: 사용자가 지정한 대표 화면
+
+- 약 정보 → 복용 기록 → 복용 시간 알림 → 주변 약국 검색 순으로 순환한다. 약 정보는 실제 Pillinfo 화면을 새로 캡처하고, 타이레놀 공개 상세 응답·기존 식약처 사진을 그대로 사용했다. 4.5초 간격·선택·일시정지·재생은 유지한다.
+- 알림은 기존 웹 도착 예시를 재사용하며 실제 앱 화면이라고 표시하지 않는다. PhoneFilm의 화면 이름을 명시적으로 전달해 약 정보 이미지가 내 약 상자로 잘못 안내되지 않게 했다. 약국 화면에는 OpenStreetMap 저작자 링크를 붙이고 고정 높이를 예약해 순환 시 배치를 유지한다.
+- 브라우저에서 drug-info PNG 로드, home-taken, dose-notification과 알림 도착 예시 캡션, pharmacy-list와 지도 저작자 표시를 확인했다. 영어 버튼 네 개·한국어 UI 안내 정상, 가로 넘침 없음, 콘솔 오류·경고 없음. 실제 약 정보 캡처 테스트 1개·기존 웹 테스트 50개·TypeScript 포함 빌드·diff 검사 통과.
+- 결과: `/private/tmp/pillnote-review-results/overview-selected-screens.jpg`. 아래는 이전 기록이다.
+
+## 2026-10-13: 제품 요약 대표 화면 순환
+
+- OverviewPreview에 오늘의 복용(home-start), 약 등록(schedule-ready), 복용 기록(home-taken), 내 약 상자(box-taken)의 실제 캡처를 배치했다. 같은 크기의 겹친 레이어로 4.5초마다 400ms 페이드하며 반복한다. 화면 크기와 본문 배치는 유지된다. 캡션·선택 버튼·일시정지와 재생 접근성 문구를 양쪽 언어로 제공한다.
+- 25% 이상 보일 때만 자동 순환하며 숨겨진 탭에서는 멈춘다. 모션 감소에서는 자동 순환·페이드가 없고 수동 선택만 제공한다. 수동 선택은 순환을 일시정지해 해당 화면을 읽을 수 있게 한다.
+- 브라우저에서 0/home-start→1/schedule-ready 자동 변경, 일시정지 뒤 1 유지, 2/home-taken·3/box-taken 수동 선택, 재생 재개 뒤 다시 이전 인덱스까지 반복 진행됨을 확인했다. 모션 감소 모의 환경에서는 5초 이상 0 유지·transition 0s·자동 재생 버튼 없음·3 수동 선택 정상. 콘솔 오류·경고 없음. 기존 테스트 50개, TypeScript 포함 빌드·diff 검사 통과.
+- 결과: `/private/tmp/pillnote-review-results/overview-rotation.jpg`. 아래는 이전 기록이다.
+
+## 2026-10-13: 중립 배경과 화면 중심 제품 요약
+
+- Things의 실제 앱 화면과 Bear의 이미지·설명 배치를 브라우저에서 확인했다. 민트색 도입부를 흰 배경으로 변경하고 소개 무대·낮은 가로 화면의 장면 배경은 중립 회색으로 통일했다. 주요 글자·버튼은 잉크색, 링크 포인트는 앱의 파란색 계열을 사용한다. 로고와 캡처의 색은 유지했다.
+- 2×2 요약을 실제 내 약 상자 화면 옆의 세로 기능 목록으로 변경했다. PhoneFilm을 모션 감소 정적 상태로 재사용해 캡처의 비율·상태바·원본 UI를 유지하고, 한국어 UI라는 캡션을 양쪽 언어에 추가했다. 보호자 이용 조건·보조 약국·안전 안내는 유지하며 녹색 박스·버튼형 요약 링크를 제거했다. 진입 효과는 텍스트 중심으로 유지한다. 모바일은 텍스트가 먼저, 앱 화면이 뒤에 나온다.
+- 데스크톱의 300px/602px 열 배치와 영어 한국어 UI 안내, 모바일 column·텍스트 order0/화면 order1·가로 넘침 없음을 확인했다. #features 새로고침 후 section top80px 접근 정상. 콘솔 오류·경고 없음. 기존 테스트 50개, TypeScript 포함 빌드·diff 검사 통과.
+- 결과: `/private/tmp/pillnote-review-results/overview-reference-redesign.jpg`, `/private/tmp/pillnote-review-results/overview-mobile-redesign.jpg`. 아래는 이전 기록이다.
+
 ## 2026-10-13: Pretendard와 메뉴 크기 통일
 
 - 웹 기본 글꼴을 공식 Pretendard v1.3.9 Variable로 변경해 로컬 제공·preload하고 라이선스를 보존했다. 실제 앱 캡처와 날짜 캡처 글꼴은 유지했다.

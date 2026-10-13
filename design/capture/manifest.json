@@ -262,5 +262,13 @@
     "logicalWidth": 390,
     "logicalHeight": 844,
     "sha256": "866735682cda055fea1809c2fde10c57ae6ee29deab1f749a6fb166ac0abeb02"
+  },
+  {
+    "file": "drug-info.png",
+    "width": 780,
+    "height": 1688,
+    "logicalWidth": 390,
+    "logicalHeight": 844,
+    "sha256": "0629fdcd8fa21cc27923c64bff75ec30b58316f0993ce6d3b7c4f684b02072d7"
   }
 ]

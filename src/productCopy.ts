@@ -11,6 +11,15 @@ type ProductCopy = {
     conditions: string;
     tour: string;
     status: string;
+    screenCaption: string;
+    pausePreview: string;
+    playPreview: string;
+    previewLabels: {
+      drugInfo: string;
+      record: string;
+      notification: string;
+      pharmacy: string;
+    };
   };
   product: {
     label: string;
@@ -58,7 +67,16 @@ export const productTranslations: Record<Locale, ProductCopy> = {
   ko: {
     overview: {
       label: "PillNote 한눈에",
-      title: "매일의 복약을 정리하는 네 가지 방법.",
+      title: "오늘의 복용부터\n내 약 관리까지.",
+      screenCaption: "실제 앱 화면 · 한국어 UI",
+      pausePreview: "앱 화면 순환 일시정지",
+      playPreview: "앱 화면 순환 재생",
+      previewLabels: {
+        drugInfo: "약 정보",
+        record: "복용 기록",
+        notification: "복용 시간 알림",
+        pharmacy: "주변 약국 검색",
+      },
       description:
         "필요한 기능부터 살펴보세요. 로그인 없이 기기에 기록하고, 필요하면 계정과 보호자를 연결할 수 있어요.",
       features: [
@@ -198,7 +216,16 @@ export const productTranslations: Record<Locale, ProductCopy> = {
   en: {
     overview: {
       label: "PillNote at a glance",
-      title: "Four ways to organize your medication routine.",
+      title: "Daily doses.\nYour medications, organized.",
+      screenCaption: "Actual app screen · Korean UI",
+      pausePreview: "Pause app screen rotation",
+      playPreview: "Play app screen rotation",
+      previewLabels: {
+        drugInfo: "Medication information",
+        record: "Dose records",
+        notification: "Dose reminder",
+        pharmacy: "Nearby pharmacy search",
+      },
       description:
         "Start with the features you need. Keep records on your device without signing in, then connect an account or caregiver when needed.",
       features: [

@@ -204,7 +204,7 @@ function FlowScene({
   );
 }
 
-const stageColors = scenes.map(() => [242, 245, 243]);
+const stageColors = scenes.map(() => [245, 246, 248]);
 
 function StoryViewport({
   state,

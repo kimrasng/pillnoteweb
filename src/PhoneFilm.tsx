@@ -55,12 +55,16 @@ export default function PhoneFilm({
   reducedMotion,
   nextScene,
   transition = 0,
+  accessibleLabel,
+  screenLabel,
 }: {
   scene: Scene;
   progress: number;
   reducedMotion: boolean;
   nextScene?: Scene;
   transition?: number;
+  accessibleLabel?: string;
+  screenLabel?: string;
 }) {
   const { copy } = useLocale();
   const now = useCurrentDate();
@@ -82,7 +86,7 @@ export default function PhoneFilm({
     transition,
   );
   const displayScene = film.transition >= 0.5 && nextScene ? nextScene : scene;
-  const label = copy.scenes[displayScene.id].label;
+  const label = screenLabel ?? copy.scenes[displayScene.id].label;
   const typing = getTypingState(film.searchProgress);
   const lockWeight = film.frames.reduce(
     (sum, frame) =>
@@ -110,7 +114,10 @@ export default function PhoneFilm({
       data-frame={film.dominantImage}
       data-motion={film.motion}
       data-today={dateKey(now)}
-      aria-label={`${label} — ${notificationScreens.has(film.dominantImage) ? copy.notification.example : copy.appAnimation}`}
+      aria-label={
+        accessibleLabel ??
+        `${label} — ${notificationScreens.has(film.dominantImage) ? copy.notification.example : copy.appAnimation}`
+      }
     >
       <div className="phone-shell">
         <div className="phone-display">

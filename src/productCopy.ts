@@ -108,11 +108,14 @@ export const productTranslations: Record<Locale, ProductCopy> = {
     },
     product: {
       label: "About PillNote",
-      title: "제품 현황과 개발 활동.",
+      title: "PillNote 회사 소개.",
       description:
-        "PillNote는 복약 일정과 기록을 관리하는 Flutter 앱입니다. 공개 코드와 릴리즈에서 구현과 수정 과정을 확인할 수 있어요.",
+        "PillNote는 2026년 5월 설립된 회사이자 복약 관리 앱의 이름입니다. 정기적으로 약을 챙기는 사람과 보호자를 위해 복용 일정·기록과 알림을 관리하는 앱을 개발합니다.",
       facts: [
+        { title: "회사명 · 제품명", body: "PillNote" },
+        { title: "설립", body: "2026년 5월" },
         { title: "개발자", body: "Dohyun Kim" },
+        { title: "투자 이력", body: "최근 2년 내 투자 유치 없음" },
         {
           title: "현재 공개 배포",
           body: "Android · GitHub Releases에서 APK 직접 배포",
@@ -134,7 +137,7 @@ export const productTranslations: Record<Locale, ProductCopy> = {
         title: "개발 과정에서 Claude 활용",
         body: "PillNote 개발 과정에서 Claude를 개발 도구로 활용합니다. 현재 앱 내부 기능에는 Claude API를 직접 사용하지 않습니다.",
       },
-      contact: "피드백 보내기",
+      contact: "회사·제품 문의",
     },
     download: {
       label: "다운로드 안내",
@@ -210,7 +213,7 @@ export const productTranslations: Record<Locale, ProductCopy> = {
     safety:
       "PillNote는 복약 일정과 기록을 지원하는 도구입니다. 진단·처방이나 의료전문가의 판단을 대체하지 않습니다. 복용 방법과 약 변경은 의료전문가와 확인해주세요.",
     privacyLink: "개인정보·데이터 안내",
-    productNavigation: "제품 현황",
+    productNavigation: "회사 소개",
     deletionLink: "계정·데이터 삭제 안내",
   },
   en: {
@@ -257,11 +260,17 @@ export const productTranslations: Record<Locale, ProductCopy> = {
     },
     product: {
       label: "About PillNote",
-      title: "Product status and development.",
+      title: "The company behind PillNote.",
       description:
-        "PillNote is a Flutter app for medication schedules and records. Its public source and releases show how features are implemented and updated.",
+        "PillNote is the company and product name, established in May 2026. We build a medication management app for people taking regular medication and their caregivers, with dose schedules, records, and reminders.",
       facts: [
+        { title: "Company and product", body: "PillNote" },
+        { title: "Established", body: "May 2026" },
         { title: "Developer", body: "Dohyun Kim" },
+        {
+          title: "Funding",
+          body: "No investment raised in the past two years",
+        },
         {
           title: "Current public distribution",
           body: "Android · APK distributed directly through GitHub Releases",
@@ -283,7 +292,7 @@ export const productTranslations: Record<Locale, ProductCopy> = {
         title: "Developed with help from Claude",
         body: "Claude is used as a tool in PillNote's development process. The current app does not directly use the Claude API for in-app features.",
       },
-      contact: "Send feedback",
+      contact: "Company and product inquiries",
     },
     download: {
       label: "Download guide",
@@ -360,7 +369,7 @@ export const productTranslations: Record<Locale, ProductCopy> = {
     safety:
       "PillNote supports medication schedules and records. It does not replace diagnosis, prescriptions or a healthcare professional's judgment. Check medication instructions and changes with a healthcare professional.",
     privacyLink: "Privacy and data guide",
-    productNavigation: "Product status",
+    productNavigation: "Company",
     deletionLink: "Account and data deletion",
   },
 };

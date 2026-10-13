@@ -5,6 +5,8 @@ import { productTranslations } from "./productCopy";
 import OverviewPreview from "./OverviewPreview";
 import {
   CONTACT_EMAIL,
+  COMPANY_PROFILE_URL,
+  WEBSITE_URL,
   HISTORY_URL,
   LATEST_RELEASE_URL,
   RELEASES_URL,
@@ -145,6 +147,18 @@ export function ProductStatus() {
         ))}
       </dl>
       <div className="info-links">
+        <a href={COMPANY_PROFILE_URL}>
+          <LocaleText>
+            {locale === "ko" ? "회사 소개 페이지" : "Company profile"}
+          </LocaleText>
+          <ArrowRight size={18} />
+        </a>
+        <a href={WEBSITE_URL}>
+          <LocaleText>
+            {locale === "ko" ? "공식 웹사이트" : "Official website"}
+          </LocaleText>
+          <ArrowRight size={18} />
+        </a>
         <a href={LATEST_RELEASE_URL}>
           <LocaleText>{product.latest}</LocaleText>
           <ArrowRight size={18} />

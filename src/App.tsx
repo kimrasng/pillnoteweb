@@ -7,7 +7,7 @@ import useWeightedScroll from "./useWeightedScroll";
 import useChapterNavigation from "./useChapterNavigation";
 import { LocaleText, useLocale } from "./LocaleProvider";
 import LanguageSwitch from "./LanguageSwitch";
-import { CONTACT_EMAIL, RELEASES_URL } from "./links";
+import { CONTACT_EMAIL, COMPANY_PROFILE_URL, RELEASES_URL } from "./links";
 import {
   DataGuide,
   DownloadGuide,
@@ -496,6 +496,9 @@ export default function App() {
           <a href="#features">
             <LocaleText>{copy.guide}</LocaleText>
           </a>
+          <a href="#product">
+            <LocaleText>{productCopy.productNavigation}</LocaleText>
+          </a>
           <LanguageSwitch className="desktop-language" />
           <a
             className="release-button"
@@ -646,7 +649,17 @@ export default function App() {
             <ArrowRight size={12} />
           </a>
         </div>
-        <nav className="footer-links" aria-label={productCopy.data.label}>
+        <nav
+          className="footer-links"
+          aria-label={
+            locale === "ko"
+              ? "회사 및 서비스 안내"
+              : "Company and service information"
+          }
+        >
+          <a href={COMPANY_PROFILE_URL}>
+            <LocaleText>{productCopy.productNavigation}</LocaleText>
+          </a>
           <a href="#privacy">
             <LocaleText>{productCopy.privacyLink}</LocaleText>
           </a>

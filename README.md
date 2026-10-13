@@ -25,6 +25,25 @@ npm run preview
 
 첫 화면에 대상 사용자, 일정·기록 관리 용도, 보호자 이용 조건과 다운로드·기능 보기 버튼을 함께 표시합니다. `#features`의 정적 요약, `#product`의 제품·개발 현황, `#download`의 APK 설치 안내, `#privacy`의 데이터 흐름 안내와 `#data-deletion`의 삭제 절차는 스크롤 연출을 끝까지 재생하지 않아도 바로 읽을 수 있습니다. 상단·푸터 로고는 중간 장면을 거치지 않고 첫 화면으로 이동합니다. 작은 화면과 글자 확대 환경에서는 첫 화면의 긴 본문을 내부에서 스크롤할 수 있습니다.
 
+## 회사 정보와 Claude Startups 재신청
+
+회사명과 앱 이름은 **PillNote**, 설립 시점은 **2026년 5월**, 최근 2년 내 투자 유치는 없습니다. 이 정보는 운영자가 2026-10-13 직접 확인했습니다. 설립일의 일자는 확인되지 않아 월까지만 표시합니다. 개발자는 **Dohyun Kim**, 공개 연락처는 **dohyun.kim@pillnote.app**입니다.
+
+`#product`에서 회사 정보와 개발 활동을 안내합니다. `/company.html`은 JavaScript 없이 한국어·영어 회사 소개, 연락처, 공개 배포·소스·개발 이력을 제공합니다. `public/company.html`의 회사 정보·구조화 데이터와 `src/productCopy.ts`를 함께 유지해야 합니다. 홈페이지의 canonical/OG URL, JavaScript 미사용 안내, `robots.txt`, `sitemap.xml`도 공식 도메인 `https://pillnote.app/`을 사용합니다.
+
+재신청에 사용할 영문 설명:
+
+> PillNote is a company established in May 2026, building a medication management app under the same name. Our app helps people taking regular medication and their caregivers manage dose schedules, records, reminders, and caregiver check-in alerts. We distribute a working Android APK through public GitHub releases, with public source code and development history. We use Claude as a tool in our development process; the current app does not directly use the Claude API for in-app features. We have not raised investment in the past two years. Our official website is https://pillnote.app/ and our company profile is https://pillnote.app/company.html. Contact: dohyun.kim@pillnote.app.
+
+재신청 전 확인:
+
+- 회사 이름을 PillNote로 통일하고, 실제 수신 가능한 `@pillnote.app` 이메일로 신청합니다. 공개된 이메일 주소만으로 해당 메일함의 소유·수신 상태를 확인한 것은 아닙니다.
+- 수정한 사이트를 기존 호스팅에 배포한 뒤 `/company.html`이 로그인 없이 열리는지 확인합니다. 로컬 빌드만으로 공개 사이트가 갱신되지는 않습니다.
+- 설립 시점은 2026년 5월로 입력하고, 증빙을 요청받으면 실제 설립·사업자등록 자료를 제공합니다. 코드 최초 커밋이나 앱 출시일을 법적 설립일 증빙으로 대신하지 않습니다.
+- 공식 안내와 거절 메일의 기준은 최근 5년 내 설립 또는 최근 2년 내 투자입니다. 설립 시점은 기간 기준에 해당하지만 승인 여부는 Anthropic의 회사 검증에 달려 있습니다.
+
+공식 안내: [Claude Startups](https://claude.com/programs/startups), [프로그램 확대 안내](https://claude.com/resources/articles/were-expanding-the-claude-startups-program-to-help-founders-build). 2026-10-13 확인 시 공식 FAQ는 Claude Team 1년 및 $1,000 API 크레딧 신규 혜택이 수용 한도에 도달했다고 안내합니다. 재신청 승인과 해당 혜택 제공은 별개입니다.
+
 ## 제품 설명의 사실 확인과 유지보수
 
 - 2026-10-13 확인한 최신 공개 릴리즈는 [v0.2.2](https://github.com/kimrasng/pillnote/releases/tag/v0.2.2)이며 첨부 파일은 `pillnote-v0.2.2.apk`입니다. 페이지에는 버전 문자열을 고정하지 않고 `/releases/latest`를 사용합니다. 새 릴리즈를 낼 때 지원 플랫폼과 안내 기능이 공개 APK에 포함되는지 대조해야 합니다. 개발 저장소의 새 화면을 이미 배포된 화면처럼 설명하지 않습니다.

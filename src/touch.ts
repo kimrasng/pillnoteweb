@@ -4,6 +4,7 @@ export type TouchCue = {
   start: number;
   release: number;
   end: number;
+  motionStart?: number;
 };
 export type TouchPose = TouchCue & {
   opacity: number;
@@ -15,13 +16,17 @@ export type TouchPose = TouchCue & {
 
 const notificationTouchEnd =
   (motionDistances.unlock * 0.3 + TOUCH_EXTRA_SCREENS) /
-  (motionDistances.unlock + TOUCH_EXTRA_SCREENS);
+  (motionDistances.unlock + TOUCH_EXTRA_SCREENS + POST_TOUCH_PAUSE_SCREENS);
 export const notificationTouch: TouchCue = {
   x: 195,
   y: 600,
   start: 0,
   release: notificationTouchEnd * TOUCH_PRESS_SHARE,
   end: notificationTouchEnd,
+  motionStart:
+    notificationTouchEnd +
+    POST_TOUCH_PAUSE_SCREENS /
+      (motionDistances.unlock + TOUCH_EXTRA_SCREENS + POST_TOUCH_PAUSE_SCREENS),
 };
 
 export function getTouchPose(cue: TouchCue, progress: number): TouchPose {
@@ -57,4 +62,5 @@ import {
   motionDistances,
   TOUCH_EXTRA_SCREENS,
   TOUCH_PRESS_SHARE,
+  POST_TOUCH_PAUSE_SCREENS,
 } from "./pacing.ts";

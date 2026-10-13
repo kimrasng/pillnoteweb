@@ -7,10 +7,16 @@ import {
   motionDistances,
   TAP_SCREENS,
   TOUCH_EXTRA_SCREENS,
+  POST_TOUCH_PAUSE_SCREENS,
   BASE_CHAPTER_EXIT_SCREENS,
 } from "../src/pacing.ts";
 import { scenes } from "../src/story.ts";
-import { getScrollState, getChapterStart } from "../src/scroll.ts";
+import {
+  getScrollState,
+  getChapterStart,
+  getChapterScreens,
+  CHAPTER_SCROLL_EXIT_SCREENS,
+} from "../src/scroll.ts";
 import { sampleNativeClip, nativeTouchCount } from "../src/native.ts";
 import { notificationTouch } from "../src/touch.ts";
 const add = scenes.find((scene) => scene.id === "add");
@@ -195,7 +201,8 @@ test("clicks have their own extra scroll distance while non-click motion keeps i
       assert.ok(
         Math.abs(
           frame.duration * chapterLengths[index] -
-            (motionDistances[frame.motion] + count * TOUCH_EXTRA_SCREENS),
+            (motionDistances[frame.motion] +
+              count * (TOUCH_EXTRA_SCREENS + POST_TOUCH_PAUSE_SCREENS)),
         ) < 1e-10,
       );
       assert.ok(
@@ -227,15 +234,15 @@ test("guardian dialogs include Flutter's own background, keyboard focus and clos
   assert.equal(closing.shade, 0);
 });
 
-test("button, field and notification touches remain visible for at least 0.3 viewport before the next motion", () => {
+test("button, field and notification touches remain visible before the next motion at the shorter scroll pace", () => {
   for (const [index, scene] of scenes.entries()) {
     for (const frame of scene.frames.slice(1)) {
       const state = getFilmState(scene, frame.at - frame.duration / 2);
       for (const cue of state.touches) {
         const distance =
-          (cue.end - cue.start) * frame.duration * chapterLengths[index];
+          (cue.end - cue.start) * frame.duration * getChapterScreens(index);
         assert.ok(
-          distance >= 0.3 && distance <= 0.42,
+          distance >= 0.1 && distance <= 0.2,
           `${scene.id}: ${frame.image}, ${distance}`,
         );
       }
@@ -249,8 +256,8 @@ test("button, field and notification touches remain visible for at least 0.3 vie
     if (!index) continue;
     const state = getFilmState(scenes[index - 1], 1, false, next, 0.5);
     for (const cue of state.touches) {
-      const distance = (cue.end - cue.start) * CHAPTER_EXIT_SCREENS;
-      assert.ok(distance >= 0.3 && distance <= 0.42, next.id);
+      const distance = (cue.end - cue.start) * CHAPTER_SCROLL_EXIT_SCREENS;
+      assert.ok(distance >= 0.1 && distance <= 0.2, next.id);
     }
   }
 });
@@ -303,7 +310,8 @@ test("notifications wait for the tap, then open the corresponding app screen fro
 test("cross-chapter Flutter playback keeps the same clock as transitions within a chapter", () => {
   const index = 2;
   const height = 1000;
-  const quarter = getChapterStart(index + 1) - CHAPTER_EXIT_SCREENS * 0.75;
+  const quarter =
+    getChapterStart(index + 1) - CHAPTER_SCROLL_EXIT_SCREENS * 0.75;
   const scroll = getScrollState(quarter * height, height, scenes.length);
   const film = getFilmState(
     scenes[index],
@@ -317,7 +325,42 @@ test("cross-chapter Flutter playback keeps the same clock as transitions within 
     "box-taken",
     0.25,
     TOUCH_EXTRA_SCREENS / BASE_CHAPTER_EXIT_SCREENS,
+    POST_TOUCH_PAUSE_SCREENS / BASE_CHAPTER_EXIT_SCREENS,
   );
   assert.equal(film.native.index, expected.index);
   assert.equal(film.native.frame.image, expected.frame.image);
+});
+
+test("a few small wheel gestures complete app actions rather than advancing single captures", () => {
+  const viewport = 800;
+  const gesture = 120;
+  const start = getChapterStart(1) * viewport;
+  const sample = (gestures) => {
+    const scroll = getScrollState(
+      start + gestures * gesture,
+      viewport,
+      scenes.length,
+    );
+    return getFilmState(add, scroll.progress);
+  };
+  assert.equal(sample(3).dominantImage, "search-empty");
+  assert.equal(sample(9).dominantImage, "search-typed");
+});
+
+test("notification cards pause after the completed tap before unlocking the app", () => {
+  for (const sceneId of ["alarm", "guardian"]) {
+    const scene = scenes.find((s) => s.id === sceneId);
+    const target = scene.frames.at(-1);
+    const local = (notificationTouch.end + notificationTouch.motionStart) / 2;
+    const held = getFilmState(
+      scene,
+      target.at - target.duration + target.duration * local,
+    );
+    assert.equal(held.touches[0].opacity, 0);
+    assert.equal(held.unlockProgress, 0);
+    assert.equal(
+      held.frames.find((frame) => frame.image === target.image).opacity,
+      0,
+    );
+  }
 });

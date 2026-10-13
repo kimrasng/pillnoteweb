@@ -10,9 +10,8 @@ import {
   getStoryScreens,
   sceneScrollOffset,
   smoothstep,
+  CHAPTER_SCROLL_EXIT_SCREENS,
 } from "../src/scroll.ts";
-
-import { CHAPTER_EXIT_SCREENS } from "../src/pacing.ts";
 
 const height = 800;
 const count = 7;
@@ -56,7 +55,7 @@ test("each chapter boundary selects the next scene and scrolling back restores t
 });
 
 test("frame progress and chapter blend depend only on the sampled scroll position", () => {
-  const middle = 1 - CHAPTER_EXIT_SCREENS / getChapterScreens(2) / 2;
+  const middle = 1 - CHAPTER_SCROLL_EXIT_SCREENS / getChapterScreens(2) / 2;
   const distance = atScene(2, middle);
   const state = getScrollState(distance, height, count);
   assert.equal(state.activeIndex, 2);
@@ -67,7 +66,10 @@ test("frame progress and chapter blend depend only on the sampled scroll positio
   assert.deepEqual(getScrollState(distance, height, count), state);
   assert.equal(
     getScrollState(
-      atScene(2, 1 - CHAPTER_EXIT_SCREENS / getChapterScreens(2) - 0.001),
+      atScene(
+        2,
+        1 - CHAPTER_SCROLL_EXIT_SCREENS / getChapterScreens(2) - 0.001,
+      ),
       height,
       count,
     ).transition,
@@ -127,18 +129,19 @@ test("story height and easing endpoints are explicit and bounded", () => {
 
 test("the intro is quicker while interactive chapters allow more scroll distance", () => {
   assert.ok(INTRO_SCREENS < 1.75);
-  for (const index of [1, 2, 3]) assert.ok(getChapterScreens(index) > 2.15);
+  for (const index of [1, 2, 3])
+    assert.ok(getChapterScreens(index) > getChapterScreens(0));
   assert.ok(getChapterScreens(1) > getChapterScreens(0));
 });
 
 test("chapter exits take equal scroll distance in short and long chapters", () => {
   for (let index = 0; index < count - 1; index++) {
-    const start = 1 - CHAPTER_EXIT_SCREENS / getChapterScreens(index);
+    const start = 1 - CHAPTER_SCROLL_EXIT_SCREENS / getChapterScreens(index);
     close(getScrollState(atScene(index, start), height, count).transition, 0);
     close(
       getScrollState(atScene(index, (start + 1) / 2), height, count).transition,
       0.5,
     );
-    close((1 - start) * getChapterScreens(index), CHAPTER_EXIT_SCREENS);
+    close((1 - start) * getChapterScreens(index), CHAPTER_SCROLL_EXIT_SCREENS);
   }
 });

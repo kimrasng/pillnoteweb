@@ -3,6 +3,7 @@ import {
   motionDistances,
   TAP_SCREENS,
   TOUCH_EXTRA_SCREENS,
+  POST_TOUCH_PAUSE_SCREENS,
 } from "./pacing.ts";
 import { nativeTouchCount } from "./native.ts";
 import { translations } from "./i18n.ts";
@@ -31,6 +32,7 @@ export type CaptureFrame = {
   motion?: ScreenMotion;
   duration?: number;
   touchExtension?: number;
+  pauseExtension?: number;
   region?: [number, number, number, number];
   travel?: number;
 };
@@ -60,7 +62,8 @@ function timeline(index: number) {
     ): CaptureFrame {
       const touchCount =
         nativeTouchCount(previousImage, image) || Number(motion === "unlock");
-      const added = touchCount * TOUCH_EXTRA_SCREENS;
+      const added =
+        touchCount * (TOUCH_EXTRA_SCREENS + POST_TOUCH_PAUSE_SCREENS);
       extension += added;
       previousImage = image;
       return {
@@ -71,6 +74,8 @@ function timeline(index: number) {
               motion,
               duration: (motionDistances[motion] + added) / length,
               touchExtension: TOUCH_EXTRA_SCREENS / motionDistances[motion],
+              pauseExtension:
+                POST_TOUCH_PAUSE_SCREENS / motionDistances[motion],
             }
           : {}),
         ...options,

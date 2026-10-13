@@ -206,3 +206,76 @@ test("extending a touch preserves the scroll distance between subsequent Flutter
     }
   }
 });
+
+test("every click leaves a still interval after its ring disappears before motion resumes", () => {
+  const extension = 0.22 / 0.55;
+  const pause = 0.24 / 0.55;
+  for (const clip of Object.values(nativeClips)) {
+    const cues = sampleNativeClip(
+      clip.from,
+      clip.to,
+      0,
+      extension,
+      pause,
+    ).touches;
+    for (const [index, cue] of cues.entries()) {
+      assert.ok(cue.motionStart > cue.end);
+      const atEnd = sampleNativeClip(
+        clip.from,
+        clip.to,
+        cue.end,
+        extension,
+        pause,
+      );
+      for (const portion of [0.1, 0.5, 0.99]) {
+        const held = sampleNativeClip(
+          clip.from,
+          clip.to,
+          cue.end + (cue.motionStart - cue.end) * portion,
+          extension,
+          pause,
+        );
+        assert.equal(
+          held.index,
+          atEnd.index,
+          `${clip.from}: still frame after click`,
+        );
+        assert.equal(held.touches[index].opacity, 0);
+        assert.equal(held.touches[index].ringOpacity, 0);
+      }
+      const resumed = sampleNativeClip(
+        clip.from,
+        clip.to,
+        cue.motionStart,
+        extension,
+        pause,
+      );
+      assert.ok(
+        resumed.index > atEnd.index,
+        `${clip.from}: resumes after pause`,
+      );
+    }
+  }
+});
+
+test("the new pause does not stretch the Flutter movement or typing that follows it", () => {
+  const extension = 0.22 / 0.55;
+  const pause = 0.24 / 0.55;
+  for (const clip of Object.values(nativeClips)) {
+    const cues = sampleNativeClip(clip.from, clip.to, 0).touches;
+    if (!cues.length) continue;
+    for (const position of [0.2, 0.4, 0.6, 0.9]) {
+      if (cues.some((cue) => position >= cue.start && position < cue.end))
+        continue;
+      const completed = cues.filter((cue) => position >= cue.end).length;
+      const adjusted =
+        (position + completed * (extension + pause)) /
+        (1 + cues.length * (extension + pause));
+      assert.equal(
+        sampleNativeClip(clip.from, clip.to, adjusted, extension, pause).index,
+        sampleNativeClip(clip.from, clip.to, position).index,
+        `${clip.from}: same movement pace`,
+      );
+    }
+  }
+});

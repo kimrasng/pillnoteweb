@@ -5,7 +5,7 @@
     "height": 1688,
     "logicalWidth": 390,
     "logicalHeight": 844,
-    "sha256": "a7ef57326f3be9466d130b03848bd295a0b4ac66e03cee052cdb13237954840e"
+    "sha256": "d888ed1fc73b02ed06dc01a740012c2ea2e9b29ff248bf040a3411d5002df912"
   },
   {
     "file": "box-start.png",
@@ -13,7 +13,7 @@
     "height": 1688,
     "logicalWidth": 390,
     "logicalHeight": 844,
-    "sha256": "a7ef57326f3be9466d130b03848bd295a0b4ac66e03cee052cdb13237954840e"
+    "sha256": "d888ed1fc73b02ed06dc01a740012c2ea2e9b29ff248bf040a3411d5002df912"
   },
   {
     "file": "box-taken.png",
@@ -21,7 +21,7 @@
     "height": 1688,
     "logicalWidth": 390,
     "logicalHeight": 844,
-    "sha256": "1d8bae08d22f10704dc7cff7af57038354e04a773884dd4d7fd33f8b427f7e6d"
+    "sha256": "a36a4fd8fc750bdb30ea06ac847fded6e22232aed4dba38319a104f8f732d87a"
   },
   {
     "file": "box.png",
@@ -141,7 +141,7 @@
     "height": 1688,
     "logicalWidth": 390,
     "logicalHeight": 844,
-    "sha256": "cfc5fb86aa88bf343faf819bcc562b59622c09948c26e45c5e7e95e22b9407e8"
+    "sha256": "2c880027d9b345912d845d98594d929b6d42ead0e606f88a8e491e222e232179"
   },
   {
     "file": "pharmacy-list.png",
@@ -149,7 +149,7 @@
     "height": 1688,
     "logicalWidth": 390,
     "logicalHeight": 844,
-    "sha256": "42e0d16aa52a7141f18722cfd6adb455975a60be73e454c1fbedc4bb638e850f"
+    "sha256": "742893b13fc1a3ea5691e79b3cea2e409bb6ec635360ab2cb3c48488e2578093"
   },
   {
     "file": "pharmacy-map.png",
@@ -165,7 +165,7 @@
     "height": 1688,
     "logicalWidth": 390,
     "logicalHeight": 844,
-    "sha256": "6e5238a6a91047ad227c8ed50d93c9bb14fa14ffa5e86267361b3fc1b2fc298a"
+    "sha256": "88c06e0d82c0549fb7d7c750efd9325442a9e2ed527c9bee81e0d8b070449f73"
   },
   {
     "file": "pharmacy.png",
@@ -245,7 +245,7 @@
     "height": 1688,
     "logicalWidth": 390,
     "logicalHeight": 844,
-    "sha256": "5cc583adbf7e5d294650f7c547129ecd345d5dadf187107a52184affeff4cbf1"
+    "sha256": "18067f4cbf9c94d5cc0fdaf9312a09bd361be192854da6021659a5fae0427af7"
   },
   {
     "file": "stock.png",

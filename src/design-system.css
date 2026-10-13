@@ -168,14 +168,39 @@
 .language-transition {
   display: contents;
 }
-.locale-copy {
-  transition: opacity 140ms ease;
+.locale-text {
+  display: inline-block;
+  max-width: 100%;
 }
-.language-transition.is-switching .locale-copy {
-  opacity: 0;
+.language-transition.locale-leaving .locale-text {
+  animation: locale-leave var(--locale-exit-duration, 160ms)
+    cubic-bezier(0.4, 0, 0.2, 1) var(--locale-delay, 0ms) both;
+}
+.language-transition.locale-entering .locale-text {
+  animation: locale-enter var(--locale-enter-duration, 200ms)
+    cubic-bezier(0.4, 0, 0.2, 1) var(--locale-delay, 0ms) both;
+}
+@keyframes locale-leave {
+  from {
+    clip-path: inset(0);
+  }
+  to {
+    clip-path: inset(0 0 0 100%);
+  }
+}
+@keyframes locale-enter {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0);
+  }
 }
 .release-label-short {
   display: none;
+}
+.release-label-full {
+  display: inline-block;
 }
 .about-intro h2 {
   white-space: pre-line;
@@ -216,7 +241,7 @@ html {
     display: none;
   }
   .release-label-short {
-    display: inline;
+    display: inline-block;
   }
   .site-header nav > a:not(.release-button),
   .site-header nav > button:not(.release-button) {

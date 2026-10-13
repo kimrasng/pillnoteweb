@@ -1,5 +1,13 @@
 # PillNote 실제 앱 화면 캡처
 
+## 2026-10-13: 약 상세 화면의 작은 상단 바
+
+사용자 요청에 따라 앱 `lib/screen/management/pilmanagement.dart`의 ‘내 약’ 상세에 `compactHeading: true`를 적용했다. 제목은 18pt 고정이며 기존 뒤로가기 버튼을 유지한다. `stock-taken.png`와 `box-taken--stock-taken` 전환을 실제 Flutter로 다시 촬영했다. 캡처 테스트 2개(00:53), 기존 상단 제목·복약 UI 테스트 13개 통과. 24개 클립·984개 샘플·609개 WebP와 PNG/WebP 해시를 갱신했다. 아래는 이전 기록이다.
+
+## 2026-10-13: 내 약 상자 compactHeading 반영
+
+앱의 `lib/screen/pages/pill.dart`에 추가된 `compactHeading: true`를 실제 Flutter 렌더로 반영했다. 내 약 상자의 제목·상단 간격이 줄어든 정지 화면과 출입 전환 프레임을 함께 갱신했다. main/showcase 캡처 테스트 2개 통과(01:10). 임시 테스트 파일은 제거하고 앱의 사용자 수정은 유지했다. 현재 24개 클립·984개 샘플, 609개 무손실 WebP(36.06MiB)이며 PNG manifest와 WebP SHA-256 목록을 갱신했다. 아래는 이전 기록이다.
+
 ## 2026-10-13 (v16): 중간 깜빡임과 복용 카드 수정
 
 NativeRaster는 캔버스를 유지하고 최신 요청만 반영한다. 디코딩 완료 후 이미지와 날짜를 같은 React commit에서 표시하고 useLayoutEffect로 paint 전에 그린다. 다른 클립의 캔버스는 새 클립을 덮지 않는다. 양 끝의 PNG와 가까운 샘플을 미리 디코딩하며 캐시는 24개로 제한한다. 새로고침이나 크기 변경 시 최초 스크롤 상태도 paint 전에 결정한다.

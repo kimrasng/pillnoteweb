@@ -34,21 +34,29 @@ function interpolate(from: number, to: number, progress: number) {
   return from + (to - from) * progress;
 }
 
-function sequenceTouch(clip: NativeClip, position: number, extension: number) {
+function sequenceTouch(
+  clip: NativeClip,
+  position: number,
+  extension: number,
+  pauseExtension: number,
+) {
   const recorded = clip.touches ?? [];
-  const duration = 1 + recorded.length * extension;
+  const duration = 1 + recorded.length * (extension + pauseExtension);
   const touches = recorded.map((touch, index) => {
     const originalEnd =
       recorded.length === 1 && touch.start === 0 ? touch.release : touch.end;
-    const start = (touch.start + index * extension) / duration;
-    const end = (originalEnd + (index + 1) * extension) / duration;
+    const offset = index * (extension + pauseExtension);
+    const start = (touch.start + offset) / duration;
+    const end = (originalEnd + offset + extension) / duration;
     return {
       ...touch,
       start,
       release: start + (end - start) * TOUCH_PRESS_SHARE,
       end,
+      motionStart: end + pauseExtension / duration,
     };
   });
+  if (position === 1) return { progress: 1, touches };
   const stops =
     clip.stops ??
     clip.frames.map((_, index) => index / (clip.frames.length - 1));
@@ -82,8 +90,10 @@ function sequenceTouch(clip: NativeClip, position: number, extension: number) {
     }
     // Keep the last pointer-down capture until the contact and ring disappear.
     // The first pointer-up capture can already contain a route or focus change.
-    if (position < touch.end) return { progress: pressed, touches };
-    previousScroll = touch.end;
+    // The ring disappears at end; keep this capture still for a separate pause
+    // before advancing the Flutter route, focus change or typed characters.
+    if (position < touch.motionStart) return { progress: pressed, touches };
+    previousScroll = touch.motionStart;
     previousCapture = original.release;
   }
   return {
@@ -103,6 +113,7 @@ export function sampleNativeClip(
   to: string,
   progress: number,
   touchExtension = 0,
+  pauseExtension = 0,
 ): NativeSample | null {
   const id = `${from}--${to}`;
   const clip = (nativeClips as Record<string, NativeClip>)[id];
@@ -110,7 +121,12 @@ export function sampleNativeClip(
   const position = Number.isNaN(progress)
     ? 0
     : Math.max(0, Math.min(1, progress));
-  const sequence = sequenceTouch(clip, position, touchExtension);
+  const sequence = sequenceTouch(
+    clip,
+    position,
+    touchExtension,
+    pauseExtension,
+  );
   const lastRelease = clip.touches?.at(-1)?.release ?? 0;
   let index = Math.min(
     clip.frames.length - 1,

@@ -5,3 +5,23 @@ dist/
 .env
 .env.*
 !.env.example
+
+# Local AI prompts, instructions, and agent state
+.claude/
+.codex/
+.agents/
+.cursor/
+.aider*
+AGENTS.md
+AGENTS.override.md
+CLAUDE.md
+CLAUDE.local.md
+GEMINI.md
+.cursorrules
+.github/copilot-instructions.md
+.github/instructions/
+.github/prompts/
+[Pp][Rr][Oo][Mm][Pp][Tt][Ss]/
+ai-prompts/
+*[Pp][Rr][Oo][Mm][Pp][Tt]*.md
+*[Pp][Rr][Oo][Mm][Pp][Tt]*.txt

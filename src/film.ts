@@ -7,7 +7,11 @@ import {
   sampleNativeClip,
   type NativeSample,
 } from "./native.ts";
-import { BASE_CHAPTER_EXIT_SCREENS, TOUCH_EXTRA_SCREENS } from "./pacing.ts";
+import {
+  BASE_CHAPTER_EXIT_SCREENS,
+  TOUCH_EXTRA_SCREENS,
+  POST_TOUCH_PAUSE_SCREENS,
+} from "./pacing.ts";
 import { lockPower } from "./feedback.ts";
 
 export const FRAME_FADE_DISTANCE = 0.08;
@@ -46,12 +50,9 @@ function motionProgress(from: CaptureFrame, to: CaptureFrame, local: number) {
   )
     return local;
   if (to.motion === "unlock") {
-    if (local <= notificationTouch.end + 1e-10) return 0;
-    return smoothstep(
-      clampProgress(
-        (local - notificationTouch.end) / (1 - notificationTouch.end),
-      ),
-    );
+    const motionStart = notificationTouch.motionStart ?? notificationTouch.end;
+    if (local <= motionStart + 1e-10) return 0;
+    return smoothstep(clampProgress((local - motionStart) / (1 - motionStart)));
   }
   return smoothstep(local);
 }
@@ -131,6 +132,9 @@ export function getFilmState(
       touchExtension: nativeTouchCount(from.image, nextScene.frames[0].image)
         ? TOUCH_EXTRA_SCREENS / BASE_CHAPTER_EXIT_SCREENS
         : 0,
+      pauseExtension: nativeTouchCount(from.image, nextScene.frames[0].image)
+        ? POST_TOUCH_PAUSE_SCREENS / BASE_CHAPTER_EXIT_SCREENS
+        : 0,
     };
     actionProgress = boundary;
     blend = motionProgress(from, to, boundary);
@@ -142,7 +146,13 @@ export function getFilmState(
   const incoming = to && frames.find((frame) => frame.image === to.image);
   const native =
     to && !reducedMotion
-      ? sampleNativeClip(from.image, to.image, blend, to.touchExtension)
+      ? sampleNativeClip(
+          from.image,
+          to.image,
+          blend,
+          to.touchExtension,
+          to.pauseExtension,
+        )
       : null;
   if (previous) Object.assign(previous, { opacity: 1, weight: 1, zIndex: 0 });
   if (previous && incoming && to && incoming !== previous) {

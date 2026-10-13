@@ -5,7 +5,7 @@ import { scenes, type Scene } from "./story";
 import { notificationScreens } from "./NotificationScreen";
 import useWeightedScroll from "./useWeightedScroll";
 import useChapterNavigation from "./useChapterNavigation";
-import { useLocale } from "./LocaleProvider";
+import { LocaleText, useLocale } from "./LocaleProvider";
 import LanguageSwitch from "./LanguageSwitch";
 import { CONTACT_EMAIL, RELEASES_URL } from "./links";
 import {
@@ -46,11 +46,19 @@ function SceneCopy({ scene }: { scene: Scene }) {
   const { copy } = useLocale();
   const text = copy.scenes[scene.id];
   return (
-    <div className="story-copy locale-copy">
-      <p className="scene-label">{text.label}</p>
-      <h2>{text.title}</h2>
-      <p className="scene-description">{text.description}</p>
-      <p className="scene-detail">{text.detail}</p>
+    <div className="story-copy">
+      <p className="scene-label">
+        <LocaleText>{text.label}</LocaleText>
+      </p>
+      <h2>
+        <LocaleText>{text.title}</LocaleText>
+      </h2>
+      <p className="scene-description">
+        <LocaleText>{text.description}</LocaleText>
+      </p>
+      <p className="scene-detail">
+        <LocaleText>{text.detail}</LocaleText>
+      </p>
       {scene.id === "pharmacy" && (
         <a
           className="map-credit"
@@ -85,36 +93,48 @@ function BrandIntro({
       aria-hidden={opacity === 0}
       inert={reveal >= 0.12}
     >
-      <div className="intro-title-group locale-copy">
+      <div className="intro-title-group">
         <h1 className="intro-heading">
-          <span>{copy.intro.title}</span>
+          <span>
+            <LocaleText>{copy.intro.title}</LocaleText>
+          </span>
           <strong>PillNote</strong>
         </h1>
         <div
           className="intro-body"
           style={{ opacity: 1 - smoothstep(0, 0.12, reveal) }}
         >
-          <p className="intro-audience">{copy.intro.audience}</p>
-          <p className="intro-description">{copy.intro.description}</p>
-          <p className="intro-conditions">{copy.intro.conditions}</p>
+          <p className="intro-audience">
+            <LocaleText>{copy.intro.audience}</LocaleText>
+          </p>
+          <p className="intro-description">
+            <LocaleText>{copy.intro.description}</LocaleText>
+          </p>
+          <p className="intro-conditions">
+            <LocaleText>{copy.intro.conditions}</LocaleText>
+          </p>
           <div className="intro-actions">
             <a className="primary-action" href="#download">
-              {copy.release}
+              <LocaleText>{copy.release}</LocaleText>
               <ArrowRight size={18} />
             </a>
             <a href="#features">
-              {copy.intro.features}
+              <LocaleText>{copy.intro.features}</LocaleText>
               <ArrowDown size={18} />
             </a>
           </div>
-          <p className="intro-platform">{copy.intro.platform}</p>
+          <p className="intro-platform">
+            <LocaleText>{copy.intro.platform}</LocaleText>
+          </p>
         </div>
       </div>
       <div
-        className="intro-scroll-cue locale-copy"
+        className="intro-scroll-cue"
         style={{ opacity: 1 - smoothstep(0, 0.12, reveal) }}
       >
-        <span>{copy.intro.scroll}</span>
+        <span>
+          <LocaleText>{copy.intro.scroll}</LocaleText>
+        </span>
         <ArrowDown size={19} />
       </div>
     </div>
@@ -450,7 +470,7 @@ export default function App() {
   return (
     <>
       <a className="skip-link" href="#features">
-        {copy.skip}
+        <LocaleText>{copy.skip}</LocaleText>
       </a>
       <header
         className="site-header"
@@ -470,11 +490,11 @@ export default function App() {
           <span>PillNote</span>
         </a>
         <nav aria-label={copy.navigation}>
-          <button className="locale-copy" onClick={() => goToScene(0)}>
-            {copy.explore}
+          <button onClick={() => goToScene(0)}>
+            <LocaleText>{copy.explore}</LocaleText>
           </button>
-          <a className="locale-copy" href="#features">
-            {copy.guide}
+          <a href="#features">
+            <LocaleText>{copy.guide}</LocaleText>
           </a>
           <LanguageSwitch className="desktop-language" />
           <a
@@ -482,11 +502,11 @@ export default function App() {
             aria-label={copy.release}
             href="#download"
           >
-            <span className="release-label-full locale-copy">
-              {copy.release}
+            <span className="release-label-full">
+              <LocaleText>{copy.release}</LocaleText>
             </span>
-            <span className="release-label-short locale-copy">
-              {copy.releaseShort}
+            <span className="release-label-short">
+              <LocaleText>{copy.releaseShort}</LocaleText>
             </span>
             <ArrowRight size={20} />
           </a>
@@ -495,29 +515,29 @@ export default function App() {
               <Menu size={24} />
             </summary>
             <div className="mobile-nav-panel">
-              <button className="locale-copy" onClick={() => goToScene(0)}>
-                {copy.explore}
+              <button onClick={() => goToScene(0)}>
+                <LocaleText>{copy.explore}</LocaleText>
               </button>
               <a
                 href="#features"
-                className="locale-copy"
                 onClick={() => {
                   if (mobileMenu.current) mobileMenu.current.open = false;
                 }}
               >
-                {copy.guide}
+                <LocaleText>{copy.guide}</LocaleText>
               </a>
               <a
                 href="#product"
-                className="locale-copy"
                 onClick={() => {
                   if (mobileMenu.current) mobileMenu.current.open = false;
                 }}
               >
-                {productCopy.product.title}
+                <LocaleText>{productCopy.product.title}</LocaleText>
               </a>
               <div className="mobile-language-row">
-                <span className="locale-copy">{copy.language}</span>
+                <span>
+                  <LocaleText>{copy.language}</LocaleText>
+                </span>
                 <LanguageSwitch />
               </div>
             </div>
@@ -572,26 +592,32 @@ export default function App() {
           tabIndex={-1}
           aria-labelledby="faq-title"
         >
-          <div className="about-intro locale-copy">
+          <div className="about-intro">
             <img src="/images/app-icon.png" alt="" />
-            <h2 id="faq-title">{copy.about.title}</h2>
-            <p>{copy.about.features}</p>
+            <h2 id="faq-title">
+              <LocaleText>{copy.about.title}</LocaleText>
+            </h2>
+            <p>
+              <LocaleText>{copy.about.features}</LocaleText>
+            </p>
             <a className="about-release" href={RELEASES_URL}>
-              {copy.about.release}
+              <LocaleText>{copy.about.release}</LocaleText>
               <ArrowRight size={18} />
             </a>
           </div>
-          <div className="faq-list locale-copy">
+          <div className="faq-list">
             {copy.faqs.map((faq, index) => (
               <details key={index}>
                 <summary>
-                  {faq.question}
+                  <LocaleText>{faq.question}</LocaleText>
                   <ChevronDown size={19} />
                 </summary>
-                <p>{faq.answer}</p>
+                <p>
+                  <LocaleText>{faq.answer}</LocaleText>
+                </p>
                 {faq.link && (
                   <a className="faq-link" href={faq.link.href}>
-                    {faq.link.label}
+                    <LocaleText>{faq.link.label}</LocaleText>
                     <ArrowRight size={16} />
                   </a>
                 )}
@@ -620,13 +646,18 @@ export default function App() {
             <ArrowRight size={12} />
           </a>
         </div>
-        <nav
-          className="footer-links locale-copy"
-          aria-label={productCopy.data.label}
-        >
-          <a href="#privacy">{productCopy.privacyLink}</a>
-          <a href="#data-deletion">{productCopy.deletionLink}</a>
-          <a href="#about">{locale === "ko" ? "자주 묻는 질문" : "FAQ"}</a>
+        <nav className="footer-links" aria-label={productCopy.data.label}>
+          <a href="#privacy">
+            <LocaleText>{productCopy.privacyLink}</LocaleText>
+          </a>
+          <a href="#data-deletion">
+            <LocaleText>{productCopy.deletionLink}</LocaleText>
+          </a>
+          <a href="#about">
+            <LocaleText>
+              {locale === "ko" ? "자주 묻는 질문" : "FAQ"}
+            </LocaleText>
+          </a>
         </nav>
         <span>© {new Date().getFullYear()} PillNote</span>
       </footer>

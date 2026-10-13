@@ -1,14 +1,17 @@
 // Distances are viewport heights, so an action has the same pace in every chapter.
 export const TOUCH_EXTRA_SCREENS = 0.22;
+export const POST_TOUCH_PAUSE_SCREENS = 0.24;
 export const TOUCH_PRESS_SHARE = 0.52;
 export const BASE_CHAPTER_EXIT_SCREENS = 0.55;
 export const CHAPTER_EXIT_SCREENS =
-  BASE_CHAPTER_EXIT_SCREENS + TOUCH_EXTRA_SCREENS;
+  BASE_CHAPTER_EXIT_SCREENS + TOUCH_EXTRA_SCREENS + POST_TOUCH_PAUSE_SCREENS;
 const chapterTouchCounts = [1, 8, 1, 1, 1, 8, 1];
 // Reserve the added contact distance inside each chapter and its outgoing route.
 export const chapterLengths = [2.1, 8.2, 2.6, 4.2, 3.4, 10.7, 3.4].map(
   (length, index) =>
-    length + (chapterTouchCounts[index] + 1) * TOUCH_EXTRA_SCREENS,
+    length +
+    (chapterTouchCounts[index] + 1) *
+      (TOUCH_EXTRA_SCREENS + POST_TOUCH_PAUSE_SCREENS),
 );
 export const motionDistances = {
   push: 0.55,

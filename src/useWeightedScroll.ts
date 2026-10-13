@@ -16,7 +16,7 @@ export function dampScroll(
   return (
     current +
     (target - current) *
-      (1 - Math.exp(-Math.min(50, Math.max(0, elapsedMs)) / 45))
+      (1 - Math.exp(-Math.min(50, Math.max(0, elapsedMs)) / 80))
   );
 }
 

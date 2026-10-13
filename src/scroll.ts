@@ -2,9 +2,14 @@ import { chapterLengths, CHAPTER_EXIT_SCREENS } from "./pacing.ts";
 
 export const INTRO_SCREENS = 1.2;
 export const CHAPTER_SCREENS = 2.15;
+// Keep the authored action sequence, but complete it with 40% of the previous
+// scrolling distance. Typical wheel gestures now advance a whole app action.
+export const CHAPTER_SCROLL_SCALE = 0.4;
+export const CHAPTER_SCROLL_EXIT_SCREENS =
+  CHAPTER_EXIT_SCREENS * CHAPTER_SCROLL_SCALE;
 
 export function getChapterScreens(index: number): number {
-  return chapterLengths[index] ?? CHAPTER_SCREENS;
+  return (chapterLengths[index] ?? CHAPTER_SCREENS) * CHAPTER_SCROLL_SCALE;
 }
 
 export function getChapterStart(index: number): number {
@@ -80,8 +85,9 @@ export function getScrollState(
       activeIndex < count - 1
         ? clamp01(
             (progress -
-              (1 - CHAPTER_EXIT_SCREENS / getChapterScreens(activeIndex))) /
-              (CHAPTER_EXIT_SCREENS / getChapterScreens(activeIndex)),
+              (1 -
+                CHAPTER_SCROLL_EXIT_SCREENS / getChapterScreens(activeIndex))) /
+              (CHAPTER_SCROLL_EXIT_SCREENS / getChapterScreens(activeIndex)),
           )
         : 0,
   };

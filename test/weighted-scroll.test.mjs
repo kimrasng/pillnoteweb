@@ -1,42 +1,86 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { weightedWheelDelta, dampScroll } from "../src/useWeightedScroll.ts";
+import { weightedWheelDelta } from "../src/useWeightedScroll.ts";
+import {
+  accumulateGesture,
+  scrollThreshold,
+  playbackSteps,
+  nextPlaybackStep,
+  playbackPosition,
+} from "../src/playback.ts";
+import { getScrollState } from "../src/scroll.ts";
+import { getFilmState } from "../src/film.ts";
+import { scenes } from "../src/story.ts";
 
-test("wheel input keeps its native distance and direction with consistent units", () => {
+test("wheel units keep consistent input thresholds", () => {
   assert.equal(weightedWheelDelta(100, 0, 800), 100);
-  assert.equal(
-    weightedWheelDelta(-100, 0, 800),
-    -weightedWheelDelta(100, 0, 800),
-  );
-  assert.ok(weightedWheelDelta(1, 2, 800) > 800 / 2);
-  assert.ok(weightedWheelDelta(1, 2, 800) < 800);
+  assert.equal(weightedWheelDelta(-100, 0, 800), -100);
   assert.equal(weightedWheelDelta(1, 1, 800), weightedWheelDelta(16, 0, 800));
 });
-test("scroll damping converges without overshoot and an opposite target responds immediately", () => {
-  let current = 0;
-  for (let i = 0; i < 100; i++) {
-    const next = dampScroll(current, 500, 16);
-    assert.ok(next >= current && next <= 500);
-    current = next;
+test("small gestures accumulate without advancing; reversing resets the direction", () => {
+  const threshold = scrollThreshold(750);
+  let accumulated = 0;
+  for (let i = 0; i < 4; i++) {
+    const next = accumulateGesture(accumulated, 60, threshold);
+    assert.equal(next.direction, 0);
+    accumulated = next.accumulated;
   }
-  assert.ok(Math.abs(500 - current) < 0.001);
-  let quick = 0;
-  for (let i = 0; i < 16; i++) quick = dampScroll(quick, 500, 16);
-  assert.ok(
-    quick > 475,
-    "a flick settles over 95% of the distance within 256 ms",
-  );
-  assert.ok(
-    dampScroll(0, 500, 16) < 125,
-    "one frame does not jump a quarter of the way",
-  );
-  assert.ok(dampScroll(current, 0, 16) < current);
-  assert.equal(dampScroll(current, current, 16), current);
+  assert.deepEqual(accumulateGesture(accumulated, 60, threshold), {
+    accumulated: 0,
+    direction: 1,
+  });
+  assert.deepEqual(accumulateGesture(180, -60, threshold), {
+    accumulated: -60,
+    direction: 0,
+  });
 });
-test("scroll smoothing has the same pace at 60 and 120 updates per second", () => {
-  let standard = 0,
-    highRefresh = 0;
-  for (let i = 0; i < 15; i++) standard = dampScroll(standard, 500, 16);
-  for (let i = 0; i < 30; i++) highRefresh = dampScroll(highRefresh, 500, 8);
-  assert.ok(Math.abs(standard - highRefresh) < 1e-10);
+test("every triggered action reaches a complete render on elapsed time alone", () => {
+  for (const step of playbackSteps) {
+    let position = step.start;
+    for (let elapsed = 0; elapsed <= step.duration + 20; elapsed += 16)
+      position = playbackPosition(step.start, step.end, elapsed, step.duration);
+    assert.equal(position, step.end);
+    const state = getScrollState(position * 750 + 1, 750, scenes.length);
+    const film = getFilmState(
+      scenes[state.activeIndex],
+      state.progress,
+      false,
+      scenes[state.activeIndex + 1],
+      state.transition,
+    );
+    assert.equal(film.native, null, `action ending at ${step.end} must settle`);
+    assert.equal(film.touches.filter((t) => t.opacity > 0).length, 0);
+  }
+});
+test("one input selects only one action and the opposite input completes the reverse", () => {
+  let position = 0;
+  for (const step of playbackSteps) {
+    assert.equal(nextPlaybackStep(position, 1), step);
+    assert.equal(nextPlaybackStep(step.end, -1), step);
+    assert.equal(
+      playbackPosition(step.end, step.start, step.duration, step.duration),
+      step.start,
+    );
+    position = step.end;
+  }
+  assert.equal(nextPlaybackStep(position, 1), undefined);
+  assert.equal(nextPlaybackStep(0, -1), undefined);
+});
+test("timed playback has the same endpoint at different refresh rates", () => {
+  const step = playbackSteps[1];
+  for (const interval of [1000 / 60, 1000 / 120]) {
+    for (let elapsed = 0; elapsed < step.duration; elapsed += interval) {
+      const position = playbackPosition(
+        step.start,
+        step.end,
+        elapsed,
+        step.duration,
+      );
+      assert.ok(position >= step.start && position <= step.end);
+    }
+    assert.equal(
+      playbackPosition(step.start, step.end, step.duration, step.duration),
+      step.end,
+    );
+  }
 });

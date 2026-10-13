@@ -90,7 +90,7 @@ test("the final scene reaches completion and remains clamped beyond the story", 
   );
 });
 
-test("chapter navigation enters the intended scene five percent into its sequence", () => {
+test("chapter navigation enters the intended scene at its settled first screen", () => {
   for (let index = 0; index < count; index += 1) {
     const state = getScrollState(
       sceneScrollOffset(index, height),
@@ -98,7 +98,7 @@ test("chapter navigation enters the intended scene five percent into its sequenc
       count,
     );
     assert.equal(state.activeIndex, index);
-    close(state.progress, 0.05);
+    close(state.progress, 0);
     assert.equal(state.introProgress, 1);
   }
   assert.equal(sceneScrollOffset(-1, height), sceneScrollOffset(0, height));
@@ -111,10 +111,7 @@ test("viewport rescaling preserves the same visual progress", () => {
   close(desktop.progress, mobile.progress);
   assert.equal(desktop.activeIndex, mobile.activeIndex);
   assert.equal(getScrollState(0, 0, count).progress, 0);
-  close(
-    sceneScrollOffset(2, 0),
-    getChapterStart(2) + getChapterScreens(2) * 0.05,
-  );
+  close(sceneScrollOffset(2, 0), getChapterStart(2));
 });
 
 test("story height and easing endpoints are explicit and bounded", () => {

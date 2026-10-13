@@ -1,4 +1,11 @@
 import { useEffect } from "react";
+import {
+  accumulateGesture,
+  nextPlaybackStep,
+  playbackEnd,
+  playbackPosition,
+  scrollThreshold,
+} from "./playback.ts";
 
 export function weightedWheelDelta(
   delta: number,
@@ -8,54 +15,127 @@ export function weightedWheelDelta(
   const pixels = delta * (mode === 1 ? 16 : mode === 2 ? height : 1);
   return Math.max(-height * 0.85, Math.min(height * 0.85, pixels));
 }
-export function dampScroll(
-  current: number,
-  target: number,
-  elapsedMs: number,
-): number {
-  return (
-    current +
-    (target - current) *
-      (1 - Math.exp(-Math.min(50, Math.max(0, elapsedMs)) / 80))
-  );
-}
 
 export default function useWeightedScroll(disabled: boolean) {
   useEffect(() => {
-    if (disabled || !matchMedia("(pointer: fine)").matches) return;
+    if (disabled) return;
     let raf = 0,
-      target = window.scrollY,
-      lastWrite = window.scrollY,
-      previousTime = 0,
-      direction = 0;
+      accumulated = 0,
+      lastInput = 0,
+      blockedUntil = 0;
+    let touchY: number | null = null;
+    const geometry = () => {
+      const story = document.querySelector<HTMLElement>(
+        ".scroll-story:not(.intro-only)",
+      );
+      if (!story) return null;
+      const height =
+        document.querySelector(".story-viewport")?.getBoundingClientRect()
+          .height || innerHeight;
+      return {
+        story,
+        origin: story.getBoundingClientRect().top + scrollY,
+        height,
+      };
+    };
     const stop = () => {
       cancelAnimationFrame(raf);
       raf = 0;
-      target = window.scrollY;
-      direction = 0;
+      accumulated = 0;
+      blockedUntil = 0;
+      const g = geometry();
+      if (g) g.story.dataset.playbackState = "idle";
     };
-    const tick = (time: number) => {
-      const current = window.scrollY;
-      if (Math.abs(current - lastWrite) > 2) {
-        stop();
+    const canHandle = (target: EventTarget | null, delta: number) => {
+      const element = target instanceof Element ? target : null;
+      if (
+        element?.closest(
+          "dialog, input, textarea, select, [contenteditable=true]",
+        )
+      )
+        return false;
+      const intro = element?.closest(".intro-title-group");
+      if (
+        intro &&
+        intro.scrollHeight > intro.clientHeight &&
+        ((delta > 0 &&
+          intro.scrollTop < intro.scrollHeight - intro.clientHeight - 1) ||
+          (delta < 0 && intro.scrollTop > 0))
+      )
+        return false;
+      const g = geometry();
+      if (!g) return false;
+      const position = (scrollY - g.origin) / g.height;
+      return (
+        raf !== 0 ||
+        (position >= -0.002 &&
+          position <= playbackEnd + 0.002 &&
+          !(position <= 0.002 && delta < 0) &&
+          !(position >= playbackEnd - 0.002 && delta > 0))
+      );
+    };
+    const feed = (delta: number) => {
+      const now = performance.now();
+      // Inputs during playback are discarded: no skipped actions or queued momentum.
+      if (raf || now < blockedUntil) {
+        accumulated = 0;
+        lastInput = now;
         return;
       }
-      const gap = target - current;
-      const next =
-        Math.abs(gap) < 0.5
-          ? target
-          : dampScroll(
-              current,
-              target,
-              previousTime ? time - previousTime : 16,
-            );
-      previousTime = time;
-      lastWrite = next;
-      window.scrollTo({ top: next, behavior: "instant" });
-      if (Math.abs(target - next) < 0.5) {
-        raf = 0;
-        direction = 0;
-      } else raf = requestAnimationFrame(tick);
+      if (now - lastInput > 1200) accumulated = 0;
+      lastInput = now;
+      const g = geometry();
+      if (!g) return;
+      const gesture = accumulateGesture(
+        accumulated,
+        delta,
+        scrollThreshold(g.height),
+      );
+      accumulated = gesture.accumulated;
+      if (!gesture.direction) return;
+      const step = nextPlaybackStep(
+        (scrollY - g.origin) / g.height,
+        gesture.direction,
+      );
+      if (!step) return;
+      const from =
+        gesture.direction > 0
+          ? Math.max(step.start, (scrollY - g.origin) / g.height)
+          : Math.min(step.end, (scrollY - g.origin) / g.height);
+      const to = gesture.direction > 0 ? step.end : step.start;
+      g.story.dataset.playbackState = "running";
+      window.scrollTo({ top: g.origin + from * g.height, behavior: "instant" });
+      const started = performance.now();
+      const tick = (time: number) => {
+        const current = geometry();
+        if (!current) {
+          stop();
+          return;
+        }
+        const position = playbackPosition(
+          from,
+          to,
+          time - started,
+          step.duration,
+        );
+        window.scrollTo({
+          // Native scrolling can round fractional pixels below the endpoint.
+          // Land one pixel inside the stable hold after the final capture.
+          top:
+            current.origin +
+            position * current.height +
+            (time - started >= step.duration ? gesture.direction : 0),
+          behavior: "instant",
+        });
+        if (time - started < step.duration) raf = requestAnimationFrame(tick);
+        else {
+          raf = 0;
+          accumulated = 0;
+          blockedUntil = time + 250;
+          current.story.dataset.playbackState = "idle";
+        }
+      };
+      raf = requestAnimationFrame(tick);
     };
     const wheel = (event: WheelEvent) => {
       if (
@@ -64,76 +144,70 @@ export default function useWeightedScroll(disabled: boolean) {
         event.ctrlKey ||
         event.metaKey ||
         event.shiftKey ||
-        Math.abs(event.deltaX) > Math.abs(event.deltaY)
-      )
-        return;
-      const element = event.target instanceof Element ? event.target : null;
-      if (
-        !element?.closest(".scroll-story, .flow-scene") ||
-        element.closest("dialog, input, textarea, select")
-      )
-        return;
-      // Let long hero copy scroll within the available screen at small sizes or text zoom.
-      const intro = element.closest(".intro-title-group");
-      if (intro && intro.scrollHeight > intro.clientHeight) {
-        if (
-          (event.deltaY > 0 &&
-            intro.scrollTop < intro.scrollHeight - intro.clientHeight - 1) ||
-          (event.deltaY < 0 && intro.scrollTop > 0)
-        ) {
-          stop();
-          return;
-        }
-      }
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      const sign = Math.sign(event.deltaY);
-      if (
-        !sign ||
-        (window.scrollY <= 0 && sign < 0) ||
-        (window.scrollY >= max - 1 && sign > 0)
+        Math.abs(event.deltaX) > Math.abs(event.deltaY) ||
+        !canHandle(event.target, event.deltaY)
       )
         return;
       event.preventDefault();
-      if (!raf || sign !== direction) {
-        target = window.scrollY;
-        previousTime = 0;
-      }
-      direction = sign;
-      const delta = weightedWheelDelta(
-        event.deltaY,
-        event.deltaMode,
-        window.innerHeight,
+      feed(
+        weightedWheelDelta(event.deltaY, event.deltaMode, geometry()!.height),
       );
-      target = Math.max(
-        0,
-        Math.min(
-          max,
-          Math.max(
-            window.scrollY - window.innerHeight * 1.2,
-            Math.min(window.scrollY + window.innerHeight * 1.2, target + delta),
-          ),
-        ),
-      );
-      if (!raf) {
-        lastWrite = window.scrollY;
-        raf = requestAnimationFrame(tick);
-      }
     };
-    const interrupt = () => {
-      if (raf) stop();
+    const touchStart = (event: TouchEvent) => {
+      touchY = event.touches.length === 1 ? event.touches[0].clientY : null;
     };
+    const touchMove = (event: TouchEvent) => {
+      if (touchY === null || event.touches.length !== 1) return;
+      const y = event.touches[0].clientY;
+      const delta = touchY - y;
+      touchY = y;
+      if (!event.cancelable || !canHandle(event.target, delta)) return;
+      event.preventDefault();
+      feed(delta);
+    };
+    const touchEnd = () => {
+      touchY = null;
+    };
+    const key = (event: KeyboardEvent) => {
+      if (
+        event.defaultPrevented ||
+        event.ctrlKey ||
+        event.metaKey ||
+        event.altKey
+      )
+        return;
+      const target = event.target instanceof Element ? event.target : null;
+      if (event.key === " " && target?.closest("button, a, summary")) return;
+      const page = scrollThreshold(geometry()?.height ?? innerHeight);
+      const amount =
+        event.key === "ArrowDown"
+          ? 60
+          : event.key === "ArrowUp"
+            ? -60
+            : event.key === "PageDown" || (event.key === " " && !event.shiftKey)
+              ? page
+              : event.key === "PageUp" || (event.key === " " && event.shiftKey)
+                ? -page
+                : 0;
+      if (!amount || !canHandle(event.target, amount)) return;
+      event.preventDefault();
+      feed(amount);
+    };
+    stop();
     window.addEventListener("wheel", wheel, { passive: false });
-    window.addEventListener("pointerdown", interrupt);
-    window.addEventListener("keydown", interrupt);
-    window.addEventListener("resize", interrupt);
-    window.addEventListener("pillnote:navigation-start", interrupt);
+    window.addEventListener("touchstart", touchStart, { passive: true });
+    window.addEventListener("touchmove", touchMove, { passive: false });
+    window.addEventListener("touchend", touchEnd);
+    window.addEventListener("keydown", key);
+    window.addEventListener("pillnote:navigation-start", stop);
     return () => {
       stop();
       window.removeEventListener("wheel", wheel);
-      window.removeEventListener("pointerdown", interrupt);
-      window.removeEventListener("keydown", interrupt);
-      window.removeEventListener("resize", interrupt);
-      window.removeEventListener("pillnote:navigation-start", interrupt);
+      window.removeEventListener("touchstart", touchStart);
+      window.removeEventListener("touchmove", touchMove);
+      window.removeEventListener("touchend", touchEnd);
+      window.removeEventListener("keydown", key);
+      window.removeEventListener("pillnote:navigation-start", stop);
     };
   }, [disabled]);
 }

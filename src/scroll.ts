@@ -2,8 +2,8 @@ import { chapterLengths, CHAPTER_EXIT_SCREENS } from "./pacing.ts";
 
 export const INTRO_SCREENS = 1.2;
 export const CHAPTER_SCREENS = 2.15;
-// Keep the authored action sequence, but complete it with 40% of the previous
-// scrolling distance. Typical wheel gestures now advance a whole app action.
+// Compact coordinates for sampling captures. Input thresholds and playback
+// duration are separate from this authored timeline.
 export const CHAPTER_SCROLL_SCALE = 0.4;
 export const CHAPTER_SCROLL_EXIT_SCREENS =
   CHAPTER_EXIT_SCREENS * CHAPTER_SCROLL_SCALE;
@@ -97,9 +97,5 @@ export function sceneScrollOffset(
   index: number,
   viewportHeight: number,
 ): number {
-  return (
-    (getChapterStart(Math.max(0, index)) +
-      getChapterScreens(Math.max(0, index)) * 0.05) *
-    Math.max(1, viewportHeight)
-  );
+  return getChapterStart(Math.max(0, index)) * Math.max(1, viewportHeight);
 }

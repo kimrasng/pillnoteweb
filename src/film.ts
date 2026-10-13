@@ -79,7 +79,7 @@ export function getGestureState(
   return { opacity, scale, progress: local };
 }
 
-// Every pose is derived from scroll coordinates. There is no playback clock.
+// Coordinates sample the captures; the input controller advances whole actions in time.
 export function getFilmState(
   scene: Pick<Scene, "frames" | "gestures">,
   progress: number,
@@ -106,7 +106,7 @@ export function getFilmState(
   }));
   let settled = 0;
   for (let i = 1; i < scene.frames.length; i++)
-    if (position >= scene.frames[i].at) settled = i;
+    if (position + 1e-10 >= scene.frames[i].at) settled = i;
   let from = scene.frames[settled];
   let to: CaptureFrame | undefined;
   let blend = 0;

@@ -48,6 +48,7 @@ type ProductCopy = {
   };
   safety: string;
   privacyLink: string;
+  productNavigation: string;
   deletionLink: string;
 };
 
@@ -191,6 +192,7 @@ export const productTranslations: Record<Locale, ProductCopy> = {
     safety:
       "PillNote는 복약 일정과 기록을 지원하는 도구입니다. 진단·처방이나 의료전문가의 판단을 대체하지 않습니다. 복용 방법과 약 변경은 의료전문가와 확인해주세요.",
     privacyLink: "개인정보·데이터 안내",
+    productNavigation: "제품 현황",
     deletionLink: "계정·데이터 삭제 안내",
   },
   en: {
@@ -331,6 +333,7 @@ export const productTranslations: Record<Locale, ProductCopy> = {
     safety:
       "PillNote supports medication schedules and records. It does not replace diagnosis, prescriptions or a healthcare professional's judgment. Check medication instructions and changes with a healthcare professional.",
     privacyLink: "Privacy and data guide",
+    productNavigation: "Product status",
     deletionLink: "Account and data deletion",
   },
 };

@@ -532,7 +532,7 @@ export default function App() {
                   if (mobileMenu.current) mobileMenu.current.open = false;
                 }}
               >
-                <LocaleText>{productCopy.product.title}</LocaleText>
+                <LocaleText>{productCopy.productNavigation}</LocaleText>
               </a>
               <div className="mobile-language-row">
                 <span>

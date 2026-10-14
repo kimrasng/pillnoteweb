@@ -525,7 +525,9 @@ export default function App() {
       naturalFlow
         ? top + INTRO_SCREENS * height
         : chapterDestination(top, index, height),
-      fromChapterNav
+      index === 0
+        ? "instant"
+        : fromChapterNav
         ? chapterNavigationMode(
             state.current.activeIndex,
             state.current.progress,

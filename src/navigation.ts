@@ -1,6 +1,6 @@
 import { sceneScrollOffset } from "./scroll.ts";
 
-export type NavigationMode = "scroll" | "direct";
+export type NavigationMode = "scroll" | "direct" | "instant";
 export const NAVIGATION_FADE_MS = 160;
 
 export function chapterNavigationMode(

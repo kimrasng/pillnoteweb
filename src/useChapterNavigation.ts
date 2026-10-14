@@ -38,7 +38,7 @@ export default function useChapterNavigation(reducedMotion: boolean) {
         document.documentElement.scrollHeight - innerHeight,
       );
       const target = Math.max(0, Math.min(maximum, destination));
-      if (reducedMotion || Math.abs(target - origin) < 1) {
+      if (mode === "instant" || reducedMotion || Math.abs(target - origin) < 1) {
         window.scrollTo({ top: target, behavior: "instant" });
         return;
       }

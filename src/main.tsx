@@ -4,6 +4,11 @@ import App from "./App";
 import { LocaleProvider } from "./LocaleProvider";
 import "./styles.css";
 import "./design-system.css";
+import "./landing.css";
+
+if (import.meta.env.DEV) {
+  import("react-grab");
+}
 
 // Static hash destinations are restored after React renders them. Browser pixel
 // restoration could otherwise overwrite the anchor after a language change.

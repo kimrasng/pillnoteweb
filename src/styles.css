@@ -27,13 +27,7 @@ html {
   overflow-x: clip;
   overflow-anchor: none;
   scroll-padding-top: 80px;
-  scrollbar-width: none;
-}
-html::-webkit-scrollbar,
-body::-webkit-scrollbar {
-  display: none;
-  width: 0;
-  height: 0;
+  scrollbar-gutter: stable;
 }
 body {
   margin: 0;
@@ -64,7 +58,9 @@ svg {
 }
 button:focus-visible,
 a:focus-visible,
-summary:focus-visible {
+summary:focus-visible,
+input:focus-visible,
+[role="tabpanel"]:focus-visible {
   outline: 3px solid #2563eb;
   outline-offset: 4px;
 }

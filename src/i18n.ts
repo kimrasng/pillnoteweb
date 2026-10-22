@@ -11,6 +11,7 @@ type SiteCopy = {
   menu: string;
   explore: string;
   guide: string;
+  faqNavigation: string;
   release: string;
   releaseShort: string;
   storyLabel: string;
@@ -25,7 +26,7 @@ type SiteCopy = {
     scroll: string;
   };
   scenes: Record<SceneId, SceneText>;
-  about: { title: string; features: string; release: string };
+  about: { label: string; title: string; description: string; contact: string };
   faqs: {
     question: string;
     answer: string;
@@ -57,12 +58,13 @@ export const translations: Record<Locale, SiteCopy> = {
     pageTitle: "PillNote — 복약 관리도 간편하게",
     pageDescription:
       "정기적으로 약을 챙기는 사람과 보호자를 위한 복약 관리 앱. 복용 일정과 기록, 약 관리, 알림과 보호자 연결을 실제 앱 화면으로 확인하세요.",
-    skip: "제품 요약으로 이동",
+    skip: "주요 기능으로 이동",
     navigation: "웹 메뉴",
     language: "언어",
-    menu: "메뉴 열기",
-    explore: "앱 소개",
-    guide: "제품 요약",
+    menu: "사이트 메뉴",
+    explore: "사용 과정",
+    guide: "주요 기능",
+    faqNavigation: "자주 묻는 질문",
     release: "다운로드",
     releaseShort: "다운로드",
     storyLabel: "PillNote 서비스 소개",
@@ -74,7 +76,7 @@ export const translations: Record<Locale, SiteCopy> = {
         "복용 일정과 기록을 한곳에서 관리하고, 필요한 경우 보호자와 연결하세요.",
       conditions:
         "보호자 연결은 이메일 로그인·초대 수락 후, 알림은 기기 등록·알림 설정과 동기화 후 이용해요.",
-      platform: "Android APK · GitHub Releases 배포",
+      platform: "Android APK · 로그인 없이 시작할 수 있어요",
       features: "기능 보기",
       scroll: "스크롤해서 만나보세요",
     },
@@ -130,9 +132,11 @@ export const translations: Record<Locale, SiteCopy> = {
       },
     },
     about: {
-      title: "내 약을 챙기는 일,\nPillNote에서.",
-      features: "복용 기록 · 약 관리 · 시간 알림 · 보호자 연결 · 주변 약국",
-      release: "GitHub 릴리즈",
+      label: "도움말",
+      title: "자주 묻는 질문",
+      description:
+        "시작하기 전에 궁금한 점을 확인하세요. 더 궁금한 내용은 이메일로 문의해주세요.",
+      contact: "이메일로 문의하기",
     },
     faqs: [
       {
@@ -165,7 +169,7 @@ export const translations: Record<Locale, SiteCopy> = {
       {
         question: "페이지에 보이는 화면은 실제 앱인가요?",
         answer:
-          "앱 화면은 실제 PillNote 화면을 캡처했어요. 타이레놀 검색은 실제 의약품 목록과 식별 사진을 사용하고, 복용 일정과 수량은 소개용 예시예요. 휴대폰 알림은 앱과 서버의 알림 문구를 사용한 도착 예시예요. 보호자 연결은 소개용 계정으로 초대와 수락 과정을 재현했어요. 지도와 약국 목록은 서울역 주변 실제 검색 결과예요. 스크롤을 올리면 이전 과정으로 돌아갈 수 있어요.",
+          "앱 화면은 실제 PillNote 화면을 캡처했어요. 타이레놀 검색은 실제 의약품 목록과 식별 사진을 사용하고, 복용 일정과 수량은 소개용 예시예요. 휴대폰 알림은 앱과 서버의 알림 문구를 사용한 도착 예시예요. 보호자 연결은 소개용 계정으로 초대와 수락 과정을 재현했어요. 지도와 약국 목록은 서울역 주변 실제 검색 결과예요. 기능을 선택하거나 전체 사용 과정의 재생 위치를 바꿔 다시 볼 수 있어요.",
       },
     ],
     developer: "Developed by Dohyun Kim",
@@ -187,12 +191,13 @@ export const translations: Record<Locale, SiteCopy> = {
     pageTitle: "PillNote — Medication made simple",
     pageDescription:
       "A medication management app for people taking regular medication and their caregivers. Explore schedules, records, medications, reminders and caregiver connections through real app screens.",
-    skip: "Skip to product overview",
+    skip: "Skip to features",
     navigation: "Main navigation",
     language: "Language",
-    menu: "Open menu",
-    explore: "Explore",
-    guide: "Overview",
+    menu: "Site menu",
+    explore: "App tour",
+    guide: "Features",
+    faqNavigation: "FAQ",
     release: "Download",
     releaseShort: "Download",
     storyLabel: "Explore PillNote",
@@ -205,7 +210,7 @@ export const translations: Record<Locale, SiteCopy> = {
         "Manage dose schedules and records in one place, and connect with a caregiver when needed.",
       conditions:
         "Caregiver connections require email sign-in and an accepted invitation; alerts also require device registration, notification settings and sync.",
-      platform: "Android APK · Distributed via GitHub Releases",
+      platform: "Android APK · Get started without signing in",
       features: "View features",
       scroll: "Scroll to explore",
     },
@@ -263,10 +268,11 @@ export const translations: Record<Locale, SiteCopy> = {
       },
     },
     about: {
-      title: "Your medication routine,\nwith PillNote.",
-      features:
-        "Dose tracking · Medication management · Reminders · Caregivers · Nearby pharmacies",
-      release: "GitHub releases",
+      label: "Help & support",
+      title: "Frequently asked questions",
+      description:
+        "A few things to know before you start. For anything else, get in touch by email.",
+      contact: "Contact us by email",
     },
     faqs: [
       {
@@ -299,7 +305,7 @@ export const translations: Record<Locale, SiteCopy> = {
       {
         question: "Are these real app screens?",
         answer:
-          "The screens are captured from the actual PillNote app. Tylenol search uses real catalogue results and identification photos; schedules and stock are presentation examples. Phone notifications demonstrate the app and server's notification messages. Caregiver invitations and acceptance use demo accounts. The map and pharmacy list show real search results around Seoul Station. Scroll up to retrace the experience. The app screenshots currently show the Korean interface.",
+          "The screens are captured from the actual PillNote app. Tylenol search uses real catalogue results and identification photos; schedules and stock are presentation examples. Phone notifications demonstrate the app and server's notification messages. Caregiver invitations and acceptance use demo accounts. The map and pharmacy list show real search results around Seoul Station. Select a feature or change the full tour playback position to revisit a step. The app screenshots currently show the Korean interface.",
       },
     ],
     developer: "Developed by Dohyun Kim",

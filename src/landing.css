@@ -1,0 +1,543 @@
+.landing-hero {
+  width: min(1180px, 100%);
+  min-height: 100svh;
+  margin: auto;
+  padding: 112px 44px 36px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(32px, 5vw, 72px);
+}
+.hero-copy .scene-label {
+  margin-bottom: 24px;
+}
+.hero-copy h1 {
+  font-size: clamp(40px, 4.6vw, 64px);
+  line-height: 1.18;
+  letter-spacing: -0.045em;
+  font-weight: 700;
+  white-space: pre-line;
+  word-break: keep-all;
+}
+.hero-description {
+  max-width: 450px;
+  margin-top: 24px;
+  color: var(--color-secondary);
+  line-height: var(--line-body);
+  word-break: keep-all;
+}
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 30px;
+}
+.hero-actions .primary-action,
+.tour-action,
+.download-actions .primary-action {
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 18px;
+  border: 1px solid #dfe3e9;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  transition:
+    background 180ms ease,
+    border-color 180ms ease;
+}
+.hero-actions .primary-action,
+.download-actions .primary-action {
+  background: var(--color-text);
+  border-color: var(--color-text);
+  color: white;
+}
+.tour-action {
+  background: white;
+}
+.tour-action:hover {
+  border-color: #aeb8c8;
+  background: #f9fafc;
+}
+.hero-platform {
+  margin-top: 14px;
+  font-size: 14px;
+  color: var(--color-secondary);
+  line-height: var(--line-body);
+}
+.demo-screen {
+  display: flex;
+  justify-content: center;
+}
+.demo-player .phone-film {
+  width: 240px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+.landing-hero > .demo-player .phone-film {
+  width: min(480px, 34vw, 100%);
+}
+.demo-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 12px;
+  min-height: 44px;
+}
+.demo-controls button {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  color: var(--color-secondary);
+  transition: background 180ms ease;
+}
+.demo-controls button:hover {
+  background: #e7ebf1;
+}
+.tour-heading {
+  max-width: 760px;
+}
+.tour-heading {
+  margin-bottom: 32px;
+}
+.tour-chapters {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0 0 24px;
+}
+.tour-chapter-indicator {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 0;
+  width: var(--chapter-width, 0px);
+  height: var(--chapter-height, 0px);
+  transform: translate3d(var(--chapter-x, 0px), var(--chapter-y, 0px), 0);
+  border-radius: 999px;
+  background: #eaf0ff;
+  pointer-events: none;
+  opacity: 0;
+}
+.tour-chapter-indicator[data-ready="true"] {
+  opacity: 1;
+  transition:
+    transform 320ms cubic-bezier(0.2, 0.7, 0.3, 1),
+    width 320ms cubic-bezier(0.2, 0.7, 0.3, 1),
+    height 320ms cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+.tour-chapters button {
+  position: relative;
+  z-index: 1;
+  padding: 10px 14px;
+  min-height: 44px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-secondary);
+  transition:
+    background 180ms ease,
+    color 180ms ease;
+}
+.tour-chapters button[aria-pressed="true"] {
+  color: #2458d3;
+}
+.tour-chapters button[aria-pressed="false"]:hover {
+  background: #f2f4f7;
+}
+.tour-scene-copy {
+  animation: tour-copy-enter 360ms cubic-bezier(0.2, 0.7, 0.3, 1) both;
+}
+@keyframes tour-copy-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.tour-scene {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 48px;
+  min-height: 640px;
+  padding: 36px 44px;
+  background: #f5f6f8;
+  border-radius: 28px;
+}
+.tour-scene-copy h3 {
+  margin: 0 0 20px;
+  font-size: 32px;
+  line-height: 1.25;
+  letter-spacing: -0.035em;
+  white-space: pre-line;
+}
+.tour-scene-copy > p:last-of-type {
+  font-size: 16px;
+  color: var(--color-secondary);
+  white-space: pre-line;
+  word-break: keep-all;
+}
+.tour-scene-copy .scene-label {
+  margin-bottom: 16px;
+}
+.demo-player-full .phone-film {
+  width: 272px;
+}
+.demo-controls-full {
+  justify-content: flex-start;
+  padding: 8px 0 0;
+}
+.demo-progress {
+  flex: 1;
+  min-width: 0;
+  height: 32px;
+  margin-left: 12px;
+  accent-color: #2458d3;
+  cursor: pointer;
+}
+.site-header {
+  border-bottom: 1px solid #e9edf2;
+}
+.site-header nav > a:not(.release-button):hover {
+  color: var(--color-accent);
+}
+.site-header .release-button {
+  color: #fff;
+  background: var(--color-text);
+}
+.site-header .release-button:hover,
+.hero-actions .primary-action:hover,
+.download-actions .primary-action:hover {
+  background: #2b3b55;
+}
+.menu-close-icon,
+.mobile-nav[open] .menu-open-icon {
+  display: none;
+}
+.mobile-nav[open] .menu-close-icon {
+  display: block;
+}
+.download-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+}
+.download-intro {
+  max-width: 620px;
+}
+.download-section h2 {
+  font-size: clamp(28px, 3.1vw, 40px);
+}
+.download-section .info-lead {
+  max-width: 540px;
+  margin-top: 18px;
+}
+.download-actions {
+  flex-shrink: 0;
+  text-align: center;
+}
+.download-actions .primary-action {
+  min-height: 52px;
+  padding: 14px 20px;
+}
+.download-actions .download-platform {
+  margin-top: 12px;
+  font-size: 14px;
+  color: var(--color-secondary);
+}
+.download-section .install-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  list-style: none;
+  margin: 36px 0 0;
+  padding: 0;
+  max-width: none;
+}
+.download-section .install-steps li {
+  padding: 24px;
+  margin: 0;
+  border: 1px solid #e4e9f0;
+  border-radius: 18px;
+  background: #fcfdff;
+}
+.install-step-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 20px;
+  border: 1px solid #e2eafa;
+  border-radius: 12px;
+  background: #eef3fc;
+  color: #345581;
+}
+.download-section .install-steps h3 {
+  margin: 0 0 10px;
+  font-size: 18px;
+}
+.download-section .install-steps p {
+  font-size: 14px;
+  line-height: 1.7;
+}
+.download-footnotes {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 16px;
+}
+.install-help {
+  flex: 1;
+  max-width: 700px;
+}
+.install-help summary,
+.release-history {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  font-size: 14px;
+  color: var(--color-secondary);
+}
+.install-help summary {
+  cursor: pointer;
+  list-style: none;
+}
+.install-help summary::-webkit-details-marker {
+  display: none;
+}
+.install-help[open] summary svg {
+  transform: rotate(180deg);
+}
+.install-help summary:hover,
+.release-history:hover {
+  color: var(--color-accent);
+}
+.download-section .install-help p {
+  margin: 8px 0 12px;
+  font-size: 14px;
+}
+.release-history {
+  flex-shrink: 0;
+}
+.about-section {
+  padding-top: 88px;
+  padding-bottom: 88px;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 56px;
+}
+.about-intro p {
+  color: var(--color-secondary);
+}
+.about-intro p.scene-label {
+  margin: 0 0 16px;
+  color: var(--color-accent);
+}
+.about-intro h2 {
+  text-wrap: balance;
+}
+.faq-list {
+  padding-top: 0;
+}
+.faq-list details:first-child {
+  padding-top: 0;
+}
+.faq-list summary {
+  min-height: 44px;
+}
+.faq-list summary:hover {
+  color: var(--color-accent);
+}
+@media (min-width: 741px) and (max-width: 1000px) {
+  .landing-hero {
+    padding-inline: 30px;
+    gap: 22px;
+  }
+  .hero-copy h1 {
+    font-size: 42px;
+  }
+  .hero-actions {
+    gap: 8px;
+  }
+  .hero-actions .tour-action {
+    padding-inline: 12px;
+  }
+  .tour-scene {
+    gap: 28px;
+    padding-inline: 30px;
+  }
+  .site-header nav {
+    gap: 4px;
+  }
+  .site-header nav > a {
+    padding-inline: 8px;
+  }
+  .site-header .release-button {
+    min-width: 120px;
+  }
+  .download-heading {
+    gap: 28px;
+  }
+  .about-section {
+    gap: 32px;
+  }
+}
+@media (max-width: 740px) {
+  .landing-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-height: auto;
+    padding: 96px 24px 32px;
+    gap: 30px;
+  }
+  .hero-copy .scene-label {
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+  .hero-copy h1 {
+    font-size: clamp(34px, 8.5vw, 46px);
+  }
+  .hero-description {
+    margin-top: 16px;
+  }
+  .hero-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-top: 20px;
+    gap: 8px;
+  }
+  .hero-actions .primary-action,
+  .hero-actions .tour-action {
+    width: 100%;
+    padding-inline: 14px;
+    font-size: 16px;
+  }
+  .hero-platform {
+    margin-top: 10px;
+    text-align: center;
+  }
+  .landing-hero > .demo-player .phone-film {
+    width: min(300px, 80vw);
+  }
+  .tour-section {
+    padding: 48px 24px;
+  }
+  .tour-heading {
+    margin-bottom: 24px;
+  }
+  .tour-chapters {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+  }
+  .tour-chapters button {
+    padding: 8px 12px;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+  .tour-scene {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    min-height: 0;
+    padding: 28px 20px;
+    border-radius: 24px;
+  }
+  .tour-scene-copy {
+    width: 100%;
+    min-height: 184px;
+  }
+  .tour-scene-copy .scene-label {
+    margin-bottom: 8px;
+  }
+  .tour-scene-copy h3 {
+    font-size: 26px;
+    margin-bottom: 12px;
+  }
+  .demo-player-full .phone-film {
+    width: min(240px, 65vw);
+  }
+  .download-section {
+    padding: 56px 24px;
+  }
+  .download-heading {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 24px;
+  }
+  .download-actions .primary-action {
+    width: 100%;
+  }
+  .download-section .install-steps {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 28px;
+  }
+  .download-section .install-steps li {
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr);
+    gap: 14px;
+    padding: 18px;
+    border-radius: 16px;
+  }
+  .install-step-icon {
+    width: 40px;
+    height: 40px;
+    margin: 0;
+  }
+  .download-section .install-steps h3 {
+    margin-bottom: 6px;
+    font-size: 16px;
+  }
+  .download-footnotes {
+    flex-wrap: wrap;
+    gap: 4px 20px;
+  }
+  .install-help {
+    flex-basis: 100%;
+  }
+  .about-section {
+    padding: 56px 24px;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-actions a,
+  .demo-controls button,
+  .tour-chapters button {
+    transition: none;
+  }
+  .tour-chapter-indicator[data-ready="true"] {
+    transition: none;
+  }
+  .tour-scene-copy {
+    animation: none;
+  }
+}
+
+.tour-section .scope-note {
+  margin-top: 24px;
+  border: 0;
+  padding: 0;
+  font-size: 14px;
+}

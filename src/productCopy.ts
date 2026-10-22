@@ -21,28 +21,18 @@ type ProductCopy = {
       pharmacy: string;
     };
   };
-  product: {
-    label: string;
-    title: string;
-    description: string;
-    facts: TextItem[];
-    latest: string;
-    history: string;
-    source: string;
-    changes: string;
-    development: TextItem;
-    claude: TextItem;
-    contact: string;
-  };
   download: {
     label: string;
     title: string;
     description: string;
-    steps: string[];
+    platform: string;
+    installTitle: string;
+    steps: TextItem[];
     caution: string;
     latest: string;
     history: string;
-    language: string;
+    installHelp: string;
+    installPermission: string;
   };
   data: {
     label: string;
@@ -57,12 +47,11 @@ type ProductCopy = {
   };
   safety: string;
   privacyLink: string;
-  productNavigation: string;
   deletionLink: string;
 };
 
 // Public copy contains only verified implementation and release facts.
-// Operator-confirmed policy terms and Claude usage must be verified before adding them.
+// Confirm policy terms against the implementation before publishing changes.
 export const productTranslations: Record<Locale, ProductCopy> = {
   ko: {
     overview: {
@@ -104,58 +93,36 @@ export const productTranslations: Record<Locale, ProductCopy> = {
       conditions:
         "보호자 연결에는 양쪽의 이메일 로그인과 초대 수락이 필요해요. 알림은 연결 활성화, 보호자 기기 등록·알림 허용, 본인의 보호자 알림 설정과 데이터 동기화 후 이용할 수 있어요.",
       tour: "실제 앱 화면 둘러보기",
-      status: "제품 현황 보기",
-    },
-    product: {
-      label: "About PillNote",
-      title: "PillNote 회사 소개.",
-      description:
-        "PillNote는 2026년 5월 설립된 회사이자 복약 관리 앱의 이름입니다. 정기적으로 약을 챙기는 사람과 보호자를 위해 복용 일정·기록과 알림을 관리하는 앱을 개발합니다.",
-      facts: [
-        { title: "회사명 · 제품명", body: "PillNote" },
-        { title: "설립", body: "2026년 5월" },
-        { title: "개발자", body: "Dohyun Kim" },
-        { title: "투자 이력", body: "최근 2년 내 투자 유치 없음" },
-        {
-          title: "현재 공개 배포",
-          body: "Android · GitHub Releases에서 APK 직접 배포",
-        },
-        {
-          title: "제공 기능",
-          body: "복용 일정·기록, 약 검색·관리, 기기 복용 알림, 이메일 로그인·동기화, 보호자 연결·확인 알림, 주변 약국 검색",
-        },
-      ],
-      latest: "최신 공개 릴리즈",
-      history: "릴리즈 이력",
-      source: "앱 소스 코드",
-      changes: "개발 변경 이력",
-      development: {
-        title: "개발과 검증",
-        body: "앱의 릴리즈 워크플로는 정적 분석과 단위·화면 테스트를 실행한 뒤 APK를 빌드합니다. 이 웹사이트는 React와 TypeScript로 실제 앱의 사용 과정을 소개합니다.",
-      },
-      claude: {
-        title: "개발 과정에서 Claude 활용",
-        body: "PillNote 개발 과정에서 Claude를 개발 도구로 활용합니다. 현재 앱 내부 기능에는 Claude API를 직접 사용하지 않습니다.",
-      },
-      contact: "회사·제품 문의",
+      status: "설치 안내 보기",
     },
     download: {
-      label: "다운로드 안내",
-      title: "Android에서 시작하세요.",
+      label: "시작하기",
+      title: "내 약을 챙기는 습관, 지금부터.",
       description:
-        "현재 공개 설치 파일은 GitHub Releases의 Android APK입니다. GitHub 계정 없이 릴리즈 페이지에서 받을 수 있어요.",
+        "Android에서 PillNote를 시작하세요. 기본 복약 관리는 로그인 없이 이용할 수 있어요.",
+      platform: "Android APK · 한국어 지원",
+      installTitle: "앱 설치 순서",
       steps: [
-        "Android 기기에서 아래 ‘최신 릴리즈 열기’를 누르세요.",
-        "릴리즈 페이지의 Assets(첨부 파일)를 펼쳐 이름이 .apk로 끝나는 PillNote 파일을 다운로드하세요.",
-        "다운로드한 파일을 열고 설치 안내를 따르세요. 기기에서 요청하면 사용 중인 브라우저 또는 파일 앱의 ‘이 출처 허용’을 설치할 때만 켜세요.",
-        "설치 후 PillNote를 열어 약과 복용 시간을 등록하세요. 로그인 없이 시작할 수 있어요. 알림을 이용하려면 앱과 기기의 알림 설정을 확인하세요.",
+        {
+          title: "설치 파일 받기",
+          body: "GitHub 릴리즈의 Assets에서 .apk 파일을 받으세요. GitHub 계정은 필요하지 않아요.",
+        },
+        {
+          title: "파일을 열어 설치하기",
+          body: "다운로드한 파일을 열고 기기의 설치 안내를 따라주세요.",
+        },
+        {
+          title: "내 약과 시간 등록하기",
+          body: "약을 등록하고 복용 시간을 정하세요. 알림을 받으려면 기기의 알림 권한을 허용해주세요.",
+        },
       ],
+      installHelp: "설치 전 확인사항",
+      installPermission:
+        "기기에서 요청하면 사용 중인 브라우저 또는 파일 앱의 ‘이 출처 허용’을 설치할 때만 켜세요. 설치 후 다시 끌 수 있어요.",
       caution:
-        "링크가 github.com/kimrasng/pillnote의 릴리즈인지 확인하세요. 설치 후 외부 앱 설치 허용을 다시 끌 수 있어요. 기기가 설치를 차단하면 경고를 확인하고 진행을 중단하세요.",
-      latest: "최신 릴리즈 열기",
-      history: "이전 릴리즈 보기",
-      language:
-        "웹사이트는 한국어·영어를 제공합니다. 현재 앱 UI와 이 페이지의 앱 캡처는 한국어입니다.",
+        "github.com/kimrasng/pillnote의 릴리즈인지 확인하세요. 기기가 설치를 차단하면 경고를 확인하고 진행을 중단하세요.",
+      latest: "Android APK 받기",
+      history: "이전 릴리즈",
     },
     data: {
       label: "개인정보·데이터 안내",
@@ -188,7 +155,7 @@ export const productTranslations: Record<Locale, ProductCopy> = {
         },
         {
           title: "웹사이트의 데이터",
-          body: "이 소개 페이지는 앱 계정에 로그인하거나 복약 데이터·기기 위치를 요청하지 않습니다. 언어 선택을 브라우저에 저장합니다. 다운로드·소스 코드 링크를 누르면 GitHub로 이동합니다.",
+          body: "이 소개 페이지는 앱 계정에 로그인하거나 복약 데이터·기기 위치를 요청하지 않습니다. 언어 선택을 브라우저에 저장합니다. 다운로드 링크를 누르면 GitHub로 이동합니다.",
         },
       ],
     },
@@ -213,7 +180,6 @@ export const productTranslations: Record<Locale, ProductCopy> = {
     safety:
       "PillNote는 복약 일정과 기록을 지원하는 도구입니다. 진단·처방이나 의료전문가의 판단을 대체하지 않습니다. 복용 방법과 약 변경은 의료전문가와 확인해주세요.",
     privacyLink: "개인정보·데이터 안내",
-    productNavigation: "회사 소개",
     deletionLink: "계정·데이터 삭제 안내",
   },
   en: {
@@ -256,61 +222,36 @@ export const productTranslations: Record<Locale, ProductCopy> = {
       conditions:
         "Caregiver connections require email sign-in on both sides and an accepted invitation. Notifications also require an active connection, caregiver device registration and notification permission, your caregiver alert setting, and synced data.",
       tour: "Explore real app screens",
-      status: "View product status",
-    },
-    product: {
-      label: "About PillNote",
-      title: "The company behind PillNote.",
-      description:
-        "PillNote is the company and product name, established in May 2026. We build a medication management app for people taking regular medication and their caregivers, with dose schedules, records, and reminders.",
-      facts: [
-        { title: "Company and product", body: "PillNote" },
-        { title: "Established", body: "May 2026" },
-        { title: "Developer", body: "Dohyun Kim" },
-        {
-          title: "Funding",
-          body: "No investment raised in the past two years",
-        },
-        {
-          title: "Current public distribution",
-          body: "Android · APK distributed directly through GitHub Releases",
-        },
-        {
-          title: "Available features",
-          body: "Dose schedules and records, medication search and management, local dose reminders, email sign-in and sync, caregiver connections and check-in alerts, nearby pharmacy search",
-        },
-      ],
-      latest: "Latest public release",
-      history: "Release history",
-      source: "App source code",
-      changes: "Development history",
-      development: {
-        title: "Development and validation",
-        body: "The app's release workflow runs static analysis and unit and widget tests before building an APK. This website uses React and TypeScript to present the actual app experience.",
-      },
-      claude: {
-        title: "Developed with help from Claude",
-        body: "Claude is used as a tool in PillNote's development process. The current app does not directly use the Claude API for in-app features.",
-      },
-      contact: "Company and product inquiries",
+      status: "View installation guide",
     },
     download: {
-      label: "Download guide",
-      title: "Get started on Android.",
+      label: "Get started",
+      title: "A little care, every day.",
       description:
-        "The current public installation file is an Android APK on GitHub Releases. You can download it without a GitHub account.",
+        "Start with PillNote on Android. Basic medication management works without signing in.",
+      platform: "Android APK · Korean app",
+      installTitle: "Installation steps",
       steps: [
-        "On your Android device, select ‘Open latest release’ below.",
-        "Expand Assets on the release page and download the PillNote file whose name ends in .apk.",
-        "Open the downloaded file and follow the installation instructions. If your device asks, temporarily enable ‘Allow from this source’ for the browser or file app you are using.",
-        "Open PillNote and add your medications and dose times. You can start without signing in. To use reminders, check the app and device notification settings.",
+        {
+          title: "Get the installation file",
+          body: "Download the .apk file from Assets in the GitHub release. No GitHub account is needed.",
+        },
+        {
+          title: "Open the file and install",
+          body: "Open the downloaded file and follow your device’s installation instructions.",
+        },
+        {
+          title: "Add your medications",
+          body: "Set your medications and dose times. Allow device notifications if you want reminders.",
+        },
       ],
+      installHelp: "Before you install",
+      installPermission:
+        "If asked, temporarily enable ‘Allow from this source’ for your browser or file app. You can turn it off after installation.",
       caution:
-        "Check that the release belongs to github.com/kimrasng/pillnote. You can disable installation from that source afterward. If your device blocks installation, review the warning and stop.",
-      latest: "Open latest release",
-      history: "View earlier releases",
-      language:
-        "This website is available in Korean and English. The current app UI and the app captures on this page are in Korean.",
+        "Check that the release belongs to github.com/kimrasng/pillnote. If your device blocks installation, review the warning and stop.",
+      latest: "Get Android APK",
+      history: "Earlier releases",
     },
     data: {
       label: "Privacy and data guide",
@@ -344,7 +285,7 @@ export const productTranslations: Record<Locale, ProductCopy> = {
         },
         {
           title: "Data on this website",
-          body: "This presentation page does not sign into app accounts or request medication data or device location. It saves your language preference in your browser. Download and source links take you to GitHub.",
+          body: "This presentation page does not sign into app accounts or request medication data or device location. It saves your language preference in your browser. Download links take you to GitHub.",
         },
       ],
     },
@@ -369,7 +310,6 @@ export const productTranslations: Record<Locale, ProductCopy> = {
     safety:
       "PillNote supports medication schedules and records. It does not replace diagnosis, prescriptions or a healthcare professional's judgment. Check medication instructions and changes with a healthcare professional.",
     privacyLink: "Privacy and data guide",
-    productNavigation: "Company",
     deletionLink: "Account and data deletion",
   },
 };

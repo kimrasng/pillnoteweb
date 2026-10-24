@@ -38,8 +38,8 @@ export default function NativeRaster({
     // A new clip starts from its own endpoint, never a stale canvas from a
     // different clip. This fallback is also decoded before any paint.
     if (
-      !getDecodedFrame(sample.frame.image) &&
-      ready?.frame.clipId !== sample.id
+      ready?.frame.clipId !== sample.id &&
+      !getDecodedFrame(sample.frame.image)
     ) {
       const from = sample.neighbors[0];
       const image = getDecodedFrame(from.image);

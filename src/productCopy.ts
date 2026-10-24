@@ -25,7 +25,6 @@ type ProductCopy = {
     label: string;
     title: string;
     description: string;
-    platform: string;
     installTitle: string;
     steps: TextItem[];
     caution: string;
@@ -97,23 +96,21 @@ export const productTranslations: Record<Locale, ProductCopy> = {
     },
     download: {
       label: "시작하기",
-      title: "내 약을 챙기는 습관, 지금부터.",
-      description:
-        "Android에서 PillNote를 시작하세요. 기본 복약 관리는 로그인 없이 이용할 수 있어요.",
-      platform: "Android APK · 한국어 지원",
+      title: "다운로드",
+      description: "Android용 APK를 제공해요.",
       installTitle: "앱 설치 순서",
       steps: [
         {
           title: "설치 파일 받기",
-          body: "GitHub 릴리즈의 Assets에서 .apk 파일을 받으세요. GitHub 계정은 필요하지 않아요.",
+          body: "GitHub 릴리즈의 Assets에서 .apk 파일을 받으세요. 계정 없이 받을 수 있어요.",
         },
         {
           title: "파일을 열어 설치하기",
-          body: "다운로드한 파일을 열고 기기의 설치 안내를 따라주세요.",
+          body: "받은 파일을 열고 기기의 설치 안내를 따라주세요.",
         },
         {
           title: "내 약과 시간 등록하기",
-          body: "약을 등록하고 복용 시간을 정하세요. 알림을 받으려면 기기의 알림 권한을 허용해주세요.",
+          body: "약과 복용 시간을 등록하고, 알림을 받으려면 기기의 알림 권한을 허용해주세요.",
         },
       ],
       installHelp: "설치 전 확인사항",
@@ -121,7 +118,7 @@ export const productTranslations: Record<Locale, ProductCopy> = {
         "기기에서 요청하면 사용 중인 브라우저 또는 파일 앱의 ‘이 출처 허용’을 설치할 때만 켜세요. 설치 후 다시 끌 수 있어요.",
       caution:
         "github.com/kimrasng/pillnote의 릴리즈인지 확인하세요. 기기가 설치를 차단하면 경고를 확인하고 진행을 중단하세요.",
-      latest: "Android APK 받기",
+      latest: "GitHub에서 APK 받기",
       history: "이전 릴리즈",
     },
     data: {
@@ -226,23 +223,21 @@ export const productTranslations: Record<Locale, ProductCopy> = {
     },
     download: {
       label: "Get started",
-      title: "A little care, every day.",
-      description:
-        "Start with PillNote on Android. Basic medication management works without signing in.",
-      platform: "Android APK · Korean app",
+      title: "Download",
+      description: "An APK for Android is available.",
       installTitle: "Installation steps",
       steps: [
         {
           title: "Get the installation file",
-          body: "Download the .apk file from Assets in the GitHub release. No GitHub account is needed.",
+          body: "Get the .apk file from the release’s Assets. No GitHub account needed.",
         },
         {
           title: "Open the file and install",
-          body: "Open the downloaded file and follow your device’s installation instructions.",
+          body: "Open the file and follow your device’s installation instructions.",
         },
         {
           title: "Add your medications",
-          body: "Set your medications and dose times. Allow device notifications if you want reminders.",
+          body: "Add medications and dose times. Allow notifications for reminders.",
         },
       ],
       installHelp: "Before you install",
@@ -250,7 +245,7 @@ export const productTranslations: Record<Locale, ProductCopy> = {
         "If asked, temporarily enable ‘Allow from this source’ for your browser or file app. You can turn it off after installation.",
       caution:
         "Check that the release belongs to github.com/kimrasng/pillnote. If your device blocks installation, review the warning and stop.",
-      latest: "Get Android APK",
+      latest: "Get APK on GitHub",
       history: "Earlier releases",
     },
     data: {

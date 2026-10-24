@@ -1,8 +1,9 @@
 export const demoTranslations = {
   ko: {
-    heroTitle: "내 약을 챙기는 일,\n체크 한 번으로.",
+    heroLead: "매일 챙기는 약,",
+    heroTitle: "이제 더 간편하게.",
     heroDescription:
-      "오늘 먹을 약을 확인하고, 복용한 약을 체크하세요. 일정과 기록을 한곳에서 관리해요.",
+      "복용 시간 알림부터 하루의 복용 기록까지, PillNote에서 한눈에 관리하세요.",
     eyebrow: "복약 관리도 간편하게. PillNote",
     allTour: "사용 과정 살펴보기",
     tourTitle: "처음 등록부터, 매일의 복용까지.",
@@ -12,13 +13,15 @@ export const demoTranslations = {
     play: "데모 재생",
     replay: "다시 보기",
     chapters: "기능 선택",
+    chooseHint: "궁금한 기능을 눌러 살펴보세요.",
     progress: "데모 재생 위치",
     seconds: "초",
   },
   en: {
-    heroTitle: "Your medication routine.\nOne simple check.",
+    heroLead: "Your daily medication,",
+    heroTitle: "made easier.",
     heroDescription:
-      "See what's due today and check off each dose. Keep your schedules and records together.",
+      "Keep dose reminders and medication records together in PillNote.",
     eyebrow: "Medication made simple. PillNote",
     allTour: "Explore the app",
     tourTitle: "From your first medication to your daily routine.",
@@ -28,6 +31,7 @@ export const demoTranslations = {
     play: "Play demo",
     replay: "Watch again",
     chapters: "Choose a feature",
+    chooseHint: "Choose a feature to see how it works.",
     progress: "Demo playback position",
     seconds: "s",
   },

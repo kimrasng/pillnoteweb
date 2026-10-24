@@ -44,7 +44,7 @@
   padding: 12px 18px;
   border: 1px solid #dfe3e9;
   border-radius: 12px;
-  font-size: 16px;
+  font-size: var(--font-control);
   font-weight: 600;
   transition:
     background 180ms ease,
@@ -306,13 +306,41 @@
   flex: 1;
   max-width: 700px;
 }
+:is(.install-help, .faq-list > details) {
+  --disclosure-duration: 280ms;
+  --disclosure-easing: cubic-bezier(0.22, 0.8, 0.24, 1);
+}
+:is(.install-help, .faq-list > details) > summary svg {
+  transition: transform var(--disclosure-duration) var(--disclosure-easing);
+}
+@supports (interpolate-size: allow-keywords) {
+  :is(.install-help, .faq-list > details)::details-content {
+    interpolate-size: allow-keywords;
+    height: 0;
+    opacity: 0;
+    overflow: clip;
+    transition:
+      height var(--disclosure-duration) var(--disclosure-easing),
+      opacity var(--disclosure-duration) var(--disclosure-easing),
+      content-visibility var(--disclosure-duration) allow-discrete;
+  }
+  :is(.install-help, .faq-list > details)[open]::details-content {
+    height: auto;
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :is(.install-help, .faq-list > details) {
+    --disclosure-duration: 0s;
+  }
+}
 .install-help summary,
 .release-history {
   display: inline-flex;
   align-items: center;
   gap: 10px;
   min-height: 44px;
-  font-size: 14px;
+  font-size: var(--font-caption);
   color: var(--color-secondary);
 }
 .install-help summary {
@@ -331,7 +359,7 @@
 }
 .download-section .install-help p {
   margin: 8px 0 12px;
-  font-size: 14px;
+  font-size: var(--font-control);
 }
 .release-history {
   flex-shrink: 0;
@@ -427,7 +455,7 @@
   .hero-actions .tour-action {
     width: 100%;
     padding-inline: 14px;
-    font-size: 16px;
+    font-size: var(--font-control);
   }
   .hero-platform {
     margin-top: 10px;
@@ -540,4 +568,410 @@
   border: 0;
   padding: 0;
   font-size: 14px;
+}
+
+/* A single product demo connects the introduction and feature navigation. */
+.landing-hero {
+  display: block;
+  width: min(1480px, 100%);
+  min-height: auto;
+  padding: 120px clamp(24px, 5vw, 80px) 64px;
+}
+.demo-player-integrated {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  grid-template-rows: auto auto auto 1fr;
+  grid-template-areas: "intro phone" "chapters phone" "detail phone" "controls phone";
+  column-gap: clamp(32px, 5vw, 80px);
+}
+.demo-player-integrated .hero-copy {
+  grid-area: intro;
+  align-self: end;
+}
+.demo-player-integrated .hero-copy h1 {
+  font-size: var(--font-hero);
+}
+.demo-player-integrated .hero-description {
+  max-width: 460px;
+}
+.demo-player-integrated .tour-picker {
+  grid-area: chapters;
+  align-self: end;
+  margin: 28px 0 0;
+}
+.tour-picker-hint {
+  margin: 0 0 10px;
+  color: var(--color-secondary);
+  font-size: var(--font-caption);
+  line-height: 1.5;
+}
+.demo-player-integrated .tour-chapters {
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  flex-wrap: wrap;
+}
+.demo-player-integrated .tour-chapters button {
+  padding: 8px 6px;
+  border-radius: 8px;
+  background: transparent;
+  font-weight: 500;
+  font-size: var(--font-navigation);
+}
+.demo-player-integrated .tour-chapters button[aria-pressed="true"] {
+  color: var(--color-text);
+}
+.demo-player-integrated .tour-chapters button:hover {
+  color: var(--color-accent);
+  background: transparent;
+}
+.demo-player-integrated .tour-chapter-indicator {
+  height: var(--chapter-height, 0px);
+  border-radius: 8px;
+  background: #eff2f5;
+  transform: translate3d(var(--chapter-x, 0px), var(--chapter-y, 0px), 0);
+}
+.demo-player-integrated .tour-scene {
+  display: contents;
+}
+.demo-player-integrated .demo-controls {
+  grid-area: controls;
+  margin-top: 0;
+  align-self: start;
+}
+.demo-player-integrated .tour-scene-copy {
+  grid-area: detail;
+  min-height: 0;
+  align-self: start;
+  padding-top: 10px;
+  padding-bottom: 16px;
+}
+.demo-player-integrated .tour-scene-copy > p:last-of-type {
+  font-size: var(--font-control);
+  line-height: 1.75;
+}
+.landing-hero > .demo-player-integrated .phone-film {
+  grid-area: phone;
+  align-self: center;
+  width: min(480px, 34vw, 100%);
+}
+.hero-actions .primary-action,
+.download-actions .primary-action {
+  border-radius: 6px;
+}
+.hero-platform {
+  font-size: var(--font-caption);
+}
+.download-section,
+.about-section,
+.data-section {
+  width: min(1180px, 100%);
+  max-width: 1180px;
+  padding: 48px 44px;
+}
+.download-section {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 64px;
+  border-top: 1px solid #e3e6eb;
+}
+.download-heading {
+  display: block;
+}
+.download-section h2,
+.about-intro h2 {
+  font-size: var(--font-heading);
+}
+.download-section .info-lead {
+  margin-top: 16px;
+  font-size: var(--font-body);
+}
+.download-actions {
+  text-align: left;
+  margin-top: 24px;
+}
+.download-actions .primary-action {
+  min-height: 46px;
+  padding: 10px 16px;
+}
+.download-actions .download-platform {
+  font-size: var(--font-caption);
+}
+.installation-guide > h3 {
+  font-size: var(--font-title);
+  margin: 0 0 18px;
+}
+.download-section .install-steps {
+  display: block;
+  margin: 0;
+}
+.download-section .install-steps li {
+  display: block;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  padding: 0 0 18px;
+}
+.download-section .install-steps h3 {
+  font-size: var(--font-control);
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+.download-section .install-steps p {
+  font-size: var(--font-body);
+}
+.download-footnotes {
+  border-top: 1px solid #e3e6eb;
+  margin-top: 0;
+  flex-wrap: wrap;
+  gap: 0 18px;
+}
+.install-help {
+  flex-basis: 100%;
+}
+.about-section {
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 64px;
+}
+.faq-list details {
+  padding: 10px 0;
+}
+.faq-list summary,
+.faq-list p {
+  font-size: var(--font-body);
+}
+.faq-list p {
+  color: var(--color-secondary);
+  line-height: 1.75;
+}
+.data-section {
+  border-top: 1px solid #e3e6eb;
+  border-bottom: 0;
+  padding-block: 24px;
+}
+.data-disclosure > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  min-height: 48px;
+  list-style: none;
+  cursor: pointer;
+}
+.data-disclosure > summary::-webkit-details-marker {
+  display: none;
+}
+.data-disclosure > summary h2 {
+  font-size: var(--font-title);
+}
+.data-disclosure[open] > summary svg {
+  transform: rotate(180deg);
+}
+.data-subtitle {
+  padding-top: 24px;
+}
+.data-disclosure .data-list {
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+.data-disclosure .data-list article {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 64px;
+}
+.data-disclosure .data-list p {
+  font-size: var(--font-body);
+}
+.data-disclosure .deletion-guide h2 {
+  font-size: var(--font-heading);
+}
+.footer-scope {
+  width: min(1092px, calc(100% - 48px));
+  margin: 0 auto 24px;
+  font-size: var(--font-caption);
+  color: var(--color-secondary);
+  line-height: 1.7;
+}
+.language-switch {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+.language-switch button {
+  min-height: 44px;
+  height: auto;
+  min-width: 0;
+  padding: 8px 0;
+  border-radius: 0;
+  font-size: var(--font-caption);
+}
+.language-switch button[aria-pressed="true"] {
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 1.5px;
+}
+@media (max-width: 740px) {
+  .landing-hero {
+    padding: 104px 24px 40px;
+  }
+  .demo-player-integrated {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas: "intro" "chapters" "detail" "controls" "phone";
+  }
+  .demo-player-integrated .hero-copy h1 {
+    font-size: var(--font-hero);
+  }
+  .demo-player-integrated .tour-picker {
+    margin-top: 24px;
+    position: sticky;
+    top: var(--page-header-height);
+    z-index: 10;
+    background: #fff;
+  }
+  .demo-player-integrated .tour-chapters button {
+    font-size: var(--font-navigation);
+  }
+  .demo-player-integrated .tour-scene-copy {
+    min-height: 0;
+    padding-bottom: 0;
+  }
+  .demo-player-integrated .demo-controls {
+    margin-bottom: 16px;
+  }
+  .landing-hero > .demo-player-integrated .phone-film {
+    width: min(300px, 80vw);
+  }
+  .hero-actions {
+    display: flex;
+  }
+  .hero-actions .primary-action {
+    width: auto;
+  }
+  .hero-platform {
+    text-align: left;
+  }
+  .download-section,
+  .about-section,
+  .data-section {
+    padding: 32px 24px;
+  }
+  .download-section,
+  .about-section {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 30px;
+  }
+  .download-actions .primary-action {
+    width: auto;
+  }
+  .data-disclosure .data-list article {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+  }
+}
+
+/* Use the document scroller so touch, keyboard and long sections stay native. */
+:root {
+  --page-header-height: 80px;
+  --page-section-height: calc(100svh - var(--page-header-height));
+}
+html {
+  scroll-snap-type: y mandatory;
+  scroll-padding-top: var(--page-header-height);
+}
+main#top {
+  padding-top: var(--page-header-height);
+}
+main#top > section {
+  min-height: var(--page-section-height);
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  border-top: 0;
+  border-bottom: 0;
+  align-content: center;
+}
+.landing-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  padding-block: clamp(24px, 4svh, 48px);
+}
+.landing-hero > .demo-player-integrated .phone-film {
+  width: min(
+    480px,
+    34vw,
+    calc((100svh - var(--page-header-height) - 96px) * 0.484716),
+    100%
+  );
+}
+.data-section {
+  display: grid;
+}
+.site-footer {
+  border-top: 0;
+  scroll-snap-align: end;
+  scroll-snap-stop: always;
+}
+@media (max-width: 740px) {
+  :root {
+    --page-header-height: 64px;
+  }
+  .landing-hero {
+    padding-block: 24px;
+  }
+  .landing-hero > .demo-player-integrated .phone-film {
+    width: min(280px, 80vw, max(220px, calc((100svh - 356px) * 0.484716)));
+  }
+}
+
+/* Help follows the content, rather than filling a presentation slide. */
+main#top > .about-section {
+  display: block;
+  width: min(900px, 100%);
+  min-height: 0;
+  padding-block: 48px;
+}
+.about-section .about-intro p {
+  margin-top: 16px;
+  color: var(--color-secondary);
+  font-size: var(--font-body);
+  line-height: var(--line-body);
+}
+.about-section .faq-list {
+  margin-top: 24px;
+  padding: 0;
+}
+.about-section .faq-list details {
+  padding: 0;
+}
+.about-section .faq-list summary {
+  min-height: 64px;
+  padding-block: 16px;
+  font-weight: var(--weight-label);
+  line-height: var(--line-label);
+  word-break: keep-all;
+}
+.about-section .faq-list p {
+  padding: 0 0 16px;
+  line-height: var(--line-body);
+}
+.about-section .faq-link {
+  margin-bottom: 16px;
+}
+.about-contact {
+  margin-top: 24px;
+}
+.about-contact .contact-link {
+  margin-top: 0;
+  font-size: var(--font-control);
+}
+@media (max-width: 740px) {
+  main#top > .about-section {
+    padding-block: 32px;
+  }
 }

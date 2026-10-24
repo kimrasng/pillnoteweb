@@ -1,4 +1,7 @@
+import { ChevronDown, Globe } from "lucide-react";
 import { useLocale } from "./LocaleProvider";
+import { resolveLocale } from "./i18n";
+import "./language-select.css";
 
 export default function LanguageSwitch({
   className = "",
@@ -7,31 +10,25 @@ export default function LanguageSwitch({
 }) {
   const { locale, setLocale, copy } = useLocale();
   return (
-    <div
-      className={`language-switch ${className}`}
-      role="group"
-      aria-label={copy.language}
-      data-locale={locale}
-    >
-      <span className="language-switch-thumb" aria-hidden="true" />
-      <button
-        type="button"
-        lang="ko"
-        aria-label="한국어"
-        aria-pressed={locale === "ko"}
-        onClick={() => setLocale("ko")}
+    <label className={`language-select ${className}`}>
+      <Globe className="language-select-globe" size={16} aria-hidden="true" />
+      <select
+        aria-label={copy.language}
+        value={locale}
+        onChange={(event) => setLocale(resolveLocale(event.target.value))}
       >
-        KO
-      </button>
-      <button
-        type="button"
-        lang="en"
-        aria-label="English"
-        aria-pressed={locale === "en"}
-        onClick={() => setLocale("en")}
-      >
-        EN
-      </button>
-    </div>
+        <option value="ko" lang="ko">
+          한국어
+        </option>
+        <option value="en" lang="en">
+          English
+        </option>
+      </select>
+      <ChevronDown
+        className="language-select-chevron"
+        size={14}
+        aria-hidden="true"
+      />
+    </label>
   );
 }

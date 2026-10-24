@@ -5,6 +5,7 @@ import { LocaleProvider } from "./LocaleProvider";
 import "./styles.css";
 import "./design-system.css";
 import "./landing.css";
+import "./reference.css";
 
 if (import.meta.env.DEV) {
   import("react-grab");

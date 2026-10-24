@@ -1,0 +1,58 @@
+html.privacy-document {
+  scroll-snap-type: none;
+}
+.privacy-page {
+  width: min(1000px, calc(100% - 48px));
+  margin: 112px auto 48px;
+}
+.privacy-page .data-section {
+  display: block;
+  width: 100%;
+  padding: 32px 0;
+  border: 0;
+}
+.privacy-page h1 {
+  font-size: var(--font-heading);
+  line-height: var(--line-heading);
+  letter-spacing: -0.035em;
+}
+.privacy-page .data-subtitle {
+  padding-top: 28px;
+  font-size: var(--font-title);
+}
+.privacy-page .data-list {
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+.privacy-page .data-list article {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.5fr);
+  gap: 36px;
+}
+.privacy-page .data-list p {
+  font-size: var(--font-body);
+}
+.privacy-page .deletion-guide h2 {
+  font-size: var(--font-title);
+}
+.privacy-footer {
+  width: min(1000px, calc(100% - 48px));
+  margin: 0 auto 32px;
+  font-size: var(--font-control);
+}
+.privacy-footer a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+@media (max-width: 740px) {
+  .privacy-page {
+    margin-top: 80px;
+  }
+  .privacy-page .data-list article {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+  }
+}

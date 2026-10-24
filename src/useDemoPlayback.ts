@@ -8,7 +8,13 @@ export default function useDemoPlayback(
     enabled = true,
     loop = false,
     initialTime = 0,
-  }: { enabled?: boolean; loop?: boolean; initialTime?: number } = {},
+    playbackRate = 1,
+  }: {
+    enabled?: boolean;
+    loop?: boolean;
+    initialTime?: number;
+    playbackRate?: number;
+  } = {},
 ) {
   const container = useRef<HTMLDivElement>(null);
   const elapsed = useRef(initialTime);
@@ -54,7 +60,10 @@ export default function useDemoPlayback(
     const tick = (now: number) => {
       const delta = previous === null ? 0 : Math.min(32, now - previous);
       previous = now;
-      const nextTime = Math.min(demo.duration, elapsed.current + delta);
+      const nextTime = Math.min(
+        demo.duration,
+        elapsed.current + delta * playbackRate,
+      );
       if (playbackRasterReady(sampleDemo(demo, nextTime))) {
         elapsed.current = nextTime;
         if (nextTime >= demo.duration && loop) elapsed.current = 0;
@@ -64,7 +73,7 @@ export default function useDemoPlayback(
     };
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
-  }, [demo, playing, loop]);
+  }, [demo, playing, loop, playbackRate]);
   function seek(nextTime: number) {
     elapsed.current = Math.max(0, Math.min(demo.duration, nextTime));
     setTime(elapsed.current);
@@ -86,6 +95,7 @@ export default function useDemoPlayback(
     paused,
     reducedMotion,
     seek,
+    pause: () => setPaused(true),
     toggle,
     replay,
     position:

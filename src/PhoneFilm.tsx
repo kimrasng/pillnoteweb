@@ -109,7 +109,10 @@ export default function PhoneFilm({
   ]);
   const displayScene = film.transition >= 0.5 && nextScene ? nextScene : scene;
   const label = screenLabel ?? copy.scenes[displayScene.id].label;
-  const typing = getTypingState(film.searchProgress);
+  const typing =
+    !film.native && film.searchProgress > 0
+      ? getTypingState(film.searchProgress)
+      : null;
   const lockWeight = film.frames.reduce(
     (sum, frame) =>
       sum + (notificationScreens.has(frame.image) ? frame.weight : 0),
@@ -207,7 +210,7 @@ export default function PhoneFilm({
                 aria-hidden="true"
               />
             )}
-            {!film.native && film.searchProgress > 0 && (
+            {typing && (
               <div className="search-typing" aria-hidden="true">
                 <div className="search-field-mask" />
                 <div

@@ -1,18 +1,36 @@
-import { useEffect, useRef } from "react";
-import { ArrowRight, ChevronDown, Menu, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ArrowRight, Download } from "lucide-react";
+import { BrandLink, Disclosure, TextLink } from "./components";
 import { LocaleText, useLocale } from "./LocaleProvider";
 import LanguageSwitch from "./LanguageSwitch";
-import { CONTACT_EMAIL } from "./links";
-import { DataGuide, DownloadGuide } from "./ProductInfo";
+import { CONTACT_EMAIL, DATA_DELETION_URL, PRIVACY_URL } from "./links";
+import { DownloadGuide } from "./ProductInfo";
 import LandingHero from "./LandingHero";
-import TourSection from "./TourSection";
+import { productTranslations } from "./productCopy";
+
+function NavigationLinks({ onNavigate }: { onNavigate?: () => void }) {
+  const { copy } = useLocale();
+  return (
+    <>
+      <TextLink href="#top" label={copy.introNavigation} onClick={onNavigate} />
+      <TextLink href="#features" label={copy.guide} onClick={onNavigate} />
+      <TextLink href="#about" label={copy.faqNavigation} onClick={onNavigate} />
+    </>
+  );
+}
 
 export default function App() {
   const { copy, locale } = useLocale();
   const mobileMenu = useRef<HTMLDetailsElement>(null);
+  const [scrolled, setScrolled] = useState(() => window.scrollY > 24);
   function closeMenu() {
     if (mobileMenu.current) mobileMenu.current.open = false;
   }
+  useEffect(() => {
+    const updateScroll = () => setScrolled(window.scrollY > 24);
+    window.addEventListener("scroll", updateScroll, { passive: true });
+    return () => window.removeEventListener("scroll", updateScroll);
+  }, []);
   useEffect(() => {
     const dismissOutside = (event: PointerEvent) => {
       if (
@@ -26,7 +44,7 @@ export default function App() {
       closeMenu();
       mobileMenu.current.querySelector("summary")?.focus();
     };
-    const desktop = matchMedia("(min-width: 741px)");
+    const desktop = matchMedia("(min-width: 961px)");
     const dismissOnDesktop = () => {
       if (desktop.matches) closeMenu();
     };
@@ -44,13 +62,16 @@ export default function App() {
       let id: string;
       try {
         id = decodeURIComponent(location.hash.slice(1));
+        if (id === "privacy" || id === "data-deletion") {
+          location.replace(id === "privacy" ? PRIVACY_URL : DATA_DELETION_URL);
+          return;
+        }
         if (id === "tour") id = "features";
       } catch {
         return;
       }
-      document
-        .getElementById(id)
-        ?.scrollIntoView({ behavior: "instant", block: "start" });
+      const target = document.getElementById(id);
+      target?.scrollIntoView({ behavior: "instant", block: "start" });
     };
     const frame = requestAnimationFrame(navigateToHash);
     window.addEventListener("hashchange", navigateToHash);
@@ -71,74 +92,70 @@ export default function App() {
   }
   return (
     <>
-      <a className="skip-link" href="#features">
-        <LocaleText>{copy.skip}</LocaleText>
-      </a>
-      <header className="site-header">
-        <a
-          className="brand"
-          href="#top"
-          onClick={(event) => {
-            event.preventDefault();
-            goHome();
-          }}
-        >
-          <img src="/images/pillnote-logo.webp" alt="" />
-          <span>PillNote</span>
-        </a>
-        <nav aria-label={copy.navigation}>
-          <a href="#features">
-            <LocaleText>{copy.guide}</LocaleText>
-          </a>
-          <a href="#about">
-            <LocaleText>{copy.faqNavigation}</LocaleText>
-          </a>
-          <LanguageSwitch className="desktop-language" />
-          <a
-            className="release-button"
-            aria-label={copy.release}
-            href="#download"
-          >
-            <span className="release-label-full">
-              <LocaleText>{copy.release}</LocaleText>
-            </span>
-            <span className="release-label-short">
-              <LocaleText>{copy.releaseShort}</LocaleText>
-            </span>
-            <ArrowRight size={20} />
-          </a>
-          <details
-            className="mobile-nav"
-            ref={mobileMenu}
-            onBlur={(event) => {
-              if (!event.currentTarget.contains(event.relatedTarget))
-                closeMenu();
+      <TextLink className="skip-link" href="#features" label={copy.skip} />
+      <header className={`site-header${scrolled ? " is-scrolled" : ""}`}>
+        <div className="header-inner">
+          <BrandLink
+            href="#top"
+            onClick={(event) => {
+              event.preventDefault();
+              goHome();
             }}
-          >
-            <summary aria-label={copy.menu}>
-              <Menu className="menu-open-icon" size={24} aria-hidden="true" />
-              <X className="menu-close-icon" size={24} aria-hidden="true" />
-            </summary>
-            <div className="mobile-nav-panel">
-              <a href="#features" onClick={closeMenu}>
-                <LocaleText>{copy.guide}</LocaleText>
-              </a>
-              <a href="#about" onClick={closeMenu}>
-                <LocaleText>{copy.faqNavigation}</LocaleText>
-              </a>
-              <div className="mobile-language-row">
-                <span>
-                  <LocaleText>{copy.language}</LocaleText>
-                </span>
-                <LanguageSwitch />
+          />
+          <nav className="header-menu" aria-label={copy.navigation}>
+            <NavigationLinks />
+          </nav>
+          <div className="header-actions">
+            <LanguageSwitch className="desktop-language" />
+            <a
+              className="release-button"
+              aria-label={copy.release}
+              href="#download"
+            >
+              <span className="release-label-full">
+                <LocaleText>{copy.release}</LocaleText>
+              </span>
+              <span className="release-label-short">
+                <LocaleText>{copy.releaseShort}</LocaleText>
+              </span>
+              <Download size={16} aria-hidden="true" />
+            </a>
+            <details
+              className="mobile-nav"
+              ref={mobileMenu}
+              onBlur={(event) => {
+                if (!event.currentTarget.contains(event.relatedTarget))
+                  closeMenu();
+              }}
+            >
+              <summary aria-label={copy.menu}>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.7"
+                  aria-hidden="true"
+                >
+                  <path d="M3 6h14M3 14h14" />
+                </svg>
+              </summary>
+              <div className="mobile-nav-panel">
+                <NavigationLinks onNavigate={closeMenu} />
+                <div className="mobile-language-row">
+                  <span>
+                    <LocaleText>{copy.language}</LocaleText>
+                  </span>
+                  <LanguageSwitch />
+                </div>
               </div>
-            </div>
-          </details>
-        </nav>
+            </details>
+          </div>
+        </div>
       </header>
       <main id="top">
         <LandingHero />
-        <TourSection />
         <DownloadGuide />
         <section
           className="about-section"
@@ -146,44 +163,46 @@ export default function App() {
           tabIndex={-1}
           aria-labelledby="faq-title"
         >
-          <div className="about-intro">
-            <p className="scene-label">
-              <LocaleText>{copy.about.label}</LocaleText>
-            </p>
+          <header className="about-intro">
             <h2 id="faq-title">
               <LocaleText>{copy.about.title}</LocaleText>
             </h2>
             <p>
               <LocaleText>{copy.about.description}</LocaleText>
             </p>
-            <a className="contact-link" href={`mailto:${CONTACT_EMAIL}`}>
-              <LocaleText>{copy.about.contact}</LocaleText>
-              <ArrowRight size={18} />
-            </a>
-          </div>
+          </header>
           <div className="faq-list">
             {copy.faqs.map((faq, index) => (
-              <details key={index}>
-                <summary>
-                  <LocaleText>{faq.question}</LocaleText>
-                  <ChevronDown size={19} />
-                </summary>
+              <Disclosure key={index} title={faq.question}>
                 <p>
                   <LocaleText>{faq.answer}</LocaleText>
                 </p>
                 {faq.link && (
-                  <a className="faq-link" href={faq.link.href}>
-                    <LocaleText>{faq.link.label}</LocaleText>
-                    <ArrowRight size={16} />
-                  </a>
+                  <TextLink
+                    className="faq-link"
+                    href={faq.link.href}
+                    label={faq.link.label}
+                    icon={ArrowRight}
+                    iconSize={16}
+                  />
                 )}
-              </details>
+              </Disclosure>
             ))}
           </div>
+          <div className="about-contact">
+            <TextLink
+              className="contact-link"
+              href={`mailto:${CONTACT_EMAIL}`}
+              label={copy.about.contact}
+              icon={ArrowRight}
+            />
+          </div>
         </section>
-        <DataGuide />
       </main>
       <footer className="site-footer">
+        <p className="footer-scope">
+          <LocaleText>{productTranslations[locale].safety}</LocaleText>
+        </p>
         <div className="footer-inner">
           <a
             className="footer-brand"
@@ -199,24 +218,19 @@ export default function App() {
             className="footer-links"
             aria-label={locale === "ko" ? "사이트 안내" : "Site information"}
           >
-            <a href="#about">
-              <LocaleText>{copy.faqNavigation}</LocaleText>
-            </a>
-            <a href="#privacy">
-              <LocaleText>
-                {locale === "ko" ? "개인정보·데이터" : "Privacy & data"}
-              </LocaleText>
-            </a>
-            <a href="#data-deletion">
-              <LocaleText>
-                {locale === "ko"
-                  ? "계정·데이터 삭제"
-                  : "Account & data deletion"}
-              </LocaleText>
-            </a>
-            <a href={`mailto:${CONTACT_EMAIL}`}>
-              <LocaleText>{locale === "ko" ? "문의" : "Contact"}</LocaleText>
-            </a>
+            <TextLink href="#about" label={copy.faqNavigation} />
+            <TextLink
+              href={PRIVACY_URL}
+              label={locale === "ko" ? "개인정보·데이터" : "Privacy & data"}
+            />
+            <TextLink
+              href={DATA_DELETION_URL}
+              label={locale === "ko" ? "계정·데이터 삭제" : "Account & data deletion"}
+            />
+            <TextLink
+              href={`mailto:${CONTACT_EMAIL}`}
+              label={locale === "ko" ? "문의" : "Contact"}
+            />
           </nav>
           <span className="footer-copyright">
             © {new Date().getFullYear()} PillNote

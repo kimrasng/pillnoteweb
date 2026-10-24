@@ -1,16 +1,29 @@
-import {
-  ArrowRight,
-  ArrowUpRight,
-  CalendarCheck,
-  ChevronDown,
-  Download,
-  PackageOpen,
-} from "lucide-react";
+import { ArrowRight, ArrowUpRight, Download } from "lucide-react";
+import { Disclosure, TextLink } from "./components";
 import { LocaleText, useLocale } from "./LocaleProvider";
 import { productTranslations } from "./productCopy";
 import { CONTACT_EMAIL, LATEST_RELEASE_URL, RELEASES_URL } from "./links";
 
-const installStepIcons = [Download, PackageOpen, CalendarCheck];
+function InfoList({
+  items,
+}: {
+  items: readonly { readonly title: string; readonly body: string }[];
+}) {
+  return (
+    <div className="data-list">
+      {items.map((item) => (
+        <article key={item.title}>
+          <h3>
+            <LocaleText>{item.title}</LocaleText>
+          </h3>
+          <p>
+            <LocaleText>{item.body}</LocaleText>
+          </p>
+        </article>
+      ))}
+    </div>
+  );
+}
 
 export function DownloadGuide() {
   const { locale } = useLocale();
@@ -24,9 +37,6 @@ export function DownloadGuide() {
     >
       <div className="download-heading">
         <div className="download-intro">
-          <p className="scene-label">
-            <LocaleText>{download.label}</LocaleText>
-          </p>
           <h2 id="download-title">
             <LocaleText>{download.title}</LocaleText>
           </h2>
@@ -35,57 +45,61 @@ export function DownloadGuide() {
           </p>
         </div>
         <div className="download-actions">
-          <a className="primary-action" href={LATEST_RELEASE_URL}>
-            <Download size={19} aria-hidden="true" />
-            <LocaleText>{download.latest}</LocaleText>
-            <ArrowUpRight size={18} aria-hidden="true" />
-          </a>
-          <p className="download-platform">
-            <LocaleText>{download.platform}</LocaleText>
-          </p>
+          <TextLink
+            className="primary-action"
+            href={LATEST_RELEASE_URL}
+            label={download.latest}
+            icon={Download}
+          />
         </div>
       </div>
-      <ol
-        className="install-steps"
-        role="list"
-        aria-label={download.installTitle}
-      >
-        {download.steps.map((step, index) => {
-          const StepIcon = installStepIcons[index];
-          return (
-            <li key={step.title}>
-              <span className="install-step-icon" aria-hidden="true">
-                <StepIcon size={22} strokeWidth={1.7} />
-              </span>
-              <div>
-                <h3>
-                  <LocaleText>{step.title}</LocaleText>
-                </h3>
-                <p>
-                  <LocaleText>{step.body}</LocaleText>
-                </p>
-              </div>
-            </li>
-          );
-        })}
-      </ol>
-      <div className="download-footnotes">
-        <details className="install-help">
-          <summary>
-            <LocaleText>{download.installHelp}</LocaleText>
-            <ChevronDown size={17} aria-hidden="true" />
-          </summary>
-          <p>
-            <LocaleText>{download.installPermission}</LocaleText>
-          </p>
-          <p>
-            <LocaleText>{download.caution}</LocaleText>
-          </p>
-        </details>
-        <a className="release-history" href={RELEASES_URL}>
-          <LocaleText>{download.history}</LocaleText>
-          <ArrowUpRight size={16} aria-hidden="true" />
-        </a>
+      <div className="installation-guide">
+        <h3>
+          <LocaleText>
+            {locale === "ko" ? "설치 방법" : "How to install"}
+          </LocaleText>
+        </h3>
+        <ol
+          className="install-steps"
+          role="list"
+          aria-label={download.installTitle}
+        >
+          {download.steps.map((step) => {
+            return (
+              <li key={step.title}>
+                <div>
+                  <h3>
+                    <LocaleText>{step.title}</LocaleText>
+                  </h3>
+                  <p>
+                    <LocaleText>{step.body}</LocaleText>
+                  </p>
+                </div>
+              </li>
+            );
+          })}
+        </ol>
+        <div className="download-footnotes">
+          <Disclosure
+            className="install-help"
+            title={download.installHelp}
+            iconSize={17}
+          >
+            <p>
+              <LocaleText>{download.installPermission}</LocaleText>
+            </p>
+            <p>
+              <LocaleText>{download.caution}</LocaleText>
+            </p>
+          </Disclosure>
+          <TextLink
+            className="release-history"
+            href={RELEASES_URL}
+            label={download.history}
+            icon={ArrowUpRight}
+            iconSize={16}
+          />
+        </div>
       </div>
     </section>
   );
@@ -101,27 +115,16 @@ export function DataGuide() {
       tabIndex={-1}
       aria-labelledby="data-title"
     >
-      <p className="scene-label">
+      <h1 id="data-title">
         <LocaleText>{data.label}</LocaleText>
-      </p>
-      <h2 id="data-title">
+      </h1>
+      <h2 className="data-subtitle">
         <LocaleText>{data.title}</LocaleText>
       </h2>
       <p className="info-lead">
         <LocaleText>{data.description}</LocaleText>
       </p>
-      <div className="data-list">
-        {data.items.map((item) => (
-          <article key={item.title}>
-            <h3>
-              <LocaleText>{item.title}</LocaleText>
-            </h3>
-            <p>
-              <LocaleText>{item.body}</LocaleText>
-            </p>
-          </article>
-        ))}
-      </div>
+      <InfoList items={data.items} />
       <section
         id="data-deletion"
         className="deletion-guide"
@@ -131,18 +134,7 @@ export function DataGuide() {
         <h2 id="deletion-title">
           <LocaleText>{deletion.title}</LocaleText>
         </h2>
-        <div className="data-list">
-          {deletion.items.map((item) => (
-            <article key={item.title}>
-              <h3>
-                <LocaleText>{item.title}</LocaleText>
-              </h3>
-              <p>
-                <LocaleText>{item.body}</LocaleText>
-              </p>
-            </article>
-          ))}
-        </div>
+        <InfoList items={deletion.items} />
         <p className="info-note">
           <LocaleText>{deletion.contact}</LocaleText>
         </p>

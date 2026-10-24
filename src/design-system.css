@@ -1,15 +1,16 @@
-/* Shared text roles. Small screens change layout, never shrink reading text. */
+/* Fluid text roles preserve readable minimums and respect browser text size. */
 :root {
-  --font-brand: 24px;
+  --font-brand: clamp(1.25rem, 1.16rem + 0.4vw, 1.625rem);
+  --font-hero: clamp(2rem, 1.625rem + 2.3vw, 4rem);
   --font-display-line: clamp(32px, 4.6vw, 64px);
   --font-display-brand: clamp(86px, 11.3vw, 168px);
-  --font-heading: clamp(32px, 3.4vw, 48px);
-  --font-title: 24px;
-  --font-body: 16px;
-  --font-control: 18px;
-  --font-navigation: 16px;
-  --font-label: 16px;
-  --font-caption: 14px;
+  --font-heading: clamp(1.5rem, 1.25rem + 1vw, 2.25rem);
+  --font-title: clamp(1.125rem, 1.03rem + 0.4vw, 1.5rem);
+  --font-body: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
+  --font-control: clamp(0.9375rem, 0.89rem + 0.2vw, 1.0625rem);
+  --font-navigation: clamp(0.875rem, 0.84rem + 0.15vw, 1rem);
+  --font-label: var(--font-control);
+  --font-caption: clamp(0.8125rem, 0.775rem + 0.15vw, 0.9375rem);
   --line-heading: 1.25;
   --line-body: 1.6;
   --line-label: 1.5;
@@ -24,9 +25,12 @@
   --space-1: 8px;
   --space-2: 16px;
   --space-3: 24px;
-  font-size: var(--font-body);
+  font-size: 100%;
   font-weight: 400;
   line-height: var(--line-body);
+}
+body {
+  font-size: var(--font-body);
 }
 .brand {
   font-size: var(--font-brand);
@@ -226,11 +230,8 @@ html {
 }
 @media (max-width: 740px) {
   :root {
-    --font-brand: 22px;
     --font-display-line: 32px;
     --font-display-brand: clamp(72px, 21vw, 118px);
-    --font-heading: 28px;
-    --font-control: 16px;
     --control-height: 44px;
   }
   .site-header {

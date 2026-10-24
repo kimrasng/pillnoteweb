@@ -109,7 +109,13 @@ function prepareTextDelays() {
   return longestDelay;
 }
 
-export function LocaleProvider({ children }: { children: ReactNode }) {
+export function LocaleProvider({
+  children,
+  page = "home",
+}: {
+  children: ReactNode;
+  page?: "home" | "privacy";
+}) {
   const [locale, updateLocale] = useState(initialLocale);
   const [phase, setPhase] = useState<"idle" | "leaving" | "entering">("idle");
   const pendingLocale = useRef<Locale | null>(null);
@@ -174,23 +180,35 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
     };
   }, []);
   useEffect(() => {
+    const pageTitle =
+      page === "privacy"
+        ? locale === "ko"
+          ? "개인정보·데이터 안내 | PillNote"
+          : "Privacy & data | PillNote"
+        : copy.pageTitle;
+    const pageDescription =
+      page === "privacy"
+        ? locale === "ko"
+          ? "PillNote의 데이터 저장·동기화와 계정·데이터 삭제 방법을 안내합니다."
+          : "How PillNote stores and syncs data, and how to delete your account and data."
+        : copy.pageDescription;
     document.documentElement.lang = locale;
-    document.title = copy.pageTitle;
+    document.title = pageTitle;
     document
       .querySelector('meta[name="description"]')
-      ?.setAttribute("content", copy.pageDescription);
+      ?.setAttribute("content", pageDescription);
     document
       .querySelector('meta[property="og:title"]')
-      ?.setAttribute("content", copy.pageTitle);
+      ?.setAttribute("content", pageTitle);
     document
       .querySelector('meta[property="og:description"]')
-      ?.setAttribute("content", copy.pageDescription);
+      ?.setAttribute("content", pageDescription);
     try {
       localStorage.setItem(LANGUAGE_STORAGE_KEY, locale);
     } catch {
       // Switching still works when browser storage is unavailable.
     }
-  }, [locale, copy]);
+  }, [locale, copy, page]);
   return (
     <LocaleContext.Provider value={{ locale, setLocale, copy }}>
       <div

@@ -1,21 +1,23 @@
 # PillNote Web
 
-실제 PillNote Flutter 앱 화면을 캡처해 사용 과정을 애니메이션으로 소개하는 React 웹입니다. 공개 주소는 https://pillnote.app/이며, 설치 안내에서 GitHub 릴리즈의 Android APK로 연결합니다.
+**English** | [한국어](README.ko.md)
 
-## 실행
+A React website that introduces PillNote through animated walkthroughs captured from the actual Flutter app. The public site is https://pillnote.app/, and its installation guide links to the Android APK on GitHub Releases.
+
+## Getting started
 
 ```sh
 npm install
 npm run dev
 ```
 
-로컬 주소: http://127.0.0.1:5173/
+Local URL: http://127.0.0.1:5173/
 
-### 화면 요소를 선택해 수정 요청하기
+### Selecting a page element to request changes
 
-개발 서버에서는 React Grab이 자동으로 켜집니다. 수정할 요소에 마우스를 올리고 `⌘C`(Mac) 또는 `Ctrl+C`(Windows/Linux)를 누른 뒤, 복사된 내용을 Codex 채팅에 붙여 넣고 원하는 변경을 적어 주세요. 선택한 요소와 관련 컴포넌트의 코드 위치가 함께 전달됩니다.
+React Grab is enabled automatically on the development server. Hover over the element you want to change, press `⌘C` (Mac) or `Ctrl+C` (Windows/Linux), then paste the copied content into a Codex chat along with your requested change. The selection includes the code locations of the element and its related components.
 
-React Grab은 개발 환경에서만 불러오며 프로덕션 빌드에는 포함하지 않습니다. 자세한 사용법은 [React Grab 공식 문서](https://github.com/aidenybai/react-grab)를 참고하세요.
+React Grab is loaded only in development and is excluded from production builds. See the [official React Grab documentation](https://github.com/aidenybai/react-grab) for usage details.
 
 ```sh
 npm test
@@ -23,89 +25,89 @@ npm run build
 npm run preview
 ```
 
-`npm run build`는 TypeScript 검사와 프로덕션 빌드를 수행합니다. 정적 빌드 결과는 `dist/`입니다.
+`npm run build` runs TypeScript checks and creates the production build. Static output is written to `dist/`.
 
-## 소개 방식
+## Presentation
 
-웹 글자 크기는 역할별 `rem`·뷰포트 기반 `clamp()` 토큰으로 조절합니다. 모바일부터 큰 화면까지 제목·본문·버튼·메뉴·보조 문구가 연속적으로 커지며 본문은 기본 글자 설정에서 16–18px을 유지합니다. 브라우저 기본 글자 크기와 확대 설정을 따르고, 실제 앱 캡처 내부 글자는 원래 비율을 유지합니다. 다운로드 버튼은 아래쪽 화살표 하나로 통일합니다.
+Website typography uses role-based `rem` and viewport-based `clamp()` tokens. Headings, body text, buttons, menus, and supporting text scale continuously from mobile to large screens, with body text staying at 16–18px under default font settings. Browser font-size and zoom preferences are respected, while text within app captures retains its original proportions. Download buttons consistently use a single downward arrow.
 
-섹션 사이의 구분선은 표시하지 않습니다. 세로 Scroll Snap 없이 원하는 위치에서 자유롭게 스크롤합니다. 소개·데모·다운로드·이용 안내의 최소 높이는 헤더 높이를 빼지 않은 100dvh이며, 헤더 여백은 각 영역 안에 확보합니다. 앵커 이동 시 영역의 배경이 화면 상단부터 채워지고, PC의 데모 폰은 화면 높이도 반영합니다. 모바일의 긴 첫 화면과 펼친 안내처럼 내용이 화면보다 길면 높이를 늘려 내용을 끝까지 읽을 수 있습니다. 휠·터치·키보드를 가로채거나 별도의 내부 스크롤 영역을 만들지 않습니다.
+There are no dividers between sections. Visitors can scroll freely without vertical scroll snap. The introduction, demo, download, and usage-guide sections have a minimum height of 100dvh without subtracting the header height; header spacing is reserved inside each section. Anchor navigation fills the screen from the top with the section background, and the desktop demo phone also accounts for viewport height. Sections expand when content exceeds the viewport, such as the longer mobile introduction or expanded instructions. Wheel, touch, and keyboard events are not intercepted, and there are no separate internal scrolling areas.
 
-첫 화면은 가운데 정렬한 소개와 밝은 회색의 기능 데모 무대로 구성합니다. 실제 앱 화면은 한 번만 표시하며 전체 사용 과정을 1.2배 속도로 반복 재생합니다. 첫 화면에는 재생·일시정지·다시 보기와 재생 위치 조절을 표시하지 않습니다. 기능을 선택하면 해당 장면부터 이어서 재생합니다. 모바일에서는 기능 메뉴를 헤더 아래에 고정하고 선택 시 데모를 볼 수 있는 위치로 이동합니다. 휴대폰은 PC에서 최대 340px, 모바일에서 최대 280px로 표시합니다. 화면 밖과 숨겨진 탭에서는 재생을 멈추고, 동작 감소 설정에서는 자동 재생 없이 선택한 기능을 표시합니다. 최신 디자인 기준은 루트 `DESIGN.md`, 적용 스타일은 `src/reference.css`에 있습니다.
+The opening screen combines a centered introduction with a light-gray feature-demo stage. The actual app screen appears only once, looping through the complete walkthrough at 1.2× speed. Play, pause, replay, and seek controls are not shown on the opening screen. Selecting a feature resumes playback from that scene. On mobile, the feature menu is fixed below the header, and selecting a feature scrolls the demo into view. The phone is displayed at up to 340px wide on desktop and 280px on mobile. Playback pauses offscreen and in hidden tabs. With reduced motion enabled, the selected feature is shown without autoplay. Current design guidance is in the root `DESIGN.md`, and applied styles are in `src/reference.css`.
 
-오늘의 복용 → 약 등록 → 복용 기록 → 내 약 상자 → 시간 알림 → 보호자 연결 → 주변 약국의 7개 기능을 첫 화면에서 선택할 수 있습니다. 메뉴 위에 선택 안내를 표시하고, 선택한 기능은 옅은 배경으로 구분합니다. 직접 선택하거나 자동 재생으로 기능이 바뀌면 선택 배경이 320ms 동안 이동하고, 사용 방법을 설명하는 문장은 360ms 동안 페이드·슬라이드로 나타납니다. 휴대폰 화면은 기존 앱 전환을 이어갑니다. 언어 전환·화면 크기 변경에도 선택 배경 위치를 맞추며 모바일에서는 기능 메뉴가 여러 줄로 줄바꿈됩니다. 이전 `#tour` 주소도 이 섹션으로 연결합니다.
+Seven features can be selected on the opening screen: today's doses → add medication → dose history → my medications → scheduled reminders → caregiver connections → nearby pharmacies. Selection instructions appear above the menu, and the selected feature has a subtle background. When selection changes manually or through autoplay, the selection background moves over 320ms, and the explanatory sentence fades and slides in over 360ms. The phone continues the existing app transition. Selection-background positioning adjusts to language and viewport changes, and the feature menu wraps onto multiple lines on mobile. The previous `#tour` URL also points to this section.
 
-데모 주변의 재생 길이·미리보기·화면 출처 문구는 표시하지 않습니다. 동작 감소 설정에서는 기능 선택 시 즉시 바뀝니다. 다운로드와 설치 방법을 나란히 배치하고 카드·아이콘·순서 번호 없이 안내합니다. 설치 확인사항은 펼쳐 읽을 수 있습니다. 개인정보·데이터 안내와 삭제 절차는 본문 대신 `/privacy.html`에 두고, 푸터와 FAQ에서 연결합니다. 이전 `#privacy`·`#data-deletion` 링크도 새 페이지로 연결합니다.
+Playback duration, preview labels, and screen-source captions are not displayed around the demo. With reduced motion enabled, feature selection changes immediately. Download and installation instructions sit side by side without cards, icons, or step numbers. Installation notes can be expanded. Privacy, data information, and deletion instructions live at `/privacy.html` rather than in the main page body, with links from the footer and FAQ. Previous `#privacy` and `#data-deletion` links also lead to the new page.
 
-메인 페이지에는 주요 기능(`#features`), APK 설치 안내(`#download`), 자주 묻는 질문(`#about`)을 섹션 단위 스크롤로 배치합니다. 별도 데이터 안내 페이지는 일반 스크롤로 읽을 수 있고, 삭제 절차(`/privacy.html#data-deletion`)에 직접 연결할 수 있습니다. 두 페이지 모두 한국어·영어 전환을 지원합니다. 설치 안내는 다운로드 버튼과 지원 플랫폼을 먼저 보여주고, 세 단계로 설치 과정을 안내합니다. 웹의 앱 화면은 실제 캡처를 재생하는 소개이며 방문자가 앱에 직접 입력하는 체험은 아닙니다.
+The main page arranges key features (`#features`), APK installation instructions (`#download`), and frequently asked questions (`#about`) as scrollable sections. The separate data-information page uses normal scrolling and supports direct links to deletion instructions (`/privacy.html#data-deletion`). Both pages support Korean and English. The installation guide starts with the download button and supported platform, followed by three installation steps. The app screens on the website are a presentation of real captures, not an interactive app that visitors can type into.
 
-## 제품 설명의 사실 확인과 유지보수
+## Product fact-checking and maintenance
 
-- 2026-10-13 확인한 최신 공개 릴리즈는 [v0.2.2](https://github.com/kimrasng/pillnote/releases/tag/v0.2.2)이며 첨부 파일은 `pillnote-v0.2.2.apk`입니다. 페이지에는 버전 문자열을 고정하지 않고 `/releases/latest`를 사용합니다. 새 릴리즈를 낼 때 지원 플랫폼과 안내 기능이 공개 APK에 포함되는지 대조해야 합니다. 개발 저장소의 새 화면을 이미 배포된 화면처럼 설명하지 않습니다.
-- 데이터 안내는 모바일 `LocalMedicationStore`, `SnapshotSyncService`, `SessionStore`, `ApiClient`, `DevicePrivacy`, `Pushalarm`, `Menu`, `Distanc`와 백엔드의 계정 삭제·초대·푸시 구현을 대조했습니다. 복약 정보는 기기에 저장하고 로그인 시 서버와 동기화합니다. 보호자에게 전체 복용 기록을 보여주는 기능은 확인되지 않았고, 푸시 본문은 복약 상태 확인 요청입니다.
-- 공개 정책 문서는 저장소에서 발견되지 않았습니다. 현재 `/privacy.html`은 검증된 구현에 대한 **개인정보·데이터 안내**이며 확정된 개인정보처리방침은 아닙니다. 처리 주체, 실제 서비스 공급자·처리 지역·계약, 데이터별 보관 기간, 삭제 후 백업·로그의 보존 범위를 확인한 뒤 정식 정책과 푸터 정책 링크를 추가해야 합니다. 미확인 정책 문구나 placeholder는 공개 화면에 넣지 않습니다.
-- 코드에서 확인한 외부 연동은 Resend 이메일, Firebase FCM/APNs 푸시, OpenStreetMap 지도 타일, 식약처 의약품·공공 약국 조회이며 서버 저장 구현에는 Cloudflare Workers/D1 경로가 있습니다. 이것만으로 실제 운영 계약과 국외 처리 조건을 확정하지 않습니다.
-- 백엔드 코드에는 운영 집계 30일, 이메일·장애·검사 이벤트 7일의 정리 작업과 비활성 로그인 기기 30일 정리가 있습니다. 계정 삭제는 계정 참조 데이터와 인증 이메일 기록을 삭제하지만 운영 이벤트 전체·외부 서비스 로그·DB 백업까지 즉시 삭제된다는 근거는 없습니다. 코드의 정리 규칙을 서비스 전체의 확정 보관 정책으로 공개하지 않습니다.
+- As checked on October 13, 2026, the latest public release was [v0.2.2](https://github.com/kimrasng/pillnote/releases/tag/v0.2.2), with the attachment `pillnote-v0.2.2.apk`. The website uses `/releases/latest` rather than hardcoding a version string. For each new release, check that the supported platforms and described features are included in the public APK. Do not describe new screens in the development repository as already released.
+- Data information was checked against the mobile app's `LocalMedicationStore`, `SnapshotSyncService`, `SessionStore`, `ApiClient`, `DevicePrivacy`, `Pushalarm`, `Menu`, and `Distanc`, along with the backend's account-deletion, invitation, and push implementations. Medication data is stored on the device and synchronized with the server when signed in. A feature that shows caregivers the complete dose history was not confirmed; push messages ask them to check medication status.
+- No public policy document was found in the repository. The current `/privacy.html` provides **privacy and data information** about verified implementation details; it is not a finalized privacy policy. Confirm the responsible entity, actual service providers, processing regions and contracts, retention periods by data type, and the scope of backups and logs retained after deletion before adding a formal policy and footer policy link. Do not publish unverified policy statements or placeholders.
+- External integrations found in the code include Resend email, Firebase FCM/APNs push notifications, OpenStreetMap map tiles, and medication and public-pharmacy lookups from Korea's Ministry of Food and Drug Safety and public data services. The server storage implementation includes Cloudflare Workers/D1 paths. These alone do not establish actual operating contracts or cross-border processing terms.
+- Backend code includes cleanup after 30 days for operational aggregates, 7 days for email, failure, and inspection events, and 30 days for inactive signed-in devices. Account deletion removes account-linked data and authentication email records, but there is no evidence that all operational events, external service logs, and database backups are immediately deleted. Do not publish code-level cleanup rules as a finalized retention policy for the entire service.
 
-검색 입력·커서, 화면 push/pop, 탭과 버튼 반응, 시간 선택 창, 복용 체크, 보호자 초대·입력·수락, 약국 목록과 상세 시트는 Flutter 엔진이 그린 중간 프레임을 데모의 재생 위치로 선택합니다. iPhone에 맞는 실제 Flutter iOS 화면 전환을 사용합니다. 복용 체크에는 체크 그리기와 작은 탄성 반응을 더했습니다. 다음 복용 카드의 위치와 라벨을 유지하며 내용·높이·진행 막대를 바꾸고, 완료 목록을 아래로 스크롤하는 단계 없이 내 약 상자로 이어집니다. 캔버스와 날짜를 같은 화면 갱신에서 반영하고 전환의 양 끝을 미리 디코딩해 중간 화면 깜빡임을 방지합니다. 잠금 화면은 아이폰 형태의 웹 알림 예시이며 화면 꺼짐 없이 바로 잠금 화면으로 전환하고, 아래쪽 알림 카드, 잠금 해제와 앱 창 확장을 보여줍니다. 복용 알림은 오늘의 복용, 보호자 알림은 보호자 연결 화면을 엽니다. 데모를 재생하면 각 동작을 정해진 시간에 완료하며, 전체 데모의 재생 위치를 조정해 이전 과정도 볼 수 있습니다. 전환과 터치에 필요한 거리를 화면 높이 단위로 통일해 장면 길이에 따라 속도가 달라지지 않습니다. 팝업과 배경은 Flutter에서 함께 렌더링하며, 웹에서 화면 전체를 다시 페이드하거나 이동시키지 않습니다. 날짜는 같은 프레임의 이동·가림·어두워짐에 맞춥니다. 방문자가 앱 화면을 직접 클릭하거나 입력할 수 없습니다.
+Search input and cursors, screen push/pop transitions, tab and button responses, time pickers, dose checks, caregiver invitations, entry and acceptance, pharmacy lists, and detail sheets use intermediate frames rendered by the Flutter engine, selected according to the demo playback position. The demo uses real Flutter iOS screen transitions suited to the iPhone. Dose checks add a drawn checkmark and a small spring response. The next-dose card retains its position and label while its content, height, and progress bar change, then moves on to my medications without scrolling through the completed list. The canvas and date update in the same screen refresh, and both ends of transitions are decoded in advance to prevent intermediate-frame flicker. The lock screen is an iPhone-style web notification example: it transitions directly without turning the screen off and shows lower notification cards, unlocking, and app-window expansion. Dose reminders open today's doses; caregiver notifications open caregiver connections. Playback completes each action at a scheduled time, and seeking through the full demo lets visitors revisit earlier steps. Transition and touch distances use screen-height units so speed does not vary with scene length. Popups and backgrounds are rendered together in Flutter; the web layer does not fade or move the entire screen again. Dates follow the movement, occlusion, and dimming of the same frame. Visitors cannot click or type directly into the app screens.
 
-데스크톱과 모바일에서 하나의 기기가 각 데모를 이어갑니다. 페이지는 일반 흐름을 사용하며 모바일 사용 과정은 설명과 앱 화면을 본문에 차례로 보여줍니다. 동작 감소 설정에서는 중간 애니메이션을 생략하고 완성된 상태로 전환합니다.
+A single device continues through each demo on desktop and mobile. The page uses normal document flow, and the mobile walkthrough presents explanations and app screens sequentially in the body. With reduced motion enabled, intermediate animations are skipped in favor of completed states.
 
-기능 설명은 장면 안에서 고정하고, 버튼 누르기·입력·화면 전환은 앱 애니메이션으로 전달합니다. 진행자 말투나 단계마다 바뀌는 조작 안내 자막은 사용하지 않습니다.
+Feature descriptions stay fixed within each scene, while app animations convey button presses, input, and screen transitions. The demo does not use presenter-style narration or operation captions that change at each step.
 
-데모는 `src/demo.ts`의 시간 기반 타임라인으로 기존 `playback.ts`의 실제 앱 동작을 재사용합니다. 이미지 디코딩이 늦으면 해당 프레임이 준비될 때까지 시계를 멈추고, 긴 처리 지연 뒤에도 한 번에 최대 32ms만 진행합니다. 보호자 초대 이메일의 빈 포커스 400ms 대기도 전체 데모에서 유지합니다. `scroll.ts`의 좌표는 앱 캡처 선택용 내부 좌표이며 페이지 스크롤을 가로채지 않습니다.
+The demo uses the time-based timeline in `src/demo.ts`, reusing actual app actions from `playback.ts`. If image decoding is delayed, the clock pauses until the frame is ready. Even after a long processing delay, time advances by at most 32ms at once. The full demo retains the 400ms empty-focus pause for caregiver invitation email entry. Coordinates in `scroll.ts` are internal coordinates for selecting app captures and do not intercept page scrolling.
 
-상단의 지구본 아이콘과 현재 언어가 표시된 드롭다운에서 한국어·English를 선택합니다. 모바일에서는 메뉴 안에서 선택합니다. 문구 위치는 고정하고, 기존 문구를 왼쪽부터 160ms 동안 닦아낸 뒤 새 문구를 같은 방향으로 200ms 동안 드러냅니다. 현재 화면의 위쪽 텍스트부터 아래쪽 텍스트까지 최대 140ms의 시작 지연을 적용하며, 텍스트 span만 잘라내므로 컨테이너·구분선·아이콘은 유지됩니다. 빠르게 재선택하면 대기 중 전환을 정리하고 마지막 선택을 반영합니다. 모션 감소 설정에서는 즉시 전환합니다. 선택은 브라우저에 저장되고 새로고침 후 복원되며, 전환할 때 읽던 문구의 화면 내 위치를 paint 전에 복원합니다. 한국어·영어 문단 높이가 달라도 같은 내용을 보고 있도록 문서 스크롤 좌표를 보정합니다. 소개·메뉴·FAQ·접근성 문구·웹 알림 예시·문서 언어와 메타데이터가 함께 바뀝니다. 한국어만 지원하는 실제 앱의 캡처와 캡처 안의 날짜는 한국어 원본을 유지합니다.
+Visitors choose Korean or English from the header dropdown, which shows a globe icon and the current language. On mobile, language selection is inside the menu. Text remains in place: the old text is wiped away from left to right over 160ms, then the new text is revealed in the same direction over 200ms. Start delays of up to 140ms run from the topmost visible text to the bottom. Only text spans are clipped, preserving containers, dividers, and icons. Rapid reselection clears pending transitions and applies the last choice. With reduced motion enabled, switching is immediate. The choice is saved in the browser and restored after refresh. Before paint, switching restores the onscreen position of the text being read. Document scroll coordinates are adjusted so readers stay on the same content even when Korean and English paragraph heights differ. Introduction text, menus, FAQ, accessibility text, web notification examples, document language, and metadata change together. Actual app captures and the dates within them retain the Korean originals because the app supports Korean only.
 
-페이지 스크롤바와 휠·터치·키보드의 기본 스크롤을 유지합니다. 모바일 메뉴는 메뉴 항목 선택, 바깥 터치, Escape와 메뉴 밖 포커스 이동으로 닫힙니다. 기능 버튼은 Tab으로 이동하고 Enter·Space로 선택할 수 있으며, 선택한 기능의 첫 화면으로 바로 이동합니다. 동작 감소 설정에서는 자동 재생 없이 선택한 기능의 화면을 표시합니다.
+The page keeps its scrollbar and native wheel, touch, and keyboard scrolling. The mobile menu closes when an item is selected, the visitor touches outside it, Escape is pressed, or focus moves outside the menu. Feature buttons support Tab navigation and Enter/Space selection, which jumps directly to the selected feature's opening screen. With reduced motion enabled, the selected feature's screen appears without autoplay.
 
-앱 캡처와 중간 렌더 프레임은 780×1688픽셀, 논리 화면은 390×844입니다. 기존 iPhone 18 Pro WebP 목업으로 실제 기기의 베젤·측면 버튼·Dynamic Island를 표시하며 캡처 비율을 유지합니다. 캡처의 SafeArea에 웹 상태바와 홈 인디케이터를 배치합니다. 목업 출처와 라이선스 기록은 [design/device/README.md](design/device/README.md)에 있습니다.
+App captures and intermediate rendered frames are 780×1688 pixels, with a logical screen size of 390×844. The existing iPhone 18 Pro WebP mockup shows the device bezel, side buttons, and Dynamic Island while preserving capture proportions. A web status bar and home indicator are placed in the capture's SafeArea. Mockup attribution and license records are in [design/device/README.md](design/device/README.md).
 
-## 디자인 기준
+## Design guidelines
 
-흰 배경과 중립 회색, 잉크색 글자·버튼, 앱 UI의 파란색 포인트를 사용합니다. 첫 화면은 짧은 제품 소개와 실제 앱 데모를 나란히 배치합니다. 기능 소개는 하나의 사용 과정 섹션에서 모든 기능을 선택해 볼 수 있습니다. 화면 밖·숨겨진 탭·동작 감소 설정에서는 자동 재생하지 않습니다. 배경색과 배치는 [Things](https://culturedcode.com/things/)와 [Bear](https://bear.app/)의 실제 제품 화면 중심 구성을 참고했습니다. 참고 사이트의 이미지나 문구는 사용하지 않습니다.
+The design uses white backgrounds, neutral grays, ink-colored text and buttons, and blue accents from the app UI. The opening screen places a short product introduction beside the actual app demo. All features can be selected within one walkthrough section. Autoplay stops offscreen, in hidden tabs, and under reduced-motion preferences. Backgrounds and layout draw on productivity-app landing pages that use generous spacing and center the actual product screens. No images or copy from reference sites are used.
 
-글자 크기와 굵기는 `src/design-system.css`에서 역할별로 관리합니다. 본문16px, 보조 문구14px, 라벨16px, 구성요소 제목24px, 상단·좁은 화면 메뉴16px입니다. 웹은 로컬에서 제공하는 Pretendard Variable을 사용하며, 앱 캡처의 원본 글꼴은 유지합니다. 섹션 제목과 첫 화면 문구만 화면 크기에 맞춰 커집니다. 상세 기준은 [design/DESIGN_SYSTEM.md](design/DESIGN_SYSTEM.md)에 있습니다. 모바일에서도 웹의 보조 문구를14px보다 작게 줄이지 않습니다. 실제 앱 캡처 안의 글꼴은 앱의 원래 크기와 화면 비율을 유지합니다.
+Font sizes and weights are managed by role in `src/design-system.css`: body text 16px, supporting text 14px, labels 16px, component headings 24px, and header and narrow-screen menus 16px. The website uses locally served Pretendard Variable, while app captures retain their original font. Only section headings and opening-screen copy scale with viewport size. Detailed guidance is in [design/DESIGN_SYSTEM.md](design/DESIGN_SYSTEM.md). Supporting website text is never reduced below 14px, even on mobile. Text inside real app captures keeps the app's original size and screen proportions.
 
-검색 전·포커스·입력 후는 동일한 모바일 밀도로 캡처해 입력창 밖의 화면이 이동하지 않습니다.
+Search states before entry, during focus, and after input are captured at the same mobile density so the screen outside the input field does not shift.
 
-## 캡처와 출시 상태
+## Captures and release status
 
-- Flutter의 실제 페이지, 앱 테마, Pretendard 글꼴과 탐색 아이콘을 사용했습니다. 입력 중 글자·커서를 포함한 UI와 애니메이션은 실제 Flutter 렌더입니다. 현재 날짜만 원래 글꼴과 프레임별 좌표로 덧그리며 생성 이미지는 사용하지 않았습니다.
-- 복용 일정과 수량은 소개용 예시입니다. 타이레놀은 실제 공개 검색 API 응답과 식약처 식별 사진을 사용합니다. 실제 결과 선택·시간 추가·등록·복용 처리 코드로 체크와 14정→13정 수량 변화를 캡처했습니다.
-- 웹은 저장소, 인증, 의약품 검색 API, 위치, 이메일, 푸시와 기기 알림에 연결하지 않습니다. 별도의 체험용 계정이나 입력 양식도 없습니다.
-- 보호자 화면은 격리한 소개용 계정으로 실제 앱의 초대 → 대기 → 다른 계정의 수락 → 연결 과정을 캡처했습니다. 실제 사람에게 초대나 푸시를 전송하지 않았습니다.
-- 잠금 화면 알림은 실제 앱·서버의 제목과 본문을 사용하는 도착 예시입니다. 날짜는 방문자의 오늘 날짜로 갱신됩니다. 앱 캡처의 날짜도 같은 실제 글꼴로 현재 날짜를 표시합니다.
-- 지도와 목록은 서울역 주변 실제 약국 15곳과 센츄럴팜약국 상세를 캡처했습니다. 웹에서 타일을 요청하지 않습니다. 화면 옆에 [© OpenStreetMap contributors](https://www.openstreetmap.org/copyright)를 표시합니다.
-- 다운로드 버튼은 `#download`의 APK 설치 절차로 이동합니다. 설치 안내와 제품 현황의 최신 릴리즈 버튼은 [최신 공개 릴리즈](https://github.com/kimrasng/pillnote/releases/latest)로, 이력 링크는 [PillNote 릴리즈](https://github.com/kimrasng/pillnote/releases)로 이동합니다.
+- Captures use actual Flutter pages, the app theme, Pretendard fonts, and navigation icons. UI and animations, including text and cursors during input, are real Flutter renders. Only the current date is overlaid using the original font and per-frame coordinates; no generated images are used.
+- Dose schedules and quantities are illustrative examples. Tylenol uses an actual public search API response and an identification photo from Korea's Ministry of Food and Drug Safety. Checkmarks and the quantity change from 14 to 13 tablets were captured through real result selection, time addition, registration, and dose-recording code.
+- The website does not connect to storage, authentication, medication search APIs, location, email, push services, or device notifications. It has no separate demo account or input forms.
+- Caregiver screens capture the actual app flow using isolated demonstration accounts: invitation → pending → acceptance by another account → connected. No invitations or push notifications were sent to real people.
+- Lock-screen notifications illustrate delivery using actual app/server titles and bodies. Dates update to the visitor's current date. Dates inside app captures also show the current date in the same original font.
+- Maps and lists capture 15 real pharmacies near Seoul Station and the details of Central Pharm Pharmacy. The website does not request map tiles. [© OpenStreetMap contributors](https://www.openstreetmap.org/copyright) appears beside the screen.
+- Download buttons navigate to the APK installation steps at `#download`. Latest-release buttons in the installation guide and product status link to the [latest public release](https://github.com/kimrasng/pillnote/releases/latest), while history links open [PillNote Releases](https://github.com/kimrasng/pillnote/releases).
 
-자세한 캡처 출처, 재현 코드와 이미지 해시는 [design/capture/README.md](design/capture/README.md)에 있습니다.
+Detailed capture sources, reproduction code, and image hashes are in [design/capture/README.md](design/capture/README.md).
 
-## 주요 파일
+## Key files
 
-- `src/App.tsx`: 첫 화면, 기능 데모, 본문의 전체 사용 과정, 이용 안내와 다운로드 링크
-- `src/LandingHero.tsx`: 첫 화면과 기능별 사용 과정을 통합한 구성
-- `src/DemoPlayer.tsx`, `src/useDemoPlayback.ts`, `src/demo.ts`: 시간 기반 재생, 일시정지와 장면 이동
-- `src/landing.css`, `src/demoCopy.ts`: 새 화면 배치와 한국어·영어 데모 문구
-- `src/PhoneFilm.tsx`: 비율이 고정된 휴대폰과 스크롤에 맞춘 캡처 표시
-- `src/film.ts`: 되돌릴 수 있는 캡처 합성과 터치 표시 계산
-- `src/DoseCheckFeedback.tsx`, `src/feedback.ts`: 복용 체크 완료와 화면 전원 피드백
-- `src/motion.ts`: 페이지 이동, 목록 스크롤, 팝업·알림 동작의 포즈
-- `src/useWeightedScroll.ts`: 이전 스크롤 제어 구현(현재 페이지에서는 사용하지 않음)
-- `src/playback.ts`: 동작별 시작·완료 좌표, 임계값과 재생 시간
-- `src/pacing.ts`: 화면 높이 단위의 공통 전환·터치 거리
-- `src/typing.ts`: 스크롤 좌표에 따른 한글 조합과 커서
-- `src/scroll.ts`: 도입부와 장면의 스크롤 좌표 계산
-- `test/`: 정지, 역스크롤, 장면 경계와 화면 비율 계산 회귀 검사
-- `src/story.ts`: 장면별 캡처·스크롤 구간
-- `src/i18n.ts`: 한국어·영어 소개 문구
-- `src/ProductInfo.tsx`, `src/productCopy.ts`: 한국어·영어 설치·데이터·삭제 안내와 기능 설명
-- `src/LocaleProvider.tsx`: 언어 선택·저장과 문서 메타데이터
-- `src/styles.css`: 화면 배치와 동작 감소 설정
-- `src/design-system.css`: 역할별 글자 크기·굵기·줄 간격, 버튼과 모바일 메뉴 기준
-- `public/images/app/`: 실제 Flutter 앱 PNG 캡처
-- `design/capture/`: 캡처 코드, 출처와 이미지 해시
-- `design/QA.md`: 검증 내역
-- `design/v1/`, `design/v2/`: 이전 시안 보관
+- `src/App.tsx`: Opening screen, feature demos, full walkthrough, usage information, and download links
+- `src/LandingHero.tsx`: Combined opening screen and feature walkthrough
+- `src/DemoPlayer.tsx`, `src/useDemoPlayback.ts`, `src/demo.ts`: Time-based playback, pausing, and scene navigation
+- `src/landing.css`, `src/demoCopy.ts`: New page layout and Korean/English demo copy
+- `src/PhoneFilm.tsx`: Fixed-aspect-ratio phone and scroll-based capture display
+- `src/film.ts`: Reversible capture composition and touch-indicator calculations
+- `src/DoseCheckFeedback.tsx`, `src/feedback.ts`: Dose-check completion and screen-power feedback
+- `src/motion.ts`: Poses for page transitions, list scrolling, popups, and notifications
+- `src/useWeightedScroll.ts`: Previous scroll-control implementation (not used by the current page)
+- `src/playback.ts`: Per-action start/end coordinates, thresholds, and playback durations
+- `src/pacing.ts`: Shared transition and touch distances in screen-height units
+- `src/typing.ts`: Korean text composition and cursor behavior based on scroll coordinates
+- `src/scroll.ts`: Introduction and scene scroll-coordinate calculations
+- `test/`: Regression checks for pauses, reverse scrolling, scene boundaries, and aspect-ratio calculations
+- `src/story.ts`: Per-scene capture and scroll ranges
+- `src/i18n.ts`: Korean and English introduction copy
+- `src/ProductInfo.tsx`, `src/productCopy.ts`: Korean/English installation, data, and deletion information, plus feature descriptions
+- `src/LocaleProvider.tsx`: Language selection, persistence, and document metadata
+- `src/styles.css`: Page layout and reduced-motion settings
+- `src/design-system.css`: Role-based font sizes, weights, line heights, buttons, and mobile-menu guidelines
+- `public/images/app/`: Real Flutter app PNG captures
+- `design/capture/`: Capture code, sources, and image hashes
+- `design/QA.md`: Verification records
+- `design/v1/`, `design/v2/`: Archived earlier designs
 
-개발자: **Dohyun Kim** · **dohyun.kim@pillnote.app**
+Developer: **Dohyun Kim** · **dohyun.kim@pillnote.app**

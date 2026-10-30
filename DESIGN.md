@@ -2,8 +2,9 @@
 
 ## Reference and scope
 
-Reference: https://www.hookable.ai/, inspected in a browser at 1440px and
-390px on 2026-10-23. This is a visual adaptation, not a copy of its product,
+Reference: a landing page with a centered introduction, high-contrast headings,
+pill-shaped buttons, and neutral gray demonstration surfaces, inspected in a
+browser at 1440px and 390px on 2026-10-23. This is a visual adaptation, not a copy of its product,
 claims, logos, illustrations, or service interface.
 
 Runtime observations: 64px header; white hero with centered text; 30px
@@ -91,6 +92,9 @@ naturally on small screens, never clipped or forced onto one overflowing line.
 Mobile uses a single column, full-width download actions, numbered installation
 steps with neutral hairline separators, and no platform caption below the action.
 All primary download actions use the same Download glyph.
+The installation section's download button uses a compact 48px height, 16px
+horizontal padding, an 8px icon gap and 1.25 line-height. Keep 24px between
+the introduction and its action, retaining the full-width button on mobile.
 Header navigation follows the page content: Overview links to #top, Features
 links to the actual demonstration at #features, and FAQ links to #about.
 The right-hand Download action links to #download. Desktop and mobile share
